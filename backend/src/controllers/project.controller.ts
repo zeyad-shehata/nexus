@@ -200,20 +200,20 @@ export async function updateProjectStatus(req: AuthenticatedRequest, res: Respon
       return res.status(404).json({ error: 'Project not found.' });
     }
 
-    // Update project status
-    const updatedProject = await prisma.project.update({
-      where: { id: req.params.id },
-      data: { status: status as ProjectStatus }
-    });
-
-    // Create Notification for Client
-    await prisma.notification.create({
-      data: {
-        userId: project.clientId,
-        title: 'Project Status Updated',
-        body: `The status of your project "${project.title}" has changed to: ${status}.`
-      }
-    });
+    // Update project status and create client notification atomically
+    const [updatedProject] = await prisma.$transaction([
+      prisma.project.update({
+        where: { id: req.params.id },
+        data: { status: status as ProjectStatus }
+      }),
+      prisma.notification.create({
+        data: {
+          userId: project.clientId,
+          title: 'Project Status Updated',
+          body: `The status of your project "${project.title}" has changed to: ${status}.`
+        }
+      })
+    ]);
 
     // Emit Real-time notification to client
     emitToUser(project.clientId, 'notification_received', {
