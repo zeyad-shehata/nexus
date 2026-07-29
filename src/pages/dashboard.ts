@@ -1,5 +1,5 @@
 // ============================================
-// NEXUS AGENCY — Unified Dashboards
+// NEXUS AGENCY â€ Unified Dashboards
 // ============================================
 
 import { API_BASE, SOCKET_URL, apiFetch } from '../utils/api';
@@ -22,10 +22,10 @@ export function renderDashboard() {
       <section class="section" style="padding-top:12rem; text-align:center;">
         <div class="container" style="max-width: 500px;">
           <div class="glass-card reveal" style="padding:var(--space-10);">
-            <div style="font-size:4rem; margin-bottom:var(--space-4);">🔒</div>
+            <div style="font-size:4rem; margin-bottom:var(--space-4);">ðŸ</div>
             <h2 style="font-size:var(--font-size-2xl); font-weight:800; margin-bottom:var(--space-2);">Access Denied</h2>
             <p style="color:var(--text-secondary); margin-bottom:var(--space-6);">You must be logged in to access the dashboard portal.</p>
-            <a href="/auth" class="btn btn-primary" data-link>Sign In</a>
+            <a href="./auth" class="btn btn-primary" data-link>Sign In</a>
           </div>
         </div>
       </section>
@@ -41,7 +41,7 @@ export function renderDashboard() {
       <div class="page-hero-content">
         <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-4);">
           <div>
-            <span class="section-label">✦ Workspace</span>
+            <span class="section-label">âœ¦ Workspace</span>
             <h1 class="section-title" style="font-size:var(--font-size-3xl); margin-bottom:0;">Welcome back, <span class="gradient-text">${user.name}</span></h1>
             <p style="color:var(--text-secondary); font-size:var(--font-size-sm); margin-top:var(--space-1);">${isAdmin ? 'Nexus Administrator Console' : 'Nexus Client Portal'}</p>
           </div>
@@ -56,16 +56,17 @@ export function renderDashboard() {
           
           <!-- Sidebar Navigation -->
           <div class="glass-card" style="padding:var(--space-4); display:flex; flex-direction:column; gap:var(--space-2);">
-            <button class="tab-btn active" id="btn-tab-overview" onclick="switchDashboardTab('overview')" style="width:100%; text-align:left; justify-content:flex-start;">📊 Overview</button>
-            <button class="tab-btn" id="btn-tab-projects" onclick="switchDashboardTab('projects')" style="width:100%; text-align:left; justify-content:flex-start;">📁 Projects</button>
-            <button class="tab-btn" id="btn-tab-chat" onclick="switchDashboardTab('chat')" style="width:100%; text-align:left; justify-content:flex-start;">💬 Support Chat</button>
+            <button class="tab-btn active" id="btn-tab-overview" onclick="switchDashboardTab('overview')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸŠ Overview</button>
+            <button class="tab-btn" id="btn-tab-projects" onclick="switchDashboardTab('projects')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸ Projects</button>
+            <button class="tab-btn" id="btn-tab-chat" onclick="switchDashboardTab('chat')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸ¬ Support Chat</button>
             ${isAdmin ? `
-              <button class="tab-btn" id="btn-tab-cms" onclick="switchDashboardTab('cms')" style="width:100%; text-align:left; justify-content:flex-start;">⚙️ CMS Manager</button>
-              <button class="tab-btn" id="btn-tab-logs" onclick="switchDashboardTab('logs')" style="width:100%; text-align:left; justify-content:flex-start;">📜 Audit Logs</button>
+              <button class="tab-btn" id="btn-tab-cms" onclick="switchDashboardTab('cms')" style="width:100%; text-align:left; justify-content:flex-start;">âšï¸ CMS Manager</button>
+              <button class="tab-btn" id="btn-tab-clients" onclick="switchDashboardTab('clients')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸ¥ Clients</button>
+              <button class="tab-btn" id="btn-tab-logs" onclick="switchDashboardTab('logs')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸœ Audit Logs</button>
             ` : `
-              <button class="tab-btn" id="btn-tab-notifications" onclick="switchDashboardTab('notifications')" style="width:100%; text-align:left; justify-content:flex-start;">🔔 Notifications <span class="badge" id="noti-unread-count" style="display:none; background:var(--accent-tertiary); margin-left:var(--space-2);">0</span></button>
+              <button class="tab-btn" id="btn-tab-notifications" onclick="switchDashboardTab('notifications')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸ Notifications <span class="badge" id="noti-unread-count" style="display:none; background:var(--accent-tertiary); margin-left:var(--space-2);">0</span></button>
             `}
-            <button class="tab-btn" id="btn-tab-settings" onclick="switchDashboardTab('settings')" style="width:100%; text-align:left; justify-content:flex-start;">🔒 Account</button>
+            <button class="tab-btn" id="btn-tab-settings" onclick="switchDashboardTab('settings')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸ Account</button>
           </div>
 
           <!-- Content Panel -->
@@ -119,15 +120,33 @@ export function renderDashboard() {
             ${isAdmin ? `
               <div class="db-tab-content" id="tab-content-cms" style="display:none;">
                 <div class="tabs" style="margin-bottom: var(--space-4); overflow-x:auto;">
-                  <button class="tab-btn active" id="btn-cms-services" onclick="switchCMSTab('services')">💼 Services</button>
-                  <button class="tab-btn" id="btn-cms-portfolio" onclick="switchCMSTab('portfolio')">🎨 Portfolio</button>
-                  <button class="tab-btn" id="btn-cms-blog" onclick="switchCMSTab('blog')">📝 Blog</button>
-                  <button class="tab-btn" id="btn-cms-reviews" onclick="switchCMSTab('reviews')">⭐ Reviews</button>
-                  <button class="tab-btn" id="btn-cms-contacts" onclick="switchCMSTab('contacts')">📧 Contact Requests</button>
+                  <button class="tab-btn active" id="btn-cms-services" onclick="switchCMSTab('services')">ðŸ¼ Services</button>
+                  <button class="tab-btn" id="btn-cms-portfolio" onclick="switchCMSTab('portfolio')">ðŸŽ¨ Portfolio</button>
+                  <button class="tab-btn" id="btn-cms-blog" onclick="switchCMSTab('blog')">ðŸ Blog</button>
+                  <button class="tab-btn" id="btn-cms-reviews" onclick="switchCMSTab('reviews')">â­ Reviews</button>
+                  <button class="tab-btn" id="btn-cms-contacts" onclick="switchCMSTab('contacts')">ðŸ§ Contact Requests</button>
                 </div>
                 <div id="cms-editor-content"></div>
               </div>
               
+              <div class="db-tab-content" id="tab-content-clients" style="display:none;">
+                <div style="display:flex; flex-direction:column; gap:var(--space-4);">
+                  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-3);">
+                    <div>
+                      <h3 style="font-weight:800; font-size:var(--font-size-xl); margin:0;">Client Directory</h3>
+                      <p style="color:var(--text-secondary); margin-top:var(--space-2); font-size:var(--font-size-sm);">Quickly view and manage your active customers, contact details, and project status.</p>
+                    </div>
+                    <button class="btn btn-secondary" onclick="loadClientDirectory()" style="padding:var(--space-2) var(--space-4);">Refresh</button>
+                  </div>
+                  <div style="display:grid; grid-template-columns: 1fr 320px; gap:var(--space-4); align-items:start;">
+                    <div class="glass-card" style="padding:var(--space-4); min-height: 360px;" id="client-directory-list">Loading clients...</div>
+                    <div class="glass-card" style="padding:var(--space-4); min-height: 360px;" id="client-directory-detail">
+                      <div style="color:var(--text-secondary);">Select a customer to view their profile and recent activity.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div class="db-tab-content" id="tab-content-logs" style="display:none;">
                 <h3 style="font-weight:800; font-size:var(--font-size-xl); margin-bottom:var(--space-4);">System Audit Log</h3>
                 <div class="glass-card" style="padding:0; overflow:hidden;">
@@ -206,6 +225,7 @@ export function initDashboard() {
         if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
       }, 50);
     }
+    if (tabId === 'clients' && user.role === 'ADMIN') loadClientDirectory();
     if (tabId === 'cms' && user.role === 'ADMIN') (window as any).switchCMSTab('services');
     if (tabId === 'logs' && user.role === 'ADMIN') loadAuditLogs();
     if (tabId === 'notifications' && user.role !== 'ADMIN') loadNotifications();
@@ -274,7 +294,7 @@ function connectSocket(user, token) {
   });
 
   socket.on('connect', () => {
-    console.log('⚡ Connected to support WebSocket server.');
+    console.log('âš¡ Connected to support WebSocket server.');
     const dot = document.getElementById('chat-status-dot');
     if (dot) dot.style.background = 'var(--accent-secondary)';
     
@@ -482,9 +502,9 @@ async function loadMessages(convId) {
         } else {
           contentHtml = `
             <div style="display:flex; align-items:center; gap:var(--space-2); padding:var(--space-2); background:rgba(255,255,255,0.05); border-radius:var(--radius-sm); margin-top:var(--space-2);">
-              <span>📄</span>
+              <span>ðŸ„</span>
               <span style="font-size:var(--font-size-xs); color:white; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:150px;">${fileName}</span>
-              <a href="${fileUrl}" download target="_blank" style="color:var(--accent-primary); text-decoration:none;">⬇️</a>
+              <a href="${fileUrl}" download target="_blank" style="color:var(--accent-primary); text-decoration:none;">â¬ï¸</a>
             </div>
           `;
         }
@@ -543,9 +563,9 @@ function appendChatMessage(msg, myUserId) {
     } else {
       contentHtml = `
         <div style="display:flex; align-items:center; gap:var(--space-2); padding:var(--space-2); background:rgba(255,255,255,0.05); border-radius:var(--radius-sm); margin-top:var(--space-2);">
-          <span>📄</span>
+          <span>ðŸ„</span>
           <span style="font-size:var(--font-size-xs); color:white; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:150px;">${fileName}</span>
-          <a href="${fileUrl}" download target="_blank" style="color:var(--accent-primary); text-decoration:none;">⬇️</a>
+          <a href="${fileUrl}" download target="_blank" style="color:var(--accent-primary); text-decoration:none;">â¬ï¸</a>
         </div>
       `;
     }
@@ -741,7 +761,7 @@ async function loadProjects(user) {
 
     if (projects.length === 0) {
       container.innerHTML = `<div style="text-align:center; padding:var(--space-12); color:var(--text-secondary);">
-        No projects found. Ready to kickstart your next build? <a href="/start-project" class="gradient-text" data-link>Start your project proposal →</a>
+        No projects found. Ready to kickstart your next build? <a href="./start-project" class="gradient-text" data-link>Start your project proposal â†</a>
       </div>`;
       return;
     }
@@ -753,13 +773,14 @@ async function loadProjects(user) {
             <h3 style="font-weight:800; font-size:var(--font-size-lg); margin:0;">${p.title}</h3>
             <span style="font-size:var(--font-size-xs); color:var(--text-secondary);">ID: ${p.id}</span>
           </div>
-          <div style="display:flex; align-items:center; gap:var(--space-2);">
+          <div style="display:flex; align-items:center; gap:var(--space-2); flex-wrap:wrap;">
             ${user.role === 'ADMIN' ? `
               <select class="form-select form-input" style="padding:var(--space-1) var(--space-2); font-size:var(--font-size-xs);" onchange="updateProjectStatusDirect('${p.id}', this.value)">
                 ${['Under Review', 'Approved', 'Discovery', 'Design', 'Development', 'Testing', 'Completed', 'Cancelled'].map(status => `
                   <option value="${status}" ${p.status === status ? 'selected' : ''}>${status}</option>
                 `).join('')}
               </select>
+              <button class="btn btn-secondary" onclick="showCustomerDetails('${p.client?.id || ''}')" style="padding:var(--space-1) var(--space-3); font-size:var(--font-size-xs);">View Client</button>
               <button class="btn btn-secondary" onclick="deleteProjectDirect('${p.id}')" style="border-color:var(--accent-tertiary); color:var(--accent-tertiary); padding:var(--space-1) var(--space-3); font-size:var(--font-size-xs);">Delete</button>
             ` : `
               <span class="badge badge-green">${p.status}</span>
@@ -778,7 +799,7 @@ async function loadProjects(user) {
 
         ${p.aiSummary ? `
           <div style="background:rgba(124, 92, 252, 0.05); border-left:3px solid var(--accent-primary); padding:var(--space-3) var(--space-4); border-radius:var(--radius-sm); margin-bottom:var(--space-6);">
-            <div style="font-weight:700; color:var(--accent-primary); font-size:var(--font-size-xs); margin-bottom:var(--space-1);">✦ AI Technical Assessment</div>
+            <div style="font-weight:700; color:var(--accent-primary); font-size:var(--font-size-xs); margin-bottom:var(--space-1);">âœ¦ AI Technical Assessment</div>
             <p style="font-size:var(--font-size-sm); color:var(--text-secondary); line-height:var(--line-height-relaxed); margin:0;">${p.aiSummary}</p>
           </div>
         ` : ''}
@@ -788,7 +809,7 @@ async function loadProjects(user) {
         <div style="display:flex; flex-direction:column; gap:var(--space-2); margin-bottom:var(--space-4);">
           ${p.files && p.files.length > 0 ? p.files.map(f => `
             <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.02); padding:var(--space-2) var(--space-4); border-radius:var(--radius-sm); font-size:var(--font-size-xs);">
-              <span>📄 ${sanitizeHTML(f.filename || f.name || 'File')}</span>
+              <span>ðŸ„ ${sanitizeHTML(f.filename || f.name || 'File')}</span>
               <a href="${f.url}" target="_blank" class="gradient-text">Download</a>
             </div>
           `).join('') : '<div style="font-size:var(--font-size-xs); color:var(--text-muted);">No documents uploaded yet.</div>'}
@@ -871,6 +892,76 @@ async function loadProjects(user) {
     loading.textContent = `Error: ${err.message}`;
   }
 }
+
+let cachedClientDirectory = [];
+let selectedClientId = '';
+
+async function loadClientDirectory() {
+  const listContainer = document.getElementById('client-directory-list');
+  const detailContainer = document.getElementById('client-directory-detail');
+  if (!listContainer || !detailContainer) return;
+
+  listContainer.innerHTML = '<div class="loader-spinner">Loading clients...</div>';
+  detailContainer.innerHTML = '<div style="color:var(--text-secondary);">Select a customer to view their profile and project details.</div>';
+
+  try {
+    const res = await apiFetch('/admin/users');
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to load clients.');
+
+    cachedClientDirectory = Array.isArray(data.users) ? data.users : data.users || [];
+    if (cachedClientDirectory.length === 0) {
+      listContainer.innerHTML = '<div style="color:var(--text-secondary);">No customers found yet.</div>';
+      return;
+    }
+
+    listContainer.innerHTML = cachedClientDirectory.map(client => `
+      <div class="glass-card" style="padding:var(--space-3); margin-bottom:var(--space-2); display:flex; justify-content:space-between; align-items:center; gap:var(--space-3);">
+        <div style="min-width:0;">
+          <div style="font-weight:700;">${sanitizeHTML(client.name || 'Unnamed')}</div>
+          <div style="font-size:var(--font-size-xs); color:var(--text-secondary);">${sanitizeHTML(client.email)}</div>
+        </div>
+        <button class="btn btn-secondary" onclick="showCustomerDetails('${client.id}')" style="padding:var(--space-1) var(--space-3); font-size:var(--font-size-xs);">Show</button>
+      </div>
+    `).join('');
+  } catch (err) {
+    listContainer.innerHTML = `<div style="color:var(--accent-danger);">${err.message}</div>`;
+    console.error(err);
+  }
+}
+
+window.showCustomerDetails = function(id) {
+  const detailContainer = document.getElementById('client-directory-detail');
+  if (!detailContainer) return;
+
+  selectedClientId = id;
+  const client = cachedClientDirectory.find(c => c.id === id);
+  if (!client) {
+    detailContainer.innerHTML = '<div style="color:var(--accent-danger);">Customer information not available. Please refresh the directory.</div>';
+    return;
+  }
+
+  detailContainer.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:var(--space-3); flex-wrap:wrap;">
+      <div>
+        <div style="font-size:var(--font-size-xl); font-weight:800;">${sanitizeHTML(client.name)}</div>
+        <div style="font-size:var(--font-size-sm); color:var(--text-secondary);">${sanitizeHTML(client.email)}</div>
+      </div>
+      <span class="badge" style="background:var(--accent-secondary);">${sanitizeHTML(client.role)}</span>
+    </div>
+    <div style="margin-top:var(--space-4); display:grid; grid-template-columns:1fr; gap:var(--space-3);">
+      <div style="background:rgba(255,255,255,0.03); padding:var(--space-3); border-radius:var(--radius-sm);">
+        <div style="font-weight:700; margin-bottom:var(--space-1);">Contact</div>
+        <div style="font-size:var(--font-size-sm); color:var(--text-secondary);">Phone: ${sanitizeHTML(client.phone || 'Not provided')}</div>
+        <div style="font-size:var(--font-size-sm); color:var(--text-secondary);">Member since: ${new Date(client.createdAt).toLocaleDateString()}</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03); padding:var(--space-3); border-radius:var(--radius-sm);">
+        <div style="font-weight:700; margin-bottom:var(--space-1);">Quick Actions</div>
+        <button class="btn btn-primary" onclick="window.location.href='/dashboard'" style="width:100%; padding:var(--space-2);">View full dashboard</button>
+      </div>
+    </div>
+  `;
+};
 
 // NOTIFICATIONS
 async function loadNotifications() {
@@ -1162,7 +1253,7 @@ function renderReviewsCMS(items, el) {
       ${items.length === 0 ? '<div style="color:var(--text-tertiary); text-align:center; padding:var(--space-4);">No reviews submitted.</div>' : items.map(r => `
         <div class="glass-card" style="display:flex; justify-content:space-between; align-items:center; padding:var(--space-3) var(--space-4); opacity:${r.approved ? '1' : '0.7'};">
           <div>
-            <strong>Client ID: ${r.userId}</strong> | Rating: ${'★'.repeat(r.rating)}
+            <strong>Client ID: ${r.userId}</strong> | Rating: ${'â˜'.repeat(r.rating)}
             <div style="font-size:var(--font-size-xs); color:var(--text-secondary); margin-top:var(--space-1);">${r.comment}</div>
           </div>
           <div style="display:flex; gap:var(--space-2);">
@@ -1218,5 +1309,6 @@ window.deleteCMSItem = async function(resource, id) {
     console.error(err);
   }
 };
+
 
 
