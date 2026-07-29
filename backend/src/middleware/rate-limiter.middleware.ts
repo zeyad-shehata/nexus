@@ -39,9 +39,14 @@ export function rateLimiter(config: RateLimitConfig) {
     
     ipData.count++;
     
+    const remaining = Math.max(0, config.max - ipData.count);
+    res.setHeader('X-RateLimit-Limit', config.max.toString());
+    res.setHeader('X-RateLimit-Remaining', remaining.toString());
+    res.setHeader('X-RateLimit-Reset', Math.ceil(ipData.resetTime / 1000).toString());
+
     if (ipData.count > config.max) {
       const retryAfterMs = ipData.resetTime - currentTime;
-      logger.warn(`🛑 Rate limit hit for IP: ${ip} | Request count: ${ipData.count}`);
+      logger.warn(`🛑 Rate limit exceeded for IP: ${ip} | Request count: ${ipData.count}`);
       res.setHeader('Retry-After', Math.ceil(retryAfterMs / 1000).toString());
       return res.status(429).json({
         error: config.message,

@@ -13,12 +13,10 @@
     "isolatedModules": true,
     "noEmit": true,
 
-    /* Linting / Migration Relaxations */
+    /* Type-Checking */
     "strict": false,
     "noImplicitAny": false,
     "strictNullChecks": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "allowJs": true
   },

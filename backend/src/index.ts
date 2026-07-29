@@ -58,8 +58,13 @@ app.use((req: any, res, next) => {
   next();
 });
 
+import { csrfProtection } from './middleware/csrf.middleware';
+
 // API Documentation Setup
 setupSwagger(app as any);
+
+// Apply CSRF Protection middleware
+app.use(csrfProtection);
 
 // Health Endpoint
 app.get('/health', (req, res) => {

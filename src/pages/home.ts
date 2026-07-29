@@ -1,5 +1,5 @@
 // ============================================
-// NEXUS AGENCY â€ Home Page
+// NEXUS AGENCY — Home Page
 // Premium Edition v2.0
 // ============================================
 
@@ -142,7 +142,7 @@ function whyChooseUs() {
     <section class="section" id="why-us">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-label">âœ¦ Why Choose Us</span>
+          <span class="section-label">✓¦ Why Choose Us</span>
           <h2 class="section-title">Built Different. <span class="gradient-text">Built Better.</span></h2>
           <p class="section-subtitle">We combine cutting-edge technology with stunning design to create digital experiences that drive real business results.</p>
         </div>
@@ -176,7 +176,7 @@ function servicesPreview() {
     <section class="section" id="services-preview" style="background: var(--bg-secondary);">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-label">âœ¦ Our Services</span>
+          <span class="section-label">✓¦ Our Services</span>
           <h2 class="section-title">What We <span class="gradient-text">Create</span></h2>
           <p class="section-subtitle">End-to-end digital solutions tailored to your business needs and growth objectives.</p>
         </div>
@@ -186,7 +186,7 @@ function servicesPreview() {
               <div class="service-icon">${s.icon}</div>
               <h3 class="service-name">${s.name}</h3>
               <p class="service-desc">${s.desc}</p>
-              <span class="service-arrow">Learn more â†</span>
+              <span class="service-arrow">Learn more →</span>
             </div>
           `).join('')}
         </div>
@@ -207,7 +207,7 @@ function portfolioPreview() {
     <section class="section" id="portfolio-preview">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-label">âœ¦ Featured Work</span>
+          <span class="section-label">✓¦ Featured Work</span>
           <h2 class="section-title">Our <span class="gradient-text">Portfolio</span></h2>
           <p class="section-subtitle">Selected projects that showcase our expertise and commitment to excellence.</p>
         </div>
@@ -233,7 +233,7 @@ function portfolioPreview() {
           `).join('')}
         </div>
         <div style="text-align:center;margin-top:var(--space-10);" class="reveal">
-          <a href="./portfolio" class="btn btn-secondary btn-large" data-link>View All Projects â†</a>
+          <a href="./portfolio" class="btn btn-secondary btn-large" data-link>View All Projects →</a>
         </div>
       </div>
     </section>
@@ -246,7 +246,7 @@ function testimonialsSection() {
     { name: 'Michael Chen', company: 'GrowthLab', initials: 'MC', quote: 'Working with Nexus was the best investment we made for our startup. They delivered a beautiful, fast, and scalable platform that our users absolutely love. Highly recommend!', rating: 5 },
     { name: 'Emma Williams', company: 'Luxe Retail', initials: 'EW', quote: 'The e-commerce platform they built for us is stunning. Sales increased 250% after launch. The team is professional, responsive, and truly cares about delivering the best result.', rating: 5 },
     { name: 'David Park', company: 'NeuralWave AI', initials: 'DP', quote: 'Their AI solutions expertise is exceptional. They built a custom dashboard that saves our team 20+ hours per week. The design is world-class and the code quality is impeccable.', rating: 5 },
-    { name: 'Lisa Zhang', company: 'Bloom Beauty', initials: 'LZ', quote: 'From branding to website to mobile app â€ Nexus handled everything flawlessly. They are a true partner who understands business needs and translates them into beautiful products.', rating: 5 },
+    { name: 'Lisa Zhang', company: 'Bloom Beauty', initials: 'LZ', quote: 'From branding to website to mobile app — Nexus handled everything flawlessly. They are a true partner who understands business needs and translates them into beautiful products.', rating: 5 },
   ];
 
   const stars = 'â˜'.repeat(5);
@@ -255,9 +255,9 @@ function testimonialsSection() {
     <section class="section testimonials-section" id="testimonials" style="background: var(--bg-secondary);">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-label">âœ¦ Testimonials</span>
+          <span class="section-label">✓¦ Testimonials</span>
           <h2 class="section-title">What Our <span class="gradient-text">Clients Say</span></h2>
-          <p class="section-subtitle">Don't just take our word for it â€ hear from some of our amazing clients.</p>
+          <p class="section-subtitle">Don't just take our word for it — hear from some of our amazing clients.</p>
         </div>
         <div style="overflow:hidden;" class="reveal" id="testimonial-wrapper">
           <div class="testimonial-slider" id="testimonial-slider">
@@ -298,7 +298,7 @@ function ctaSection() {
       <div class="cta-glow"></div>
       <div class="container">
         <div class="cta-content reveal">
-          <span class="section-label">âœ¦ Ready to Start?</span>
+          <span class="section-label">✓¦ Ready to Start?</span>
           <h2 class="cta-title">Let's Build Something <span class="gradient-text">Extraordinary</span></h2>
           <p class="cta-subtitle">Your vision deserves a world-class digital presence. Let's make it happen together.</p>
           <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>
@@ -392,7 +392,7 @@ setInterval(() => {
   }
 }, 5000);
 
-// Init typing on page load â€ called from router
+// Init typing on page load — called from router
 export function initHomePage() {
   initTypingEffect();
 }

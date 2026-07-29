@@ -15,7 +15,7 @@ export function renderConsultation() {
   for (let d = 1; d <= daysInMonth; d++) {
     const isPast = d < today.getDate();
     const isToday = d === today.getDate();
-    calendarDays += `<div class="calendar-day ${isPast ? 'disabled' : ''} ${isToday ? 'selected' : ''}" onclick="selectDay(this, ${d})">${d}</div>`;
+    calendarDays += `<div class="calendar-day ${isPast ? 'disabled' : ''} ${isToday ? 'selected' : ''}" ${isPast ? '' : 'role="button" tabindex="0"'} onclick="selectDay(this, ${d})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">${d}</div>`;
   }
 
   return `
@@ -41,7 +41,7 @@ export function renderConsultation() {
               { icon: '📹', name: 'Google Meet', desc: 'Video call via Google Meet' },
               { icon: '📞', name: 'Phone Call', desc: 'Traditional phone call' },
             ].map((m, i) => `
-              <div class="glass-card meeting-type-card ${i === 0 ? 'selected' : ''}" onclick="selectMeetingType(this)">
+              <div class="glass-card meeting-type-card ${i === 0 ? 'selected' : ''}" role="button" tabindex="0" onclick="selectMeetingType(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                 <div class="meeting-type-icon">${m.icon}</div>
                 <h3 style="font-weight:700;margin-bottom:var(--space-1);">${m.name}</h3>
                 <p style="font-size:var(--font-size-sm);color:var(--text-secondary);">${m.desc}</p>
@@ -63,7 +63,7 @@ export function renderConsultation() {
           <h2 style="font-size:var(--font-size-xl);font-weight:700;margin-bottom:var(--space-6);text-align:center;">Available Times</h2>
           <div class="time-slots" style="max-width:500px;margin:0 auto;">
             ${['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'].map((t, i) => `
-              <div class="time-slot ${i === 2 ? 'selected' : ''}" onclick="selectTimeSlot(this)">${t}</div>
+              <div class="time-slot ${i === 2 ? 'selected' : ''}" role="button" tabindex="0" onclick="selectTimeSlot(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">${t}</div>
             `).join('')}
           </div>
         </div>

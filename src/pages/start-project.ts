@@ -1,6 +1,4 @@
-// ============================================
-// NEXUS AGENCY â€ Start Your Project (Multi-Step Form)
-// ============================================
+import { apiFetch } from '../utils/api';
 
 export function renderStartProject() {
   const token = localStorage.getItem('accessToken');
@@ -10,7 +8,7 @@ export function renderStartProject() {
         <div class="page-hero-bg"></div>
         <div class="page-hero-content">
           <div class="container">
-            <span class="section-label reveal">âœ¦ Start Your Project</span>
+            <span class="section-label reveal">✓¦ Start Your Project</span>
             <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">Let's Build <span class="gradient-text">Together</span></h1>
             <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;">Tell us about your project and we'll bring your vision to life.</p>
           </div>
@@ -36,7 +34,7 @@ export function renderStartProject() {
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
         <div class="container">
-          <span class="section-label reveal">âœ¦ Start Your Project</span>
+          <span class="section-label reveal">✓¦ Start Your Project</span>
           <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">Let's Build <span class="gradient-text">Together</span></h1>
           <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;">Tell us about your project and we'll bring your vision to life.</p>
         </div>
@@ -68,7 +66,7 @@ export function renderStartProject() {
             </div>
             <div class="step-buttons">
               <div></div>
-              <button class="btn btn-primary" onclick="nextStep()">Next Step â†</button>
+              <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
             </div>
           </div>
 
@@ -113,8 +111,8 @@ export function renderStartProject() {
               <input type="text" class="form-input" id="form-country" placeholder="United States" />
             </div>
             <div class="step-buttons">
-              <button class="btn btn-secondary" onclick="prevStep()">â† Back</button>
-              <button class="btn btn-primary" onclick="nextStep()">Next Step â†</button>
+              <button class="btn btn-secondary" onclick="prevStep()">→ Back</button>
+              <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
             </div>
           </div>
 
@@ -135,8 +133,8 @@ export function renderStartProject() {
               <textarea class="form-textarea form-input" id="form-features" placeholder="List the key features you need..." style="min-height:80px;"></textarea>
             </div>
             <div class="step-buttons">
-              <button class="btn btn-secondary" onclick="prevStep()">â† Back</button>
-              <button class="btn btn-primary" onclick="nextStep()">Next Step â†</button>
+              <button class="btn btn-secondary" onclick="prevStep()">→ Back</button>
+              <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
             </div>
           </div>
 
@@ -152,7 +150,7 @@ export function renderStartProject() {
               <label class="form-label">Preferred Style</label>
               <div class="radio-group" id="form-style-group">
                 ${['Modern & Minimal', 'Bold & Colorful', 'Corporate & Professional', 'Elegant & Luxury'].map(s => `
-                  <div class="radio-option" onclick="selectRadio(this)">
+                  <div class="radio-option" role="radio" tabindex="0" aria-checked="false" onclick="selectRadio(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                     <div class="radio-dot"></div>
                     <span>${s}</span>
                   </div>
@@ -164,8 +162,8 @@ export function renderStartProject() {
               <textarea class="form-textarea form-input" id="form-references" placeholder="Share URLs of websites you like..." style="min-height:80px;"></textarea>
             </div>
             <div class="step-buttons">
-              <button class="btn btn-secondary" onclick="prevStep()">â† Back</button>
-              <button class="btn btn-primary" onclick="nextStep()">Next Step â†</button>
+              <button class="btn btn-secondary" onclick="prevStep()">→ Back</button>
+              <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
             </div>
           </div>
 
@@ -174,16 +172,16 @@ export function renderStartProject() {
             <h2 class="step-title">Budget Range</h2>
             <p class="step-subtitle">Select your approximate budget range.</p>
             <div class="radio-group" id="form-budget-group" style="grid-template-columns:1fr;">
-              ${['Under $500', '$500 â€ $1,000', '$1,000 â€ $5,000', '$5,000 â€ $10,000', '$10,000+'].map(b => `
-                <div class="radio-option" onclick="selectRadio(this)">
+              ${['Under $500', '$500 — $1,000', '$1,000 — $5,000', '$5,000 — $10,000', '$10,000+'].map(b => `
+                <div class="radio-option" role="radio" tabindex="0" aria-checked="false" onclick="selectRadio(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                   <div class="radio-dot"></div>
                   <span>${b}</span>
                 </div>
               `).join('')}
             </div>
             <div class="step-buttons">
-              <button class="btn btn-secondary" onclick="prevStep()">â† Back</button>
-              <button class="btn btn-primary" onclick="nextStep()">Next Step â†</button>
+              <button class="btn btn-secondary" onclick="prevStep()">→ Back</button>
+              <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
             </div>
           </div>
 
@@ -193,15 +191,15 @@ export function renderStartProject() {
             <p class="step-subtitle">When do you need the project completed?</p>
             <div class="radio-group" id="form-timeline-group">
               ${['ASAP', '1 Month', '2 Months', 'Flexible'].map(t => `
-                <div class="radio-option" onclick="selectRadio(this)">
+                <div class="radio-option" role="radio" tabindex="0" aria-checked="false" onclick="selectRadio(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                   <div class="radio-dot"></div>
                   <span>${t}</span>
                 </div>
               `).join('')}
             </div>
             <div class="step-buttons">
-              <button class="btn btn-secondary" onclick="prevStep()">â† Back</button>
-              <button class="btn btn-primary" onclick="nextStep()">Next Step â†</button>
+              <button class="btn btn-secondary" onclick="prevStep()">→ Back</button>
+              <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
             </div>
           </div>
 
@@ -217,8 +215,8 @@ export function renderStartProject() {
             </div>
             <div id="file-list" style="margin-top:var(--space-4);"></div>
             <div class="step-buttons">
-              <button class="btn btn-secondary" onclick="prevStep()">â† Back</button>
-              <button class="btn btn-primary" onclick="nextStep()">Next Step â†</button>
+              <button class="btn btn-secondary" onclick="prevStep()">→ Back</button>
+              <button class="btn btn-primary" onclick="nextStep()">Next Step →</button>
             </div>
           </div>
 
@@ -230,7 +228,7 @@ export function renderStartProject() {
               <textarea class="form-textarea form-input" id="form-notes" placeholder="Share any additional information, questions, or specific requirements..." style="min-height:200px;"></textarea>
             </div>
             <div class="step-buttons">
-              <button class="btn btn-secondary" onclick="prevStep()">â† Back</button>
+              <button class="btn btn-secondary" onclick="prevStep()">→ Back</button>
               <button class="btn btn-primary btn-large btn-shimmer" onclick="submitProject()">
                 ðŸš€ Submit Project
               </button>
@@ -287,8 +285,15 @@ export function initStartProject() {
   };
 
   (window as any).selectRadio = function(el: HTMLElement) {
-    el.closest('.radio-group').querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
+    const group = el.closest('.radio-group');
+    if (group) {
+      group.querySelectorAll('.radio-option').forEach(o => {
+        o.classList.remove('selected');
+        o.setAttribute('aria-checked', 'false');
+      });
+    }
     el.classList.add('selected');
+    el.setAttribute('aria-checked', 'true');
   };
 
   (window as any).handleStepFileChange = function(input: HTMLInputElement) {
@@ -356,7 +361,6 @@ ${notes}
 `.trim();
 
     try {
-      const { apiFetch } = await import('../utils/api');
       const res = await apiFetch('/projects', {
         method: 'POST',
         body: JSON.stringify({

@@ -2,6 +2,8 @@
 // NEXUS AGENCY  Live Chat Widget
 // ============================================
 
+import { API_BASE, SOCKET_URL } from '../utils/api';
+import { sanitizeHTML } from '../utils/sanitize';
 import {
   getMessages,
   sendMessage,
@@ -26,7 +28,7 @@ let serverMessages: any[] = [];
 function playBeep(frequency = 600, type = 'sine', duration = 0.15) {
   try {
     if (!audioContext) {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
     }
     if (audioContext.state === 'suspended') {
       audioContext.resume();
@@ -44,13 +46,6 @@ function playBeep(frequency = 600, type = 'sine', duration = 0.15) {
   } catch (e) {
     // Audio context not allowed or unsupported
   }
-}
-
-// Simple HTML Sanitizer to prevent XSS
-function sanitizeHTML(str) {
-  const temp = document.createElement('div');
-  temp.textContent = str;
-  return temp.innerHTML;
 }
 
 // Format timestamp
@@ -254,7 +249,6 @@ export function initChatWidget() {
   // Backend Integration State Variables
   const userToken = localStorage.getItem('accessToken');
   const user = JSON.parse(localStorage.getItem('user') || 'null');
-  const API_BASE = 'http://localhost:5000/api/v1';
   let activeConversationId: string | null = null;
   serverMessages = [];
   let clientSocket: any = null;
@@ -329,7 +323,7 @@ export function initChatWidget() {
   function setupClientSocket() {
     if (clientSocket) return;
 
-    clientSocket = (window as any).io('http://localhost:5000', {
+    clientSocket = (window as any).io(SOCKET_URL, {
       auth: { token: userToken }
     });
 

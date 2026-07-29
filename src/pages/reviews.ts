@@ -1,7 +1,4 @@
-// ============================================
-// NEXUS AGENCY  Client Reviews Page
-// Premium Edition v2.0  Rating breakdown
-// ============================================
+import { apiFetch } from '../utils/api';
 
 const staticReviews = [
   { name: 'Sarah Johnson', company: 'TechVentures Inc.', initials: 'SJ', rating: 5, text: 'Nexus transformed our online presence completely. The attention to detail and the quality of design exceeded our expectations. Our conversion rate increased by 340% within the first month. Truly world-class work!', verified: true },
@@ -161,7 +158,6 @@ export async function initReviews() {
       const comment = (document.getElementById('review-comment') as HTMLTextAreaElement).value;
 
       try {
-        const { apiFetch } = await import('../utils/api');
         const res = await apiFetch('/reviews', {
           method: 'POST',
           body: JSON.stringify({ rating, comment })
@@ -177,11 +173,11 @@ export async function initReviews() {
   }
 
   try {
-    const { apiFetch } = await import('../utils/api');
     const res = await apiFetch('/reviews');
-    const dbReviews = await res.json();
+    const data = await res.json();
+    const dbReviews = Array.isArray(data) ? data : (data.reviews || []);
     if (res.ok && dbReviews.length > 0) {
-      grid.innerHTML = dbReviews.map((r, i) => renderReviewCard(r, i)).join('');
+      grid.innerHTML = dbReviews.map((r: any, i: number) => renderReviewCard(r, i)).join('');
     }
   } catch (e) {
     console.warn('?? Could not fetch reviews from API, falling back to static mock data.', e);

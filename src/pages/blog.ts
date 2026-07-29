@@ -1,7 +1,4 @@
-// ============================================
-// NEXUS AGENCY  Blog Page
-// Premium Edition v2.0  Featured post + enhanced cards
-// ============================================
+import { apiFetch } from '../utils/api';
 
 const blogPosts = [
   { title: '10 Web Design Trends Dominating 2026', cat: 'Web Design', excerpt: 'Explore the cutting-edge design trends that are shaping the digital landscape this year, from AI-driven interfaces to immersive 3D experiences.', date: 'Jun 5, 2026', read: '8 min', icon: '??' },
@@ -106,9 +103,9 @@ export async function initBlog() {
   if (!container) return;
 
   try {
-    const { apiFetch } = await import('../utils/api');
     const res = await apiFetch('/blog');
-    const dbBlogs = await res.json();
+    const data = await res.json();
+    const dbBlogs = Array.isArray(data) ? data : (data.blogs || []);
     if (res.ok && dbBlogs.length > 0) {
       container.innerHTML = dbBlogs.map((p: any, i: number) => renderBlogPost(p, i)).join('');
     }

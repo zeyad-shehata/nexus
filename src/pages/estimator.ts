@@ -1,5 +1,5 @@
 // ============================================
-// NEXUS AGENCY â€ Cost Estimator
+// NEXUS AGENCY — Cost Estimator
 // ============================================
 
 export function renderEstimator() {
@@ -8,7 +8,7 @@ export function renderEstimator() {
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
         <div class="container">
-          <span class="section-label reveal">âœ¦ Cost Estimator</span>
+          <span class="section-label reveal">✓¦ Cost Estimator</span>
           <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">Project <span class="gradient-text">Estimator</span></h1>
           <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;">Get an instant estimate for your project based on your requirements.</p>
         </div>
@@ -30,7 +30,7 @@ export function renderEstimator() {
                 { label: 'Mobile App', value: 10000 },
                 { label: 'Full Platform', value: 20000 },
               ].map((t, i) => `
-                <div class="radio-option ${i === 0 ? 'selected' : ''}" data-value="${t.value}" onclick="selectEstOption(this, 'est-type')">
+                <div class="radio-option ${i === 0 ? 'selected' : ''}" role="radio" tabindex="0" aria-checked="${i === 0 ? 'true' : 'false'}" data-value="${t.value}" onclick="selectEstOption(this, 'est-type')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                   <div class="radio-dot"></div>
                   <span>${t.label}</span>
                 </div>
@@ -105,7 +105,7 @@ export function renderEstimator() {
           </div>
 
           <div style="text-align:center;margin-top:var(--space-8);">
-            <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>Start Your Project â†</a>
+            <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>Start Your Project →</a>
           </div>
         </div>
       </div>
@@ -114,8 +114,12 @@ export function renderEstimator() {
 }
 
 (window as any).selectEstOption = function(el: HTMLElement, groupId: string) {
-  document.querySelectorAll(`#${groupId} .radio-option`).forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll(`#${groupId} .radio-option`).forEach(o => {
+    o.classList.remove('selected');
+    o.setAttribute('aria-checked', 'false');
+  });
   el.classList.add('selected');
+  el.setAttribute('aria-checked', 'true');
   updateEstimate();
 };
 
@@ -124,7 +128,7 @@ export function renderEstimator() {
   const check = el.querySelector('.est-check') as HTMLElement;
   if (!check) return;
   if (el.classList.contains('selected')) {
-    check.textContent = 'âœ';
+    check.textContent = '✓';
     check.style.borderColor = 'var(--accent-primary)';
     check.style.background = 'var(--accent-primary)';
     check.style.color = 'white';

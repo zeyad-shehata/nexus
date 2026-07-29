@@ -58,6 +58,8 @@ export function initCursor() {
   });
 }
 
+import { getLanguage, setLanguage } from './utils/i18n';
+
 // Scroll progress with glow
 export function initScrollProgress() {
   const bar = document.getElementById('scroll-progress');
@@ -133,6 +135,17 @@ export function initNavbar() {
     }
   }
 
+  // Language toggle
+  const langBtn = document.getElementById('lang-toggle');
+  if (langBtn) {
+    langBtn.textContent = getLanguage() === 'en' ? '🌐 AR' : '🌐 EN';
+    langBtn.addEventListener('click', () => {
+      const newLang = getLanguage() === 'en' ? 'ar' : 'en';
+      setLanguage(newLang);
+      langBtn.textContent = newLang === 'en' ? '🌐 AR' : '🌐 EN';
+    });
+  }
+
   updateAuthNav();
   window.addEventListener('authChange', updateAuthNav);
 }
@@ -190,6 +203,8 @@ export function showToast(message: string, type: string = 'success') {
     toast = document.createElement('div');
     toast.id = 'nexus-toast';
     toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
     document.body.appendChild(toast);
   }
   toast.textContent = message;

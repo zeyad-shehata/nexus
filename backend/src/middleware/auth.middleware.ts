@@ -32,7 +32,11 @@ export function requireAuth(req: AuthenticatedRequest, res: Response, next: Next
       id: string;
       email: string;
       role: Role;
+      type?: string;
     };
+    if (decoded.type && decoded.type !== 'access_token') {
+      return res.status(403).json({ error: 'Invalid token type for API authorization.' });
+    }
     req.user = decoded;
     next();
   } catch (error) {

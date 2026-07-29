@@ -1,6 +1,4 @@
-// ============================================
-// NEXUS AGENCY  Project Tracker
-// ============================================
+import { apiFetch } from '../utils/api';
 
 export function renderTracker() {
   return `
@@ -77,7 +75,6 @@ export function renderTracker() {
   }
 
   try {
-    const { apiFetch } = await import('../utils/api');
     const res = await apiFetch(`/projects/${projectId}`);
     const p = await res.json();
     if (!res.ok) throw new Error(p.error || 'Project not found.');

@@ -3662,3 +3662,63 @@ input, textarea, select {
     background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
   }
 }
+
+/* === Accessibility & Skip Nav === */
+.skip-nav {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--accent-primary);
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  z-index: 10000;
+  font-weight: 700;
+  transition: top 0.2s ease;
+  text-decoration: none;
+}
+.skip-nav:focus {
+  top: 1rem;
+  outline: 3px solid var(--accent-secondary);
+}
+
+/* Focus-visible global styles */
+:focus-visible {
+  outline: 2px solid var(--accent-primary) !important;
+  outline-offset: 2px !important;
+}
+
+/* === Mobile Breakpoints Improvements === */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .reviews-stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* === RTL Support === */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+[dir="rtl"] .nav-links {
+  margin-left: 0;
+  margin-right: auto;
+}
+[dir="rtl"] .radio-option span:last-child {
+  margin-left: 0;
+  margin-right: auto;
+}
+[dir="rtl"] .accordion-icon {
+  margin-left: 0;
+  margin-right: auto;
+}
+

@@ -14,11 +14,11 @@ const REFRESH_SECRET = env.JWT_REFRESH_SECRET;
 
 // Token generation helpers
 function generateAccessToken(payload: any) {
-  return jwt.sign(payload, ACCESS_SECRET, { expiresIn: '15m' });
+  return jwt.sign({ ...payload, type: 'access_token' }, ACCESS_SECRET, { expiresIn: '15m' });
 }
 
 function generateRefreshToken(payload: any, rememberMe: boolean = false) {
-  return jwt.sign(payload, REFRESH_SECRET, { expiresIn: rememberMe ? '30d' : '1d' });
+  return jwt.sign({ ...payload, type: 'refresh_token' }, REFRESH_SECRET, { expiresIn: rememberMe ? '30d' : '1d' });
 }
 
 // Cookie options helper
@@ -52,8 +52,8 @@ export async function register(req: AuthenticatedRequest, res: Response, next: N
       }
     });
 
-    // Create a mock verification token (verify JWT)
-    const verificationToken = jwt.sign({ id: user.id }, ACCESS_SECRET, { expiresIn: '24h' });
+    // Create a verification token
+    const verificationToken = jwt.sign({ id: user.id, type: 'email_verification' }, ACCESS_SECRET, { expiresIn: '24h' });
 
     // Send Welcome Email
     await sendWelcomeEmail(user.email, user.name, verificationToken);
@@ -188,7 +188,7 @@ export async function forgotPassword(req: AuthenticatedRequest, res: Response, n
     }
 
     // Sign a transient reset token
-    const resetToken = jwt.sign({ id: user.id }, ACCESS_SECRET, { expiresIn: '1h' });
+    const resetToken = jwt.sign({ id: user.id, type: 'reset_password' }, ACCESS_SECRET, { expiresIn: '1h' });
 
     await sendPasswordResetEmail(user.email, resetToken);
     await logger.activity(user.id, 'FORGOT_PASSWORD_REQUEST', `Reset password requested for: ${user.email}`);
@@ -204,7 +204,10 @@ export async function resetPassword(req: AuthenticatedRequest, res: Response, ne
   try {
     const { token, password } = resetPasswordSchema.parse(req.body);
     
-    const decoded = jwt.verify(token, ACCESS_SECRET) as { id: string };
+    const decoded = jwt.verify(token, ACCESS_SECRET) as { id: string; type?: string };
+    if (decoded.type !== 'reset_password') {
+      return res.status(400).json({ error: 'Invalid or expired reset token.' });
+    }
     
     const salt = await bcrypt.genSalt(12);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -233,7 +236,10 @@ export async function verifyEmail(req: AuthenticatedRequest, res: Response, next
       return res.status(400).json({ error: 'Verification token is required.' });
     }
 
-    const decoded = jwt.verify(token, ACCESS_SECRET) as { id: string };
+    const decoded = jwt.verify(token, ACCESS_SECRET) as { id: string; type?: string };
+    if (decoded.type !== 'email_verification') {
+      return res.status(400).json({ error: 'Invalid or expired verification token.' });
+    }
     
     const user = await prisma.user.update({
       where: { id: decoded.id },

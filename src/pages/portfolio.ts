@@ -1,7 +1,4 @@
-// ============================================
-// NEXUS AGENCY â€ Portfolio Page
-// Premium Edition v2.0 â€ with Lightbox
-// ============================================
+import { apiFetch } from '../utils/api';
 
 const projectsData = [
   { title: 'Quantum Finance', cat: 'Web App', desc: 'A cutting-edge fintech platform with real-time analytics, AI-powered insights, and seamless payment processing.', tech: ['React', 'Node.js', 'AWS'], icon: 'ðŸ¦', metrics: '340% conversion increase', color: '#7c5cfc', client: 'FinEdge Capital', duration: '3 months', challenge: 'Building a real-time trading dashboard that handles 10K+ concurrent users with sub-second latency.' },
@@ -20,7 +17,7 @@ function renderPortfolioItem(p, i) {
   const descText = p.description || p.desc;
   const tech = p.technologies || p.tech || ['React', 'Next.js'];
   const metricsText = p.metrics || 'Successful Deployment';
-  const iconText = p.icon || 'âœ¦';
+  const iconText = p.icon || '✓¦';
   const colorText = p.color || '#7c5cfc';
   const coverImg = p.coverImage || '';
 
@@ -54,7 +51,7 @@ export function renderPortfolio() {
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
         <div class="container">
-          <span class="section-label reveal">âœ¦ Our Work</span>
+          <span class="section-label reveal">✓¦ Our Work</span>
           <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">Our <span class="gradient-text">Portfolio</span></h1>
           <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;">Explore our selected projects and see how we bring ideas to life.</p>
         </div>
@@ -87,14 +84,14 @@ export async function initPortfolio() {
   if (!container) return;
 
   try {
-    const { apiFetch } = await import('../utils/api');
     const res = await apiFetch('/portfolio');
-    const dbProjects = await res.json();
+    const data = await res.json();
+    const dbProjects = Array.isArray(data) ? data : (data.portfolio || []);
     if (res.ok && dbProjects.length > 0) {
-      container.innerHTML = dbProjects.map((p, i) => renderPortfolioItem(p, i)).join('');
+      container.innerHTML = dbProjects.map((p: any, i: number) => renderPortfolioItem(p, i)).join('');
     }
   } catch (e) {
-    console.warn('âš ï¸ Could not fetch portfolio from API, falling back to static mock data.', e);
+    console.warn('⚠️ Could not fetch portfolio from API, falling back to static mock data.', e);
   }
 }
 
@@ -107,7 +104,7 @@ export async function initPortfolio() {
   if (!lb || !body) return;
 
   body.innerHTML = `
-    <button class="lightbox-close" onclick="closeProjectLightbox()">âœ•</button>
+    <button class="lightbox-close" onclick="closeProjectLightbox()">✓•</button>
     <div class="lightbox-visual" style="background:linear-gradient(135deg, ${p.color}33, ${p.color}11);">
       <span style="font-size:6rem;">${p.icon}</span>
     </div>
@@ -140,7 +137,7 @@ export async function initPortfolio() {
       </div>
     ` : ''}
     <div style="text-align:center;">
-      <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>Start a Similar Project â†</a>
+      <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>Start a Similar Project →</a>
     </div>
   `;
 

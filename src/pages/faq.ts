@@ -1,6 +1,6 @@
 // ============================================
-// NEXUS AGENCY â€ FAQ Page
-// Premium Edition v2.0 â€ with search filter
+// NEXUS AGENCY — FAQ Page
+// Premium Edition v2.0 — with search filter
 // ============================================
 
 export function renderFAQ() {
@@ -19,7 +19,7 @@ export function renderFAQ() {
       icon: 'ðŸ°',
       faqs: [
         { q: 'How much does a website cost?', a: 'Website costs vary based on complexity and features. Simple landing pages start at $1,500, while complex web applications can range from $5,000 to $50,000+. Contact us for a free quote.' },
-        { q: 'What payment methods do you accept?', a: 'We accept bank transfers, credit cards, PayPal, and cryptocurrency. We offer flexible payment plans for larger projects â€ typically 50% upfront and 50% upon completion.' },
+        { q: 'What payment methods do you accept?', a: 'We accept bank transfers, credit cards, PayPal, and cryptocurrency. We offer flexible payment plans for larger projects — typically 50% upfront and 50% upon completion.' },
         { q: 'Is there a refund policy?', a: 'We offer a satisfaction guarantee. If you\'re not happy with the initial concept, we\'ll refund your deposit minus any work already completed. Detailed terms are in our contract.' },
       ]
     },
@@ -27,7 +27,7 @@ export function renderFAQ() {
       name: 'Process',
       icon: 'ðŸ„',
       faqs: [
-        { q: 'What is your development process?', a: 'We follow an agile methodology: Discovery â† Planning â† Design â† Development â† Testing â† Launch â† Support. You\'ll be involved at every stage with regular updates and checkpoints.' },
+        { q: 'What is your development process?', a: 'We follow an agile methodology: Discovery → Planning → Design → Development → Testing → Launch → Support. You\'ll be involved at every stage with regular updates and checkpoints.' },
         { q: 'How long does a typical project take?', a: 'Timelines vary: Landing pages (1-2 weeks), websites (2-6 weeks), mobile apps (4-12 weeks), complex platforms (3-6 months). We\'ll provide a detailed timeline during the proposal phase.' },
         { q: 'How many revisions are included?', a: 'Our standard packages include 3-5 revision rounds per design phase. Additional revisions can be arranged at an hourly rate.' },
       ]
@@ -43,7 +43,7 @@ export function renderFAQ() {
     },
     {
       name: 'Technical',
-      icon: 'âšï¸',
+      icon: '⚠️',
       faqs: [
         { q: 'What technologies do you use?', a: 'We use modern, industry-standard technologies: React, Next.js, Vue, Node.js, Python, Flutter, React Native, and more. We choose the best stack based on your project\'s specific needs.' },
         { q: 'Will my website be mobile-responsive?', a: 'Every project we deliver is fully responsive and tested across all devices and browsers. Mobile-first design is a core part of our process.' },
@@ -57,7 +57,7 @@ export function renderFAQ() {
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
         <div class="container">
-          <span class="section-label reveal">âœ¦ FAQ</span>
+          <span class="section-label reveal">✓¦ FAQ</span>
           <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">Frequently Asked <span class="gradient-text">Questions</span></h1>
           <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;">Everything you need to know about working with us.</p>
         </div>
@@ -80,10 +80,10 @@ export function renderFAQ() {
                 <span class="badge">${cat.name}</span>
               </h2>
               ${cat.faqs.map(f => `
-                <div class="accordion-item faq-item" data-question="${f.q.toLowerCase()}" data-answer="${f.a.toLowerCase()}" onclick="this.classList.toggle('active');const b=this.querySelector('.accordion-body');b.style.maxHeight=this.classList.contains('active')?b.scrollHeight+'px':'0'">
+                <div class="accordion-item faq-item" role="button" tabindex="0" aria-expanded="false" data-question="${f.q.toLowerCase()}" data-answer="${f.a.toLowerCase()}" onclick="this.classList.toggle('active');const isAct=this.classList.contains('active');this.setAttribute('aria-expanded', isAct);const b=this.querySelector('.accordion-body');b.style.maxHeight=isAct?b.scrollHeight+'px':'0'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                   <div class="accordion-header">
                     <span>${f.q}</span>
-                    <span class="accordion-icon">â¼</span>
+                    <span class="accordion-icon">▾</span>
                   </div>
                   <div class="accordion-body">
                     <div class="accordion-body-inner">${f.a}</div>
@@ -104,7 +104,7 @@ export function renderFAQ() {
           <div class="glass-card" style="padding:var(--space-12);">
             <h3 style="font-size:var(--font-size-xl);font-weight:700;margin-bottom:var(--space-3);">Still Have Questions?</h3>
             <p style="color:var(--text-secondary);margin-bottom:var(--space-6);">We're here to help. Reach out and we'll respond within 24 hours.</p>
-            <a href="./contact" class="btn btn-primary" data-link>Contact Us â†</a>
+            <a href="./contact" class="btn btn-primary" data-link>Contact Us →</a>
           </div>
         </div>
       </div>

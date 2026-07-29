@@ -6,47 +6,38 @@ import { AuthenticatedRequest } from '../middleware/auth.middleware';
 // 1. Dashboard Analytics
 export async function getDashboardAnalytics(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   try {
-    // Total Clients (Role.USER — there is no CLIENT role in schema)
-    const totalClients = await prisma.user.count({
-      where: { role: Role.USER }
-    });
-
-    // Active Projects (exclude Pending, Completed, Cancelled)
-    const activeProjects = await prisma.project.count({
-      where: {
-        status: {
-          in: [
-            ProjectStatus.Under_Review,
-            ProjectStatus.Planning,
-            ProjectStatus.Designing,
-            ProjectStatus.Development,
-            ProjectStatus.Testing
-          ]
+    // Run all count and find queries concurrently via Promise.all
+    const [
+      totalClients,
+      activeProjects,
+      pendingProjects,
+      pendingContactRequests,
+      totalProjects,
+      projectsWithBudgets
+    ] = await Promise.all([
+      prisma.user.count({ where: { role: Role.USER } }),
+      prisma.project.count({
+        where: {
+          status: {
+            in: [
+              ProjectStatus.Under_Review,
+              ProjectStatus.Planning,
+              ProjectStatus.Designing,
+              ProjectStatus.Development,
+              ProjectStatus.Testing
+            ]
+          }
         }
-      }
-    });
-
-    // Pending Proposals
-    const pendingProjects = await prisma.project.count({
-      where: { status: ProjectStatus.Pending }
-    });
-
-    // Contact Requests count
-    const pendingContactRequests = await prisma.contactRequest.count({
-      where: { status: ContactStatus.New }
-    });
-
-    // Total Projects
-    const totalProjects = await prisma.project.count();
-
-    // Mock Revenue estimation based on budgets of completed/active projects
-    const projectsWithBudgets = await prisma.project.findMany({
-      select: { budget: true, status: true }
-    });
+      }),
+      prisma.project.count({ where: { status: ProjectStatus.Pending } }),
+      prisma.contactRequest.count({ where: { status: ContactStatus.New } }),
+      prisma.project.count(),
+      prisma.project.findMany({ select: { budget: true, status: true } })
+    ]);
 
     let estimatedRevenue = 0;
     projectsWithBudgets.forEach(p => {
-      // Budgets are strings like "$5,000 — $10,000" or "$3,000", let's extract the first numeric bounds
+      // Budgets are strings like "$5,000 — $10,000" or "$3,000", let's extract numeric bounds
       const match = p.budget.replace(/[^0-9]/g, '');
       const val = parseInt(match.slice(0, 5)) || 5000; 
       if (p.status === ProjectStatus.Completed) {

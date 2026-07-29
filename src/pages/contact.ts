@@ -3,6 +3,8 @@
 // Premium Edition v2.0  Animated map + toast
 // ============================================
 
+import { apiFetch } from '../utils/api';
+
 export function renderContact() {
   return `
     <section class="page-hero">
@@ -121,9 +123,8 @@ window.handleContactSubmit = async function(e) {
   submitBtn.disabled = true;
 
   try {
-    const res = await fetch('http://localhost:5000/api/v1/contact', {
+    const res = await apiFetch('/contact', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, subject, message })
     });
     if (!res.ok) throw new Error();

@@ -1,19 +1,15 @@
 // ============================================
-// NEXUS AGENCY â€ Unified Dashboards
+// NEXUS AGENCY — Unified Dashboards
 // ============================================
 
 import { API_BASE, SOCKET_URL, apiFetch } from '../utils/api';
 import { showAlert } from '../components/ui/Alert';
+import { sanitizeHTML } from '../utils/sanitize';
+import { renderDashboardSidebar } from '../components/dashboard/DashboardSidebar';
+import { renderDashboardChatView } from '../components/dashboard/DashboardChatView';
 
 let socket = null;
 let currentActiveConversationId = null;
-
-// XSS sanitizer for user-generated content
-function sanitizeHTML(str) {
-  const temp = document.createElement('div');
-  temp.textContent = str;
-  return temp.innerHTML;
-}
 
 export function renderDashboard() {
   const userStr = localStorage.getItem('user');
@@ -41,7 +37,7 @@ export function renderDashboard() {
       <div class="page-hero-content">
         <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-4);">
           <div>
-            <span class="section-label">âœ¦ Workspace</span>
+            <span class="section-label">✓¦ Workspace</span>
             <h1 class="section-title" style="font-size:var(--font-size-3xl); margin-bottom:0;">Welcome back, <span class="gradient-text">${user.name}</span></h1>
             <p style="color:var(--text-secondary); font-size:var(--font-size-sm); margin-top:var(--space-1);">${isAdmin ? 'Nexus Administrator Console' : 'Nexus Client Portal'}</p>
           </div>
@@ -53,21 +49,8 @@ export function renderDashboard() {
     <section class="section" style="padding-top: var(--space-4);">
       <div class="container">
         <div style="display:grid; grid-template-columns: 240px 1fr; gap:var(--space-8); align-items:start;" class="dashboard-grid">
-          
-          <!-- Sidebar Navigation -->
-          <div class="glass-card" style="padding:var(--space-4); display:flex; flex-direction:column; gap:var(--space-2);">
-            <button class="tab-btn active" id="btn-tab-overview" onclick="switchDashboardTab('overview')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸŠ Overview</button>
-            <button class="tab-btn" id="btn-tab-projects" onclick="switchDashboardTab('projects')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸ Projects</button>
-            <button class="tab-btn" id="btn-tab-chat" onclick="switchDashboardTab('chat')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸ¬ Support Chat</button>
-            ${isAdmin ? `
-              <button class="tab-btn" id="btn-tab-cms" onclick="switchDashboardTab('cms')" style="width:100%; text-align:left; justify-content:flex-start;">âšï¸ CMS Manager</button>
-              <button class="tab-btn" id="btn-tab-clients" onclick="switchDashboardTab('clients')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸ¥ Clients</button>
-              <button class="tab-btn" id="btn-tab-logs" onclick="switchDashboardTab('logs')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸœ Audit Logs</button>
-            ` : `
-              <button class="tab-btn" id="btn-tab-notifications" onclick="switchDashboardTab('notifications')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸ Notifications <span class="badge" id="noti-unread-count" style="display:none; background:var(--accent-tertiary); margin-left:var(--space-2);">0</span></button>
-            `}
-            <button class="tab-btn" id="btn-tab-settings" onclick="switchDashboardTab('settings')" style="width:100%; text-align:left; justify-content:flex-start;">ðŸ Account</button>
-          </div>
+               <!-- Sidebar Navigation -->
+          ${renderDashboardSidebar(isAdmin)}
 
           <!-- Content Panel -->
           <div class="dashboard-content-panel">
@@ -87,33 +70,8 @@ export function renderDashboard() {
 
             <!-- Tab: Chat -->
             <div class="db-tab-content" id="tab-content-chat" style="display:none;">
-              <div class="glass-card" style="padding:0; overflow:hidden; display:grid; grid-template-columns: ${isAdmin ? '280px 1fr' : '1fr'}; height:600px;">
-                ${isAdmin ? `
-                  <div style="border-right:1px solid var(--border-subtle); display:flex; flex-direction:column;">
-                    <div style="padding:var(--space-4); font-weight:700; border-bottom:1px solid var(--border-subtle);">Client Channels</div>
-                    <div id="chat-channels-list" style="overflow-y:auto; flex:1;">
-                      <div style="padding:var(--space-4); color:var(--text-tertiary); text-align:center;">No active channels.</div>
-                    </div>
-                  </div>
-                ` : ''}
-                <div style="display:flex; flex-direction:column; height:100%;">
-                  <!-- Chat Header -->
-                  <div style="padding:var(--space-4); border-bottom:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.01);">
-                    <div style="display:flex; align-items:center; gap:var(--space-2);">
-                      <div style="width:10px; height:10px; border-radius:50%; background:var(--accent-secondary);" id="chat-status-dot"></div>
-                      <span style="font-weight:700;" id="chat-header-title">${isAdmin ? 'Select a channel' : 'Nexus Concierge support'}</span>
-                      <span id="chat-typing-indicator" style="display:none; font-size:var(--font-size-xs); color:var(--text-tertiary); margin-left:var(--space-2);">typing...</span>
-                    </div>
-                  </div>
-                  <!-- Chat Messages -->
-                  <div id="chat-messages-container" style="flex:1; overflow-y:auto; padding:var(--space-6); display:flex; flex-direction:column; gap:var(--space-4); background:rgba(0,0,0,0.15);"></div>
-                  <!-- Chat Input -->
-                  <form id="chat-input-form" onsubmit="handleSendDashboardMessage(event)" style="padding:var(--space-4); border-top:1px solid var(--border-subtle); display:flex; gap:var(--space-3); background:var(--bg-secondary);">
-                    <input type="text" id="chat-msg-input" placeholder="Type your message..." class="form-input" style="flex:1;" oninput="emitTypingState()" />
-                    <button type="submit" class="btn btn-primary">Send</button>
-                  </form>
-                </div>
-              </div>
+              ${renderDashboardChatView(isAdmin)}
+            </div>     </div>
             </div>
 
             <!-- Tab: CMS (Admin only) -->
@@ -761,7 +719,7 @@ async function loadProjects(user) {
 
     if (projects.length === 0) {
       container.innerHTML = `<div style="text-align:center; padding:var(--space-12); color:var(--text-secondary);">
-        No projects found. Ready to kickstart your next build? <a href="./start-project" class="gradient-text" data-link>Start your project proposal â†</a>
+        No projects found. Ready to kickstart your next build? <a href="./start-project" class="gradient-text" data-link>Start your project proposal →</a>
       </div>`;
       return;
     }
@@ -799,7 +757,7 @@ async function loadProjects(user) {
 
         ${p.aiSummary ? `
           <div style="background:rgba(124, 92, 252, 0.05); border-left:3px solid var(--accent-primary); padding:var(--space-3) var(--space-4); border-radius:var(--radius-sm); margin-bottom:var(--space-6);">
-            <div style="font-weight:700; color:var(--accent-primary); font-size:var(--font-size-xs); margin-bottom:var(--space-1);">âœ¦ AI Technical Assessment</div>
+            <div style="font-weight:700; color:var(--accent-primary); font-size:var(--font-size-xs); margin-bottom:var(--space-1);">✓¦ AI Technical Assessment</div>
             <p style="font-size:var(--font-size-sm); color:var(--text-secondary); line-height:var(--line-height-relaxed); margin:0;">${p.aiSummary}</p>
           </div>
         ` : ''}

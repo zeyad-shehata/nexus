@@ -1,6 +1,4 @@
-// ============================================
-// NEXUS AGENCY â€ Services Page
-// ============================================
+import { apiFetch } from '../utils/api';
 
 function renderServiceCard(s, i) {
   const priceStr = s.startingPrice ? `Starting at $${s.startingPrice}` : (s.price || 'Contact for price');
@@ -21,7 +19,7 @@ function renderServiceCard(s, i) {
         <div class="service-benefits">
           ${benefits.map(b => `
             <div class="service-benefit">
-              <span class="benefit-check">âœ</span>
+              <span class="benefit-check">✓</span>
               <span>${b}</span>
             </div>
           `).join('')}
@@ -29,7 +27,7 @@ function renderServiceCard(s, i) {
         <div class="service-tech-badges">
           ${tech.map(t => `<span class="badge">${t}</span>`).join('')}
         </div>
-        <a href="./start-project" class="btn btn-primary" data-link>Get Started â†</a>
+        <a href="./start-project" class="btn btn-primary" data-link>Get Started →</a>
       </div>
       <div class="service-detail-visual">
         <div class="service-visual-card">${s.icon}</div>
@@ -86,7 +84,7 @@ export function renderServices() {
       tech: ['Photoshop', 'Illustrator', 'After Effects', 'Figma', 'Blender'],
       price: 'From $500',
       faq: [
-        { q: 'What file formats?', a: 'We deliver in all formats needed â€ SVG, PNG, PDF, AI, PSD, and more.' },
+        { q: 'What file formats?', a: 'We deliver in all formats needed — SVG, PNG, PDF, AI, PSD, and more.' },
         { q: 'Do you do motion graphics?', a: 'Yes! We create animated logos, social media content, and video intros.' },
       ]
     },
@@ -127,7 +125,7 @@ export function renderServices() {
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
         <div class="container">
-          <span class="section-label reveal">âœ¦ Our Services</span>
+          <span class="section-label reveal">✓¦ Our Services</span>
           <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">What We <span class="gradient-text">Offer</span></h1>
           <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;">End-to-end digital solutions crafted with precision, powered by innovation.</p>
         </div>
@@ -146,7 +144,7 @@ export function renderServices() {
         <div class="cta-content reveal">
           <h2 class="cta-title">Ready to Get Started?</h2>
           <p class="cta-subtitle">Tell us about your project and we'll provide a free consultation and quote.</p>
-          <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>Start Your Project â†</a>
+          <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>Start Your Project →</a>
         </div>
       </div>
     </section>
@@ -158,13 +156,14 @@ export async function initServices() {
   if (!container) return;
 
   try {
-    const res = await fetch('http://localhost:5000/api/v1/services');
-    const dbServices = await res.json();
+    const res = await apiFetch('/services');
+    const data = await res.json();
+    const dbServices = Array.isArray(data) ? data : (data.services || []);
     if (res.ok && dbServices.length > 0) {
-      container.innerHTML = dbServices.map((s, i) => renderServiceCard(s, i)).join('');
+      container.innerHTML = dbServices.map((s: any, i: number) => renderServiceCard(s, i)).join('');
     }
   } catch (e) {
-    console.warn('âš ï¸ Could not fetch services from API, falling back to static mock data.', e);
+    console.warn('⚠️ Could not fetch services from API, falling back to static mock data.', e);
   }
 }
 
