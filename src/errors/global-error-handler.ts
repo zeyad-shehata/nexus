@@ -2,12 +2,14 @@
 // NEXUS AGENCY — Client Global Error Handler
 // ============================================
 
+import { logger } from '../utils/logger';
+
 export function initGlobalErrorHandler() {
   window.addEventListener('error', (event) => {
-    console.error('⚠️ [Global Error]:', event.error || event.message);
+    logger.error('Unhandled Global Error', event.error || event.message);
   });
 
   window.addEventListener('unhandledrejection', (event) => {
-    console.warn('⚠️ [Unhandled Rejection]:', event.reason);
+    logger.warn('Unhandled Rejection', event.reason);
   });
 }
