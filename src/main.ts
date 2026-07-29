@@ -11,6 +11,15 @@ import { initCursor, initScrollProgress, initBackToTop, initNavbar, initMagnetic
 import { initChatWidget } from './components/chat-widget';
 import { initParticles } from './components/particles';
 
+// Global error handler for unhandled promise rejections and runtime exceptions
+window.addEventListener('error', (event) => {
+  console.error('⚠️ [Global Error]:', event.error || event.message);
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+  console.warn('⚠️ [Unhandled Rejection]:', event.reason);
+});
+
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
   // Hide loader after content loads
