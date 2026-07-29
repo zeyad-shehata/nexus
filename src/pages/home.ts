@@ -3,7 +3,8 @@
 // Premium Edition v2.0
 // ============================================
 
-import { getTechLogo, serviceIcons } from '../components/tech-logos';
+import { getTechLogo } from '../components/tech-logos';
+import { featureIcons, serviceIcons } from '../components/ui-icons';
 
 export function renderHome() {
   return `
@@ -129,12 +130,12 @@ function statsSection() {
 }
 function whyChooseUs() {
   const features = [
-    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`, title: 'Professional Team', desc: 'Expert designers and developers with years of experience building world-class digital products.', color: 'var(--accent-primary-rgb)' },
-    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`, title: 'Fast Delivery', desc: 'We deliver projects on time without compromising on quality, using agile methodologies.', color: 'var(--accent-secondary-rgb)' },
-    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>`, title: 'Premium Quality', desc: 'Every pixel matters. We craft premium designs that stand out and drive real results.', color: 'var(--accent-tertiary-rgb)' },
-    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`, title: 'Secure Process', desc: 'Enterprise-grade security practices to protect your data and your users throughout.', color: 'var(--accent-warm-rgb)' },
-    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`, title: 'Continuous Support', desc: "We don't disappear after launch. Ongoing maintenance, updates, and 24/7 support.", color: 'var(--accent-cyan-rgb)' },
-    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`, title: 'Modern Technologies', desc: 'Latest tech stack including AI, cloud-native, and cutting-edge frameworks.', color: 'var(--accent-primary-rgb)' }
+    { icon: featureIcons.team(), title: 'Professional Team', desc: 'Expert designers and developers with years of experience building world-class digital products.' },
+    { icon: featureIcons.fast(), title: 'Fast Delivery', desc: 'We deliver projects on time without compromising on quality, using agile methodologies.' },
+    { icon: featureIcons.quality(), title: 'Premium Quality', desc: 'Every pixel matters. We craft premium designs that stand out and drive real results.' },
+    { icon: featureIcons.secure(), title: 'Secure Process', desc: 'Enterprise-grade security practices to protect your data and your users throughout.' },
+    { icon: featureIcons.support(), title: 'Continuous Support', desc: "We don't disappear after launch. Ongoing maintenance, updates, and 24/7 support." },
+    { icon: featureIcons.tech(), title: 'Modern Technologies', desc: 'Latest tech stack including AI, cloud-native, and cutting-edge frameworks.' }
   ];
 
   return `
@@ -148,7 +149,7 @@ function whyChooseUs() {
         <div class="features-grid">
           ${features.map((f, i) => `
             <div class="glass-card feature-card reveal reveal-delay-${i + 1}">
-              <div class="feature-icon" style="background:rgba(${f.color}, 0.1);border-color:rgba(${f.color}, 0.2);">${f.icon}</div>
+              <div class="feature-icon">${f.icon}</div>
               <h3 class="feature-title">${f.title}</h3>
               <p class="feature-desc">${f.desc}</p>
             </div>
@@ -161,31 +162,36 @@ function whyChooseUs() {
 
 function servicesPreview() {
   const services = [
-    { icon: serviceIcons.web(), name: 'Website Development', desc: 'Custom websites built with modern frameworks and best practices.' },
-    { icon: serviceIcons.mobile(), name: 'Mobile Applications', desc: 'Native and cross-platform apps for iOS and Android.' },
-    { icon: serviceIcons.ecommerce(), name: 'E-Commerce Stores', desc: 'Powerful online stores that convert visitors into customers.' },
-    { icon: serviceIcons.uiux(), name: 'UI/UX Design', desc: 'Intuitive interfaces designed for maximum user engagement.' },
-    { icon: serviceIcons.graphic(), name: 'Graphic Design', desc: 'Stunning visual assets that elevate your brand identity.' },
-    { icon: serviceIcons.branding(), name: 'Branding', desc: 'Complete brand identity systems that make you unforgettable.' },
-    { icon: serviceIcons.ai(), name: 'AI Solutions', desc: 'Intelligent automation and AI-powered tools for your business.' },
-    { icon: serviceIcons.marketing(), name: 'Digital Marketing', desc: 'Data-driven strategies to grow your reach and revenue.' }
+    { icon: serviceIcons.web({ size: 28 }), name: 'Website Development', desc: 'Custom websites built with modern frameworks and best practices.', price: '$1,500' },
+    { icon: serviceIcons.mobile({ size: 28 }), name: 'Mobile Applications', desc: 'Native and cross-platform apps for iOS and Android.', price: '$3,000' },
+    { icon: serviceIcons.ecommerce({ size: 28 }), name: 'E-Commerce Stores', desc: 'Powerful online stores that convert visitors into customers.', price: '$2,000' },
+    { icon: serviceIcons.uiux({ size: 28 }), name: 'UI/UX Design', desc: 'Intuitive interfaces designed for maximum user engagement.', price: '$1,000' },
+    { icon: serviceIcons.graphic({ size: 28 }), name: 'Graphic Design', desc: 'Stunning visual assets that elevate your brand identity.', price: '$500' },
+    { icon: serviceIcons.branding({ size: 28 }), name: 'Branding & Identity', desc: 'Complete brand identity systems that make you unforgettable.', price: '$2,000' },
+    { icon: serviceIcons.ai({ size: 28 }), name: 'AI Solutions', desc: 'Intelligent automation and AI-powered tools for your business.', price: '$5,000' },
+    { icon: serviceIcons.marketing({ size: 28 }), name: 'Digital Marketing', desc: 'Data-driven strategies to grow your reach and revenue.', price: '$800/mo' }
   ];
 
   return `
     <section class="section" id="services-preview" style="background: var(--bg-secondary);">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-label">Our Services</span>
-          <h2 class="section-title">What We <span class="gradient-text">Create</span></h2>
-          <p class="section-subtitle">End-to-end digital solutions tailored to your business needs and growth objectives.</p>
+          <span class="section-label">Enterprise Capabilities</span>
+          <h2 class="section-title">Engineered For <span class="gradient-text">Scale</span></h2>
+          <p class="section-subtitle">End-to-end software engineering and digital transformation solutions built for ambitious brands.</p>
         </div>
         <div class="services-grid">
           ${services.map((s, i) => `
             <div class="glass-card service-card reveal reveal-delay-${(i % 4) + 1}" onclick="window.history.pushState({},'','/services');window.dispatchEvent(new PopStateEvent('popstate'))">
-              <div class="service-icon">${s.icon}</div>
+              <div class="service-card-top">
+                <div class="service-icon-box">${s.icon}</div>
+                <span class="service-price-pill">${s.price}</span>
+              </div>
               <h3 class="service-name">${s.name}</h3>
               <p class="service-desc">${s.desc}</p>
-              <span class="service-arrow">Learn more →</span>
+              <div class="service-footer">
+                <span class="service-link">Explore Solution →</span>
+              </div>
             </div>
           `).join('')}
         </div>
