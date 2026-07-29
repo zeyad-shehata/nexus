@@ -11,14 +11,10 @@ import { initCursor, initScrollProgress, initBackToTop, initNavbar, initMagnetic
 import { initChatWidget } from './components/chat-widget';
 import { initParticles } from './components/particles';
 
-// Global error handler for unhandled promise rejections and runtime exceptions
-window.addEventListener('error', (event) => {
-  console.error('⚠️ [Global Error]:', event.error || event.message);
-});
+import { initGlobalErrorHandler } from './errors/global-error-handler';
 
-window.addEventListener('unhandledrejection', (event) => {
-  console.warn('⚠️ [Unhandled Rejection]:', event.reason);
-});
+// Initialize global error handling
+initGlobalErrorHandler();
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
