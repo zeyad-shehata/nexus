@@ -3,6 +3,8 @@
 // Premium Edition v2.0
 // ============================================
 
+import { getTechLogo, serviceIcons } from '../components/tech-logos';
+
 export function renderHome() {
   return `
     ${heroSection()}
@@ -66,30 +68,29 @@ function heroSection() {
     </section>
   `;
 }
-
 function techTicker() {
   const techs = [
-    { icon: '??', name: 'React' },
-    { icon: '??', name: 'Next.js' },
-    { icon: '??', name: 'Vue.js' },
-    { icon: '??', name: 'TypeScript' },
-    { icon: '??', name: 'Python' },
-    { icon: '??', name: 'Firebase' },
-    { icon: '??', name: 'AWS' },
-    { icon: '??', name: 'TensorFlow' },
-    { icon: '??', name: 'Flutter' },
-    { icon: '??', name: 'Figma' },
-    { icon: '??', name: 'Docker' },
-    { icon: '?', name: 'Node.js' },
-    { icon: '??', name: 'GraphQL' },
-    { icon: '??', name: 'OpenAI' },
-    { icon: '??', name: 'Tailwind' },
-    { icon: '??', name: 'PostgreSQL' },
+    { name: 'OpenAI' },
+    { name: 'GraphQL' },
+    { name: 'Tailwind' },
+    { name: 'PostgreSQL' },
+    { name: 'React' },
+    { name: 'Next.js' },
+    { name: 'Vue.js' },
+    { name: 'TypeScript' },
+    { name: 'Python' },
+    { name: 'Firebase' },
+    { name: 'AWS' },
+    { name: 'TensorFlow' },
+    { name: 'Flutter' },
+    { name: 'Figma' },
+    { name: 'Docker' },
+    { name: 'Node.js' }
   ];
 
   const items = techs.map(t => `
     <div class="ticker-item">
-      <span class="ticker-icon">${t.icon}</span>
+      <span class="ticker-icon">${getTechLogo(t.name, 24)}</span>
       <span>${t.name}</span>
     </div>
   `).join('');
@@ -105,10 +106,10 @@ function techTicker() {
 
 function statsSection() {
   const stats = [
-    { count: 150, suffix: '+', label: 'Projects Completed', icon: 'ðŸš€' },
-    { count: 120, suffix: '+', label: 'Happy Clients', icon: 'ðŸ˜Š' },
-    { count: 8, suffix: '+', label: 'Years of Experience', icon: 'â­' },
-    { count: 99, suffix: '%', label: 'Client Satisfaction', icon: 'ðŸ¯' },
+    { count: 150, suffix: '+', label: 'Projects Completed' },
+    { count: 120, suffix: '+', label: 'Happy Clients' },
+    { count: 8, suffix: '+', label: 'Years of Experience' },
+    { count: 99, suffix: '%', label: 'Client Satisfaction' }
   ];
 
   return `
@@ -117,7 +118,6 @@ function statsSection() {
         <div class="stats-grid">
           ${stats.map((s, i) => `
             <div class="stat-card glass-card reveal reveal-delay-${i + 1}">
-              <div style="font-size:2rem;margin-bottom:var(--space-3);">${s.icon}</div>
               <div class="stat-number" data-count="${s.count}" data-suffix="${s.suffix}">0${s.suffix}</div>
               <div class="stat-label">${s.label}</div>
             </div>
@@ -127,22 +127,21 @@ function statsSection() {
     </section>
   `;
 }
-
 function whyChooseUs() {
   const features = [
-    { icon: 'ðŸ¥', title: 'Professional Team', desc: 'Expert designers and developers with years of experience building world-class digital products.', color: 'var(--accent-primary-rgb)' },
-    { icon: 'âš¡', title: 'Fast Delivery', desc: 'We deliver projects on time without compromising on quality, using agile methodologies.', color: 'var(--accent-secondary-rgb)' },
-    { icon: 'ðŸŽ', title: 'Premium Quality', desc: 'Every pixel matters. We craft premium designs that stand out and drive real results.', color: 'var(--accent-tertiary-rgb)' },
-    { icon: 'ðŸ', title: 'Secure Process', desc: 'Enterprise-grade security practices to protect your data and your users throughout.', color: 'var(--accent-warm-rgb)' },
-    { icon: 'ðŸ› ï¸', title: 'Continuous Support', desc: 'We don\'t disappear after launch. Ongoing maintenance, updates, and 24/7 support.', color: 'var(--accent-cyan-rgb)' },
-    { icon: 'ðŸ§ ', title: 'Modern Technologies', desc: 'Latest tech stack including AI, cloud-native, and cutting-edge frameworks.', color: 'var(--accent-primary-rgb)' },
+    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`, title: 'Professional Team', desc: 'Expert designers and developers with years of experience building world-class digital products.', color: 'var(--accent-primary-rgb)' },
+    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`, title: 'Fast Delivery', desc: 'We deliver projects on time without compromising on quality, using agile methodologies.', color: 'var(--accent-secondary-rgb)' },
+    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>`, title: 'Premium Quality', desc: 'Every pixel matters. We craft premium designs that stand out and drive real results.', color: 'var(--accent-tertiary-rgb)' },
+    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`, title: 'Secure Process', desc: 'Enterprise-grade security practices to protect your data and your users throughout.', color: 'var(--accent-warm-rgb)' },
+    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`, title: 'Continuous Support', desc: "We don't disappear after launch. Ongoing maintenance, updates, and 24/7 support.", color: 'var(--accent-cyan-rgb)' },
+    { icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`, title: 'Modern Technologies', desc: 'Latest tech stack including AI, cloud-native, and cutting-edge frameworks.', color: 'var(--accent-primary-rgb)' }
   ];
 
   return `
     <section class="section" id="why-us">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-label">✓¦ Why Choose Us</span>
+          <span class="section-label">Why Choose Us</span>
           <h2 class="section-title">Built Different. <span class="gradient-text">Built Better.</span></h2>
           <p class="section-subtitle">We combine cutting-edge technology with stunning design to create digital experiences that drive real business results.</p>
         </div>
@@ -162,21 +161,21 @@ function whyChooseUs() {
 
 function servicesPreview() {
   const services = [
-    { icon: '??', name: 'Website Development', desc: 'Custom websites built with modern frameworks and best practices.' },
-    { icon: '??', name: 'Mobile Applications', desc: 'Native and cross-platform apps for iOS and Android.' },
-    { icon: '??', name: 'E-Commerce Stores', desc: 'Powerful online stores that convert visitors into customers.' },
-    { icon: '??', name: 'UI/UX Design', desc: 'Intuitive interfaces designed for maximum user engagement.' },
-    { icon: '??', name: 'Graphic Design', desc: 'Stunning visual assets that elevate your brand identity.' },
-    { icon: '??', name: 'Branding', desc: 'Complete brand identity systems that make you unforgettable.' },
-    { icon: '??', name: 'AI Solutions', desc: 'Intelligent automation and AI-powered tools for your business.' },
-    { icon: '??', name: 'Digital Marketing', desc: 'Data-driven strategies to grow your reach and revenue.' },
+    { icon: serviceIcons.web(), name: 'Website Development', desc: 'Custom websites built with modern frameworks and best practices.' },
+    { icon: serviceIcons.mobile(), name: 'Mobile Applications', desc: 'Native and cross-platform apps for iOS and Android.' },
+    { icon: serviceIcons.ecommerce(), name: 'E-Commerce Stores', desc: 'Powerful online stores that convert visitors into customers.' },
+    { icon: serviceIcons.uiux(), name: 'UI/UX Design', desc: 'Intuitive interfaces designed for maximum user engagement.' },
+    { icon: serviceIcons.graphic(), name: 'Graphic Design', desc: 'Stunning visual assets that elevate your brand identity.' },
+    { icon: serviceIcons.branding(), name: 'Branding', desc: 'Complete brand identity systems that make you unforgettable.' },
+    { icon: serviceIcons.ai(), name: 'AI Solutions', desc: 'Intelligent automation and AI-powered tools for your business.' },
+    { icon: serviceIcons.marketing(), name: 'Digital Marketing', desc: 'Data-driven strategies to grow your reach and revenue.' }
   ];
 
   return `
     <section class="section" id="services-preview" style="background: var(--bg-secondary);">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-label">✓¦ Our Services</span>
+          <span class="section-label">Our Services</span>
           <h2 class="section-title">What We <span class="gradient-text">Create</span></h2>
           <p class="section-subtitle">End-to-end digital solutions tailored to your business needs and growth objectives.</p>
         </div>
@@ -197,17 +196,17 @@ function servicesPreview() {
 
 function portfolioPreview() {
   const projects = [
-    { title: 'Quantum Finance', category: 'Web Application', tech: ['React', 'Node.js', 'AWS'], color: '#7c5cfc', icon: 'ðŸ¦' },
-    { title: 'Verdant Health', category: 'Mobile App', tech: ['Flutter', 'Firebase', 'AI'], color: '#00d4aa', icon: 'ðŸ¥' },
-    { title: 'Luxe Fashion', category: 'E-Commerce', tech: ['Next.js', 'Stripe', 'Sanity'], color: '#ff6b9d', icon: 'ðŸ' },
-    { title: 'Neural Analytics', category: 'AI Platform', tech: ['Python', 'TensorFlow', 'React'], color: '#ffa94d', icon: 'ðŸ§ ' },
+    { title: 'Quantum Finance', category: 'Web Application', tech: ['React', 'Node.js', 'AWS'], color: '#7c5cfc', icon: getTechLogo('React', 48) },
+    { title: 'Verdant Health', category: 'Mobile App', tech: ['Flutter', 'Firebase', 'TensorFlow'], color: '#00d4aa', icon: getTechLogo('Flutter', 48) },
+    { title: 'Luxe Fashion', category: 'E-Commerce', tech: ['Next.js', 'Stripe', 'Sanity'], color: '#ff6b9d', icon: getTechLogo('Next.js', 48) },
+    { title: 'Neural Analytics', category: 'AI Platform', tech: ['Python', 'TensorFlow', 'React'], color: '#ffa94d', icon: getTechLogo('TensorFlow', 48) }
   ];
 
   return `
     <section class="section" id="portfolio-preview">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-label">✓¦ Featured Work</span>
+          <span class="section-label">Featured Work</span>
           <h2 class="section-title">Our <span class="gradient-text">Portfolio</span></h2>
           <p class="section-subtitle">Selected projects that showcase our expertise and commitment to excellence.</p>
         </div>
@@ -215,7 +214,7 @@ function portfolioPreview() {
           ${projects.map((p, i) => `
             <div class="portfolio-card reveal reveal-delay-${(i % 2) + 1}">
               <div class="portfolio-image-wrapper">
-                <div class="portfolio-image" style="height:280px;background:linear-gradient(135deg, ${p.color}22, ${p.color}11);display:flex;align-items:center;justify-content:center;font-size:4rem;">
+                <div class="portfolio-image" style="height:280px;background:linear-gradient(135deg, ${p.color}22, ${p.color}11);display:flex;align-items:center;justify-content:center;">
                   ${p.icon}
                 </div>
                 <div class="portfolio-overlay">
@@ -246,16 +245,17 @@ function testimonialsSection() {
     { name: 'Michael Chen', company: 'GrowthLab', initials: 'MC', quote: 'Working with Nexus was the best investment we made for our startup. They delivered a beautiful, fast, and scalable platform that our users absolutely love. Highly recommend!', rating: 5 },
     { name: 'Emma Williams', company: 'Luxe Retail', initials: 'EW', quote: 'The e-commerce platform they built for us is stunning. Sales increased 250% after launch. The team is professional, responsive, and truly cares about delivering the best result.', rating: 5 },
     { name: 'David Park', company: 'NeuralWave AI', initials: 'DP', quote: 'Their AI solutions expertise is exceptional. They built a custom dashboard that saves our team 20+ hours per week. The design is world-class and the code quality is impeccable.', rating: 5 },
-    { name: 'Lisa Zhang', company: 'Bloom Beauty', initials: 'LZ', quote: 'From branding to website to mobile app — Nexus handled everything flawlessly. They are a true partner who understands business needs and translates them into beautiful products.', rating: 5 },
+    { name: 'Lisa Zhang', company: 'Bloom Beauty', initials: 'LZ', quote: 'From branding to website to mobile app — Nexus handled everything flawlessly. They are a true partner who understands business needs and translates them into beautiful products.', rating: 5 }
   ];
 
-  const stars = 'â˜'.repeat(5);
+  const starIcon = `<svg width="18" height="18" viewBox="0 0 24 24" fill="#ffa94d" stroke="#ffa94d" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+  const starsSvg = Array.from({ length: 5 }, () => starIcon).join('');
 
   return `
     <section class="section testimonials-section" id="testimonials" style="background: var(--bg-secondary);">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-label">✓¦ Testimonials</span>
+          <span class="section-label">Testimonials</span>
           <h2 class="section-title">What Our <span class="gradient-text">Clients Say</span></h2>
           <p class="section-subtitle">Don't just take our word for it — hear from some of our amazing clients.</p>
         </div>
@@ -263,7 +263,7 @@ function testimonialsSection() {
           <div class="testimonial-slider" id="testimonial-slider">
             ${testimonials.map(t => `
               <div class="glass-card testimonial-card">
-                <div class="stars" style="margin-bottom:var(--space-4);color:var(--accent-warm);">${stars}</div>
+                <div class="stars" style="margin-bottom:var(--space-4);display:flex;gap:4px;">${starsSvg}</div>
                 <p class="testimonial-quote">${t.quote}</p>
                 <div class="testimonial-author">
                   <div class="testimonial-avatar">${t.initials}</div>
@@ -298,7 +298,7 @@ function ctaSection() {
       <div class="cta-glow"></div>
       <div class="container">
         <div class="cta-content reveal">
-          <span class="section-label">✓¦ Ready to Start?</span>
+          <span class="section-label">Ready to Start?</span>
           <h2 class="cta-title">Let's Build Something <span class="gradient-text">Extraordinary</span></h2>
           <p class="cta-subtitle">Your vision deserves a world-class digital presence. Let's make it happen together.</p>
           <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>
