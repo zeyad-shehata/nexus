@@ -138,12 +138,26 @@ export class Router {
       return this.navigate('/signin');
     }
 
-    // Update page title and meta description
+    // Update page title, canonical link, and meta tags for SEO
     document.title = route.title;
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc && route.description) {
       metaDesc.setAttribute('content', route.description);
     }
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', route.title);
+
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc && route.description) ogDesc.setAttribute('content', route.description);
+
+    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = window.location.origin + path;
 
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
