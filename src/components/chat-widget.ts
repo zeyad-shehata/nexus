@@ -58,7 +58,7 @@ function formatTime(isoString) {
   return `${hours}:${minutes} ${ampm}`;
 }
 
-const COMMON_EMOJIS = ['??', '👍', '??', '??', '🙌', '??', '✨', '💻', '??', '??', '👏', '??'];
+const COMMON_EMOJIS = ['👍', '❤️', '🔥', '✨', '🚀', '👏', '💡', '💬', '🎉', '✅', '🙌', '💯'];
 
 export function initChatWidget() {
   // Prevent duplicate rendering
@@ -74,11 +74,14 @@ export function initChatWidget() {
   container.id = 'nexus-chat-widget';
   container.className = 'nexus-chat-widget';
 
+  const shieldIcon = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`;
+
   container.innerHTML = `
-    <!-- Floating Admin Toggle -->
-    <button id="admin-sim-fab" class="admin-sim-fab" title="Open Admin Simulator Console" aria-label="Open Admin Simulator Console">
+    <!-- Floating Admin Toggle Pill -->
+    <button id="admin-sim-fab" class="admin-sim-fab" title="Open Admin Portal Console" aria-label="Open Admin Portal Console">
       <span class="admin-sim-badge" id="admin-sim-badge" style="display: none;">0</span>
-      ??? Admin
+      ${shieldIcon}
+      <span>Admin Console</span>
     </button>
 
     <!-- Floating Client Button -->
@@ -97,7 +100,9 @@ export function initChatWidget() {
     <div id="chat-window" class="chat-window">
       <!-- Header -->
       <div class="chat-header">
-        <div class="chat-avatar">NC</div>
+        <div class="chat-avatar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><path d="M18 18.72a9 9 0 1 0-12 0"/><path d="M14 11a2 2 0 1 0-4 0"/><path d="M12 2v2"/><path d="M12 20v2"/></svg>
+        </div>
         <div class="chat-header-info">
           <div class="chat-title">Nexus Concierge</div>
           <div class="chat-status">

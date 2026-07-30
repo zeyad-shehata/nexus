@@ -11,19 +11,22 @@ export function renderAuth() {
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
         <div class="container">
-          <span class="section-label reveal">? Access Portal</span>
+          <span class="section-label reveal" style="display:inline-flex;align-items:center;gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            Access Portal
+          </span>
           <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">Client <span class="gradient-text">Portal</span></h1>
-          <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;">Sign in to track projects, manage deliverables, and chat with your team.</p>
+          <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;max-width:600px;">Sign in to track projects, manage deliverables, and communicate with your dedicated team.</p>
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container" style="max-width: 500px;">
-        <div class="glass-card reveal" style="padding: var(--space-8);">
+        <div class="glass-card reveal" style="padding: var(--space-8);border-radius:var(--radius-xl);">
           <div class="tabs" style="margin-bottom: var(--space-6);">
             <button class="tab-btn active" id="tab-login" data-auth-tab="login">Sign In</button>
-            <button class="tab-btn" id="tab-register" data-auth-tab="register">Register</button>
+            <button class="tab-btn" id="tab-register" data-auth-tab="register">Register Account</button>
           </div>
 
           <!-- Alert Container -->
@@ -44,10 +47,10 @@ export function renderAuth() {
             </div>
             <div class="form-group" style="display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-3);">
               <input type="checkbox" id="login-remember" />
-              <label for="login-remember" style="font-size: var(--font-size-sm); color: var(--text-secondary); cursor: pointer;">Remember me</label>
+              <label for="login-remember" style="font-size: var(--font-size-sm); color: var(--text-secondary); cursor: pointer;">Remember session</label>
             </div>
             <button type="submit" class="btn btn-primary btn-large btn-shimmer" style="width: 100%; justify-content: center; margin-top: var(--space-4);">
-              Sign In ?
+              Sign In →
             </button>
           </form>
 

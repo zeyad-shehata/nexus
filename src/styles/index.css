@@ -868,15 +868,15 @@ input, textarea, select {
   right: 0;
   z-index: var(--z-sticky);
   padding: var(--space-4) 0;
-  transition: all var(--transition-base);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .navbar.scrolled {
   background: var(--nav-bg);
-  backdrop-filter: blur(var(--nav-blur));
-  -webkit-backdrop-filter: blur(var(--nav-blur));
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
   border-bottom: 1px solid var(--border-subtle);
-  padding: var(--space-3) 0;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 0.7rem 0;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03), 0 8px 40px rgba(0, 0, 0, 0.15);
 }
 .nav-container {
   max-width: var(--container-max);
@@ -3566,38 +3566,51 @@ input, textarea, select {
   animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* === FLOATING ADMIN SIMULATOR BUTTON === */
+/* === FLOATING ADMIN PORTAL PILL (Enterprise Glass Design) === */
 .admin-sim-fab {
   position: absolute;
   bottom: 8px;
   right: 76px;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: var(--radius-lg);
-  background: var(--bg-glass);
-  border: 1px solid var(--bg-glass-border);
-  color: var(--text-primary);
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: rgba(16, 16, 26, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 12px;
-  font-weight: 700;
-  box-shadow: var(--shadow-sm);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   cursor: pointer;
-  transition: all var(--transition-base);
-  backdrop-filter: blur(10px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .admin-sim-fab:hover {
-  background: var(--bg-glass-hover);
-  border-color: var(--accent-primary);
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: var(--text-primary);
   transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 20px rgba(99, 102, 241, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .admin-sim-fab.active {
-  background: rgba(var(--accent-primary-rgb), 0.2);
-  border-color: var(--accent-primary);
-  box-shadow: var(--shadow-glow);
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.4);
+  color: var(--accent-primary-light);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 24px rgba(99, 102, 241, 0.15);
+}
+
+.admin-sim-fab svg {
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.admin-sim-fab:hover svg {
+  opacity: 1;
 }
 
 .admin-sim-badge {
@@ -3610,6 +3623,7 @@ input, textarea, select {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  line-height: 1;
 }
 
 /* === CHAT & ADMIN WINDOWS === */
@@ -4322,7 +4336,7 @@ input, textarea, select {
   }
 }
 
-/* === RTL Support === */
+/* === RTL Support & Floating Widgets Alignment === */
 [dir="rtl"] {
   direction: rtl;
   text-align: right;
@@ -4338,5 +4352,94 @@ input, textarea, select {
 [dir="rtl"] .accordion-icon {
   margin-left: 0;
   margin-right: auto;
+}
+
+/* RTL Floating Widgets Alignment */
+[dir="rtl"] .nexus-chat-widget {
+  right: auto !important;
+  left: 30px !important;
+  align-items: flex-start !important;
+}
+[dir="rtl"] .chat-window {
+  right: auto !important;
+  left: 0 !important;
+}
+[dir="rtl"] .admin-window {
+  right: auto !important;
+  left: 380px !important;
+}
+[dir="rtl"] #back-to-top {
+  right: auto !important;
+  left: 30px !important;
+}
+[dir="rtl"] .whatsapp-float {
+  right: auto !important;
+  left: 30px !important;
+}
+[dir="rtl"] .admin-sim-fab {
+  right: auto !important;
+  left: 96px !important;
+}
+@media (max-width: 768px) {
+  [dir="rtl"] .nexus-chat-widget {
+    left: 20px !important;
+    right: auto !important;
+  }
+  [dir="rtl"] #back-to-top {
+    left: 20px !important;
+    right: auto !important;
+  }
+}
+
+/* === INFINITE AUTO-SCROLL TECH TICKER === */
+.tech-ticker-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+.tech-ticker-track {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  width: max-content;
+  animation: tickerScroll 35s linear infinite;
+}
+.tech-ticker-container:hover .tech-ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes tickerScrollRTL {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
+}
+
+[dir="rtl"] .tech-ticker-track {
+  animation-name: tickerScrollRTL;
+}
+
+/* === DOWNWARD SCROLL INDICATOR PULSE === */
+.scroll-indicator-down {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-tertiary);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  animation: scrollPulse 2s ease-in-out infinite;
+  transition: color var(--transition-fast);
+}
+.scroll-indicator-down:hover {
+  color: var(--accent-primary);
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(6px); opacity: 1; }
 }
 

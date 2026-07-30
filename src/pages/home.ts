@@ -48,23 +48,41 @@ function heroSection() {
           <h1 class="hero-title reveal reveal-delay-1">
             Turn Your Vision<br>Into <span class="gradient-text">Reality.</span>
           </h1>
-          <p class="hero-subtitle reveal reveal-delay-2">
-            We design and develop premium <span class="typing-wrapper"><span class="typing-text" id="typing-text">websites</span></span> that help businesses grow, scale, and dominate their market.
+          <p class="hero-subtitle reveal reveal-delay-2" style="max-width:640px;margin:0 auto var(--space-8);">
+            We design and develop premium <span class="typing-wrapper"><span class="typing-text" id="typing-text">websites</span></span> that help high-growth companies scale and dominate their market.
           </p>
-          <div class="hero-buttons reveal reveal-delay-3">
+          <div class="hero-buttons reveal reveal-delay-3" style="margin-bottom:var(--space-8);">
             <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>
               Start Your Project
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <a href="./portfolio" class="btn btn-secondary btn-large" data-link>
-              View Portfolio
+              Explore Solutions
             </a>
+          </div>
+
+          <!-- Enterprise Floating Trust Cards -->
+          <div class="hero-kpis reveal reveal-delay-4" style="display:flex;align-items:center;justify-content:center;gap:var(--space-5);flex-wrap:wrap;">
+            <div class="glass-card hero-kpi-badge" style="padding:8px 16px;display:flex;align-items:center;gap:8px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(18,18,28,0.4);backdrop-filter:blur(12px);">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--accent-secondary);box-shadow:0 0 10px rgba(16,185,129,0.8);"></span>
+              <span style="font-size:0.8125rem;font-weight:600;color:var(--text-primary);">99.99% Uptime SLA</span>
+            </div>
+            <div class="glass-card hero-kpi-badge" style="padding:8px 16px;display:flex;align-items:center;gap:8px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(18,18,28,0.4);backdrop-filter:blur(12px);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              <span style="font-size:0.8125rem;font-weight:600;color:var(--text-primary);">SOC2 Type II Certified</span>
+            </div>
+            <div class="glass-card hero-kpi-badge" style="padding:8px 16px;display:flex;align-items:center;gap:8px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(18,18,28,0.4);backdrop-filter:blur(12px);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-tertiary)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span style="font-size:0.8125rem;font-weight:600;color:var(--text-primary);">150+ Apps Delivered</span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="hero-scroll-indicator">
-        <div class="scroll-mouse"></div>
-        <span>Scroll to explore</span>
+
+      <!-- Downward Scroll Indicator -->
+      <div class="hero-scroll-indicator scroll-indicator-down" onclick="window.scrollTo({top: window.innerHeight - 80, behavior: 'smooth'})" style="cursor:pointer;">
+        <span>Scroll down</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
       </div>
     </section>
   `;
@@ -90,15 +108,15 @@ function techTicker() {
   ];
 
   const items = techs.map(t => `
-    <div class="ticker-item">
-      <span class="ticker-icon">${getTechLogo(t.name, 24)}</span>
-      <span>${t.name}</span>
+    <div class="ticker-item" style="display:inline-flex;align-items:center;gap:10px;padding:8px 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;white-space:nowrap;">
+      <span class="ticker-icon" style="display:flex;align-items:center;">${getTechLogo(t.name, 22)}</span>
+      <span style="font-size:0.875rem;font-weight:600;color:var(--text-secondary);">${t.name}</span>
     </div>
   `).join('');
 
   return `
-    <div class="tech-ticker">
-      <div class="ticker-track">
+    <div class="tech-ticker tech-ticker-container" style="padding:var(--space-6) 0;border-y:1px solid var(--border-subtle);background:rgba(5,5,9,0.5);">
+      <div class="tech-ticker-track">
         ${items}${items}
       </div>
     </div>

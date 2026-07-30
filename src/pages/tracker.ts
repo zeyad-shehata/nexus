@@ -6,7 +6,7 @@ export function renderTracker() {
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
         <div class="container">
-          <span class="section-label reveal">? Track Your Project</span>
+          <span class="section-label reveal" style="display:inline-flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Track Your Project</span>
           <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">Project <span class="gradient-text">Tracker</span></h1>
           <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;">Enter your project ID or email to check the current status of your project.</p>
         </div>
@@ -18,7 +18,7 @@ export function renderTracker() {
         <div class="tracker-form reveal">
           <div class="tracker-input-group">
             <input type="text" class="form-input" id="tracker-input" placeholder="Enter Project ID or Email" />
-            <button class="btn btn-primary" onclick="trackProject()">Track ?</button>
+            <button class="btn btn-primary" onclick="trackProject()">Track →</button>
           </div>
         </div>
 
@@ -46,7 +46,7 @@ export function renderTracker() {
               ].map((step, i) => `
                 <div class="timeline-step ${step.status}">
                   <div class="timeline-dot">
-                    ${step.status === 'completed' ? '?' : step.status === 'active' ? '◆' : (i + 1)}
+                    ${step.status === 'completed' ? '✓' : step.status === 'active' ? '●' : (i + 1)}
                   </div>
                   <div class="timeline-content">
                     <div class="timeline-title">${step.title}</div>
@@ -116,7 +116,7 @@ export function renderTracker() {
             return `
               <div class="timeline-step ${stepStatus}">
                 <div class="timeline-dot">
-                  ${stepStatus === 'completed' ? '?' : stepStatus === 'active' ? '◆' : (i + 1)}
+                  ${stepStatus === 'completed' ? '✓' : stepStatus === 'active' ? '●' : (i + 1)}
                 </div>
                 <div class="timeline-content">
                   <div class="timeline-title">${stepLabel}</div>
