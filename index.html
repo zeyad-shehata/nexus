@@ -115,14 +115,21 @@
   <footer id="footer" class="footer">
     <div class="footer-glow"></div>
     <div class="container">
-      <div class="footer-grid">
+      <div class="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1.2fr;gap:var(--space-8);">
         <div class="footer-brand">
           <a href="./" class="footer-logo" data-link>
             <span class="logo-icon">◆</span>
             <span class="logo-text">NEXUS</span>
           </a>
-          <p class="footer-desc">We design and develop premium digital experiences that help businesses grow and succeed in the digital world.</p>
-          <div class="footer-social">
+          <p class="footer-desc">Architecting world-class software, high-scale web platforms, and custom AI solutions for industry leaders worldwide.</p>
+          <div class="footer-newsletter" style="margin-top:var(--space-4);">
+            <div style="font-size:var(--font-size-xs);font-weight:700;color:var(--text-primary);margin-bottom:var(--space-2);">Subscribe to Enterprise Insights</div>
+            <form onsubmit="event.preventDefault();if(window.showToast)window.showToast('Subscribed to Enterprise Insights!');this.reset();" style="display:flex;gap:8px;">
+              <input type="email" placeholder="Enter work email..." required class="input" style="padding:8px 12px;font-size:var(--font-size-xs);border-radius:var(--radius-md);flex:1;" />
+              <button type="submit" class="btn btn-primary" style="padding:8px 16px;font-size:var(--font-size-xs);">Subscribe</button>
+            </form>
+          </div>
+          <div class="footer-social" style="margin-top:var(--space-4);">
             <a href="#" class="social-link" aria-label="Twitter">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
@@ -140,18 +147,17 @@
         <div class="footer-links-group">
           <h4 class="footer-title">Services</h4>
           <a href="./services" class="footer-link" data-link>Web Development</a>
-          <a href="./services" class="footer-link" data-link>Mobile Apps</a>
+          <a href="./services" class="footer-link" data-link>Mobile Applications</a>
+          <a href="./services" class="footer-link" data-link>E-Commerce Stores</a>
           <a href="./services" class="footer-link" data-link>UI/UX Design</a>
-          <a href="./services" class="footer-link" data-link>Branding</a>
           <a href="./services" class="footer-link" data-link>AI Solutions</a>
         </div>
         <div class="footer-links-group">
           <h4 class="footer-title">Company</h4>
-          <a href="./portfolio" class="footer-link" data-link>Portfolio</a>
-          <a href="./blog" class="footer-link" data-link>Blog</a>
-          <a href="./faq" class="footer-link" data-link>FAQ</a>
-          <a href="./tracker" class="footer-link" data-link>Project Tracker</a>
-          <a href="./reviews" class="footer-link" data-link>Reviews</a>
+          <a href="./portfolio" class="footer-link" data-link>Case Studies</a>
+          <a href="./blog" class="footer-link" data-link>Blog & News</a>
+          <a href="./faq" class="footer-link" data-link>FAQ Accordion</a>
+          <a href="./reviews" class="footer-link" data-link>Client Reviews</a>
           <a href="./estimator" class="footer-link" data-link>Cost Estimator</a>
         </div>
         <div class="footer-links-group">
@@ -159,14 +165,23 @@
           <a href="mailto:hello@nexus.agency" class="footer-link">hello@nexus.agency</a>
           <a href="tel:+1234567890" class="footer-link">+1 (234) 567-890</a>
           <a href="./consultation" class="footer-link" data-link>Book Consultation</a>
-          <a href="./contact" class="footer-link" data-link>Contact Us</a>
+          <a href="./contact" class="footer-link" data-link>Contact Engineering</a>
+        </div>
+        <div class="footer-links-group">
+          <h4 class="footer-title">Enterprise SLA</h4>
+          <div style="font-size:var(--font-size-xs);color:var(--text-tertiary);display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;gap:6px;"><span style="color:var(--accent-secondary);">✓</span> SOC2 Type II Certified</div>
+            <div style="display:flex;align-items:center;gap:6px;"><span style="color:var(--accent-secondary);">✓</span> GDPR Compliant SDLC</div>
+            <div style="display:flex;align-items:center;gap:6px;"><span style="color:var(--accent-secondary);">✓</span> 99.9% Uptime Guarantee</div>
+            <div style="display:flex;align-items:center;gap:6px;"><span style="color:var(--accent-secondary);">✓</span> 24/7 SLA Engineering</div>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Nexus Agency. All rights reserved.</p>
+        <p>&copy; 2026 Nexus Agency. All rights reserved. Built for high-velocity enterprise teams.</p>
         <div class="footer-bottom-links">
-          <a href="./privacy" data-link>Privacy</a>
-          <a href="./terms" data-link>Terms</a>
+          <a href="./privacy" data-link>Privacy Policy</a>
+          <a href="./terms" data-link>Terms of Service</a>
         </div>
       </div>
     </div>

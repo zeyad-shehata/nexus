@@ -130,30 +130,166 @@ function statsSection() {
 }
 function whyChooseUs() {
   const features = [
-    { icon: featureIcons.team(), title: 'Professional Team', desc: 'Expert designers and developers with years of experience building world-class digital products.' },
-    { icon: featureIcons.fast(), title: 'Fast Delivery', desc: 'We deliver projects on time without compromising on quality, using agile methodologies.' },
-    { icon: featureIcons.quality(), title: 'Premium Quality', desc: 'Every pixel matters. We craft premium designs that stand out and drive real results.' },
-    { icon: featureIcons.secure(), title: 'Secure Process', desc: 'Enterprise-grade security practices to protect your data and your users throughout.' },
-    { icon: featureIcons.support(), title: 'Continuous Support', desc: "We don't disappear after launch. Ongoing maintenance, updates, and 24/7 support." },
-    { icon: featureIcons.tech(), title: 'Modern Technologies', desc: 'Latest tech stack including AI, cloud-native, and cutting-edge frameworks.' }
+    { icon: featureIcons.experience(), title: '8+ Years Experience', desc: 'Engineered high-scale software solutions for startups, scaleups, and enterprise organizations.' },
+    { icon: featureIcons.projects(), title: '150+ Projects Delivered', desc: 'Proven track record of delivering complex web apps, mobile solutions, and AI platforms on time.' },
+    { icon: featureIcons.clients(), title: '120+ Global Clients', desc: 'Trusted by founders and product leaders across North America, Europe, and Asia.' },
+    { icon: featureIcons.satisfaction(), title: '99% Client Satisfaction', desc: 'Relentless focus on user experience, performance, clean architecture, and measurable ROI.' },
+    { icon: featureIcons.secure(), title: 'Enterprise Security', desc: 'SOC2 & GDPR compliant development practices to safeguard user data and private credentials.' },
+    { icon: featureIcons.agile(), title: 'Agile Methodology', desc: 'Weekly sprint demos, continuous deployment pipelines, and complete project transparency.' },
+    { icon: featureIcons.pm(), title: 'Dedicated Project Manager', desc: 'Single point of contact with direct Slack/Teams access for seamless collaboration.' },
+    { icon: featureIcons.support(), title: 'Long-Term Support', desc: 'Post-launch maintenance, SLAs, infrastructure scaling, and continuous feature updates.' }
   ];
 
   return `
     <section class="section" id="why-us">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-label">Why Choose Us</span>
-          <h2 class="section-title">Built Different. <span class="gradient-text">Built Better.</span></h2>
-          <p class="section-subtitle">We combine cutting-edge technology with stunning design to create digital experiences that drive real business results.</p>
+          <span class="section-label">Why Choose Nexus</span>
+          <h2 class="section-title">Engineered For <span class="gradient-text">Excellence</span></h2>
+          <p class="section-subtitle">We combine deep technical expertise with product design mastery to build products users love.</p>
         </div>
-        <div class="features-grid">
+        <div class="features-grid-8">
           ${features.map((f, i) => `
-            <div class="glass-card feature-card reveal reveal-delay-${i + 1}">
+            <div class="glass-card feature-card reveal reveal-delay-${(i % 4) + 1}">
               <div class="feature-icon">${f.icon}</div>
               <h3 class="feature-title">${f.title}</h3>
               <p class="feature-desc">${f.desc}</p>
             </div>
           `).join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function techStackSection() {
+  const categories = [
+    {
+      name: 'Frontend & UI Engineering',
+      techs: [
+        { name: 'React', category: 'UI Framework', desc: 'Component architecture and state management.', badge: 'Core Stack', logo: getTechLogo('React', 28) },
+        { name: 'Next.js', category: 'Full-Stack React', desc: 'Server-side rendering, SSG, and App Router.', badge: 'Core Stack', logo: getTechLogo('Next.js', 28) },
+        { name: 'TypeScript', category: 'Typed JS', desc: 'Type safety and enterprise code maintainability.', badge: 'Enterprise Standard', logo: getTechLogo('TypeScript', 28) },
+        { name: 'Tailwind CSS', category: 'Utility CSS', desc: 'Design tokens and responsive layout engine.', badge: 'Core Stack', logo: getTechLogo('Tailwind CSS', 28) }
+      ]
+    },
+    {
+      name: 'Backend, Cloud & Databases',
+      techs: [
+        { name: 'Node.js', category: 'Server Runtime', desc: 'Asynchronous event-driven backend microservices.', badge: 'Core Stack', logo: getTechLogo('Node.js', 28) },
+        { name: 'PostgreSQL', category: 'Relational DB', desc: 'ACID-compliant data persistence and indexing.', badge: 'Enterprise Standard', logo: getTechLogo('PostgreSQL', 28) },
+        { name: 'AWS', category: 'Cloud Infrastructure', desc: 'Serverless compute, S3, and CloudFront CDN.', badge: 'Production Ready', logo: getTechLogo('AWS', 28) },
+        { name: 'Docker', category: 'Containerization', desc: 'Isolated containers and Kubernetes deployment.', badge: 'Enterprise Standard', logo: getTechLogo('Docker', 28) }
+      ]
+    },
+    {
+      name: 'Mobile & AI Engineering',
+      techs: [
+        { name: 'Flutter', category: 'Cross-Platform App', desc: 'High-performance native mobile compilation.', badge: 'Core Stack', logo: getTechLogo('Flutter', 28) },
+        { name: 'Python', category: 'AI & Data Science', desc: 'Machine learning pipelines and data analysis.', badge: 'Core Stack', logo: getTechLogo('Python', 28) },
+        { name: 'OpenAI', category: 'Generative AI', desc: 'Custom GPT models and LLM API integrations.', badge: 'Production Ready', logo: getTechLogo('OpenAI', 28) },
+        { name: 'GraphQL', category: 'API Architecture', desc: 'Typed schema queries and efficient fetching.', badge: 'Enterprise Standard', logo: getTechLogo('GraphQL', 28) }
+      ]
+    }
+  ];
+
+  return `
+    <section class="section" id="tech-stack" style="background: var(--bg-secondary);">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Technology Stack</span>
+          <h2 class="section-title">Built With <span class="gradient-text">Industry Standards</span></h2>
+          <p class="section-subtitle">We leverage enterprise-grade frameworks and cloud infrastructure to ensure security, performance, and long-term maintainability.</p>
+        </div>
+        <div class="tech-stack-container">
+          ${categories.map((cat, ci) => `
+            <div class="tech-category-block reveal reveal-delay-${ci + 1}">
+              <h3 class="tech-category-title">${cat.name}</h3>
+              <div class="tech-grid">
+                ${cat.techs.map((t) => `
+                  <div class="glass-card tech-card">
+                    <div class="tech-card-header">
+                      <div class="tech-icon">${t.logo}</div>
+                      <span class="badge badge-subtle">${t.badge}</span>
+                    </div>
+                    <div class="tech-name">${t.name}</div>
+                    <div class="tech-meta">${t.category}</div>
+                    <p class="tech-desc">${t.desc}</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function processTimeline() {
+  const steps = [
+    { num: '01', title: 'Discovery & Audit', desc: 'We analyze your requirements, business objectives, and technical constraints to define project scope.', duration: 'Week 1' },
+    { num: '02', title: 'Architecture & Planning', desc: 'We design system architecture, technical specs, user journeys, and project milestones.', duration: 'Week 1-2' },
+    { num: '03', title: 'UI/UX Design', desc: 'We create high-fidelity interactive Figma prototypes, design systems, and component tokens.', duration: 'Week 2-3' },
+    { num: '04', title: 'Agile Development', desc: 'Clean, type-safe code implementation with continuous integration and weekly demo builds.', duration: 'Week 4-7' },
+    { num: '05', title: 'QA & Security Audit', desc: 'Automated testing, load testing, security vulnerability scans, and cross-browser QA.', duration: 'Week 7-8' },
+    { num: '06', title: 'Production Deployment', desc: 'Zero-downtime deployment, CDN caching, database migration, and domain setup.', duration: 'Launch' },
+    { num: '07', title: '24/7 SLA & Growth', desc: 'Proactive monitoring, regular updates, maintenance, and continuous optimization.', duration: 'Ongoing' }
+  ];
+
+  return `
+    <section class="section" id="process-workflow">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Proven Methodology</span>
+          <h2 class="section-title">Our <span class="gradient-text">Development Process</span></h2>
+          <p class="section-subtitle">A transparent, structured workflow engineered to deliver high-impact digital products on time and on budget.</p>
+        </div>
+        <div class="timeline-container reveal">
+          <div class="timeline-grid">
+            ${steps.map((s, i) => `
+              <div class="timeline-card glass-card reveal reveal-delay-${(i % 3) + 1}">
+                <div class="timeline-badge">${s.num}</div>
+                <div class="timeline-header">
+                  <h3 class="timeline-title">${s.title}</h3>
+                  <span class="timeline-duration">${s.duration}</span>
+                </div>
+                <p class="timeline-desc">${s.desc}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function trustSection() {
+  const points = [
+    { icon: featureIcons.secure(), title: 'Enterprise Security', desc: 'SOC2 type II & GDPR compliant development workflows with automated vulnerability scanning.' },
+    { icon: featureIcons.fast(), title: '99.9% Uptime Guarantee', desc: 'Reliable cloud-native architecture deployed across multi-region edge locations.' },
+    { icon: featureIcons.quality(), title: 'Rigorous Code Audits', desc: 'Strict TypeScript typing, unit tests, end-to-end testing, and peer code reviews.' },
+    { icon: featureIcons.support(), title: '24/7 Dedicated SLA', desc: 'Direct Slack/Teams channel with senior engineers for rapid response SLAs.' }
+  ];
+
+  return `
+    <section class="section" id="trust-guarantee" style="background: var(--bg-secondary);">
+      <div class="container">
+        <div class="trust-banner glass-card reveal">
+          <div class="trust-banner-header">
+            <span class="section-label">Institutional Credibility</span>
+            <h2 class="section-title">Enterprise Standards <span class="gradient-text">Built In</span></h2>
+            <p class="section-subtitle" style="margin:0 auto;max-width:600px;">Why Fortune 500s and scaling startups trust Nexus for mission-critical software.</p>
+          </div>
+          <div class="trust-grid">
+            ${points.map((p) => `
+              <div class="trust-card">
+                <div class="trust-icon-box">${p.icon}</div>
+                <h3 class="trust-title">${p.title}</h3>
+                <p class="trust-desc">${p.desc}</p>
+              </div>
+            `).join('')}
+          </div>
         </div>
       </div>
     </section>
