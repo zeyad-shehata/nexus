@@ -1,34 +1,30 @@
-// ============================================
-// NEXUS AGENCY — Cost Estimator
-// ============================================
-
 export function renderEstimator() {
   return `
     <section class="page-hero">
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
         <div class="container">
-          <span class="section-label reveal">✓¦ Cost Estimator</span>
+          <span class="section-label reveal">Cost Estimator</span>
           <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">Project <span class="gradient-text">Estimator</span></h1>
-          <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;">Get an instant estimate for your project based on your requirements.</p>
+          <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;max-width:600px;">Configure your project parameters to get an instant cost and timeline estimate.</p>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <div class="container" style="max-width:800px;">
+      <div class="container" style="max-width:850px;">
         <div class="glass-card reveal" style="padding:var(--space-10);">
           <!-- Project Type -->
           <div style="margin-bottom:var(--space-8);">
-            <h3 style="font-weight:700;margin-bottom:var(--space-4);">1. Project Type</h3>
+            <h3 style="font-weight:700;margin-bottom:var(--space-4);color:var(--text-primary);">1. Select Project Type</h3>
             <div class="radio-group" id="est-type">
               ${[
                 { label: 'Landing Page', value: 1500 },
                 { label: 'Business Website', value: 3000 },
                 { label: 'E-Commerce Store', value: 5000 },
                 { label: 'Web Application', value: 8000 },
-                { label: 'Mobile App', value: 10000 },
-                { label: 'Full Platform', value: 20000 },
+                { label: 'Mobile Application', value: 10000 },
+                { label: 'Full Enterprise Platform', value: 20000 },
               ].map((t, i) => `
                 <div class="radio-option ${i === 0 ? 'selected' : ''}" role="radio" tabindex="0" aria-checked="${i === 0 ? 'true' : 'false'}" data-value="${t.value}" onclick="selectEstOption(this, 'est-type')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                   <div class="radio-dot"></div>
@@ -40,72 +36,47 @@ export function renderEstimator() {
 
           <!-- Features -->
           <div style="margin-bottom:var(--space-8);">
-            <h3 style="font-weight:700;margin-bottom:var(--space-4);">2. Additional Features</h3>
-            <div class="radio-group" id="est-features" style="grid-template-columns:1fr;">
+            <h3 style="font-weight:700;margin-bottom:var(--space-4);color:var(--text-primary);">2. Additional Capabilities & Features</h3>
+            <div class="radio-group" id="est-features" style="grid-template-columns:1fr 1fr;">
               ${[
-                { label: 'User Authentication', value: 500 },
-                { label: 'Payment Integration', value: 800 },
-                { label: 'Admin Dashboard', value: 1500 },
-                { label: 'Chat / Messaging', value: 1000 },
-                { label: 'AI / ML Integration', value: 3000 },
-                { label: 'API Development', value: 1200 },
-                { label: 'Multi-language Support', value: 600 },
-                { label: 'Analytics Dashboard', value: 800 },
-              ].map(f => `
-                <div class="radio-option" data-value="${f.value}" onclick="toggleEstFeature(this)" style="cursor:pointer;">
-                  <div style="width:18px;height:18px;border-radius:4px;border:2px solid var(--text-muted);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all 0.2s;" class="est-check"></div>
-                  <span>${f.label}</span>
-                  <span style="margin-left:auto;color:var(--text-tertiary);font-size:var(--font-size-sm);">+$${f.value.toLocaleString()}</span>
+                { label: 'User Authentication & OAuth', value: 500 },
+                { label: 'Payment Gateway Integration', value: 800 },
+                { label: 'Admin Dashboard & Analytics', value: 1500 },
+                { label: 'Real-Time Messaging & Chat', value: 1000 },
+                { label: 'Custom AI / ML Integration', value: 3000 },
+                { label: 'Multi-Language Support (i18n)', value: 600 },
+              ].map((f) => `
+                <div class="radio-option est-feature-option" role="checkbox" tabindex="0" aria-checked="false" data-value="${f.value}" onclick="toggleEstFeature(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+                  <div class="radio-dot"></div>
+                  <span>${f.label} (+${f.value}$)</span>
                 </div>
               `).join('')}
             </div>
           </div>
 
-          <!-- Timeline -->
+          <!-- Timeline Speed -->
           <div style="margin-bottom:var(--space-8);">
-            <h3 style="font-weight:700;margin-bottom:var(--space-4);">3. Timeline</h3>
-            <div class="radio-group" id="est-timeline">
+            <h3 style="font-weight:700;margin-bottom:var(--space-4);color:var(--text-primary);">3. Desired Turnaround Velocity</h3>
+            <div class="radio-group" id="est-speed">
               ${[
-                { label: 'Rush (1-2 weeks)', multiplier: 1.5 },
-                { label: 'Standard (1-2 months)', multiplier: 1 },
-                { label: 'Relaxed (3+ months)', multiplier: 0.9 },
-              ].map((t, i) => `
-                <div class="radio-option ${i === 1 ? 'selected' : ''}" data-multiplier="${t.multiplier}" onclick="selectEstOption(this, 'est-timeline')">
+                { label: 'Standard Delivery (Regular Pace)', mult: 1 },
+                { label: 'Accelerated Sprint (1.3x speed)', mult: 1.25 },
+                { label: 'Rush / Express Priority (2x speed)', mult: 1.5 },
+              ].map((s, i) => `
+                <div class="radio-option ${i === 0 ? 'selected' : ''}" role="radio" tabindex="0" aria-checked="${i === 0 ? 'true' : 'false'}" data-mult="${s.mult}" onclick="selectEstOption(this, 'est-speed')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                   <div class="radio-dot"></div>
-                  <span>${t.label}</span>
-                  ${t.multiplier !== 1 ? `<span style="margin-left:auto;font-size:var(--font-size-xs);color:${t.multiplier > 1 ? 'var(--accent-tertiary)' : 'var(--accent-secondary)'};">${t.multiplier > 1 ? '+50%' : '-10%'}</span>` : ''}
+                  <span>${s.label}</span>
                 </div>
               `).join('')}
             </div>
           </div>
 
-          <!-- Design -->
-          <div style="margin-bottom:var(--space-10);">
-            <h3 style="font-weight:700;margin-bottom:var(--space-4);">4. Design Level</h3>
-            <div class="radio-group" id="est-design">
-              ${[
-                { label: 'Standard Design', value: 0 },
-                { label: 'Premium Design', value: 2000 },
-                { label: 'Ultra-Premium / Custom', value: 5000 },
-              ].map((d, i) => `
-                <div class="radio-option ${i === 0 ? 'selected' : ''}" data-value="${d.value}" onclick="selectEstOption(this, 'est-design')">
-                  <div class="radio-dot"></div>
-                  <span>${d.label}</span>
-                  ${d.value > 0 ? `<span style="margin-left:auto;color:var(--text-tertiary);font-size:var(--font-size-sm);">+$${d.value.toLocaleString()}</span>` : ''}
-                </div>
-              `).join('')}
-            </div>
-          </div>
-
-          <!-- Result -->
-          <div style="text-align:center;padding:var(--space-8);background:rgba(var(--accent-primary-rgb),0.05);border-radius:var(--radius-xl);border:1px solid rgba(var(--accent-primary-rgb),0.15);">
-            <div style="font-size:var(--font-size-sm);color:var(--text-tertiary);margin-bottom:var(--space-2);">Estimated Project Cost</div>
-            <div id="estimate-result" style="font-size:var(--font-size-4xl);font-weight:900;" class="gradient-text">$1,500</div>
-            <div style="font-size:var(--font-size-xs);color:var(--text-muted);margin-top:var(--space-2);">This is an estimate. Final pricing may vary.</div>
-          </div>
-
-          <div style="text-align:center;margin-top:var(--space-8);">
-            <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>Start Your Project →</a>
+          <!-- Estimate Result -->
+          <div class="glass-card" style="padding:var(--space-8);background:var(--bg-glass);border:1px solid var(--border-accent);border-radius:var(--radius-xl);text-align:center;">
+            <div style="font-size:var(--font-size-xs);color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:var(--space-2);">Estimated Investment Range</div>
+            <div id="est-total-price" class="gradient-text" style="font-size:var(--font-size-4xl);font-weight:900;line-height:1;margin-bottom:var(--space-3);">$1,500 – $2,100</div>
+            <p style="font-size:var(--font-size-xs);color:var(--text-secondary);max-width:500px;margin:0 auto var(--space-6);">Final pricing depends on complete technical specs. Includes dedicated PM, QA, and 30-day warranty.</p>
+            <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>Start Project With This Estimate →</a>
           </div>
         </div>
       </div>
@@ -114,7 +85,10 @@ export function renderEstimator() {
 }
 
 (window as any).selectEstOption = function(el: HTMLElement, groupId: string) {
-  document.querySelectorAll(`#${groupId} .radio-option`).forEach(o => {
+  const group = document.getElementById(groupId);
+  if (!group) return;
+  const options = group.querySelectorAll('.radio-option');
+  options.forEach(o => {
     o.classList.remove('selected');
     o.setAttribute('aria-checked', 'false');
   });
@@ -124,43 +98,29 @@ export function renderEstimator() {
 };
 
 (window as any).toggleEstFeature = function(el: HTMLElement) {
-  el.classList.toggle('selected');
-  const check = el.querySelector('.est-check') as HTMLElement;
-  if (!check) return;
-  if (el.classList.contains('selected')) {
-    check.textContent = '✓';
-    check.style.borderColor = 'var(--accent-primary)';
-    check.style.background = 'var(--accent-primary)';
-    check.style.color = 'white';
-  } else {
-    check.textContent = '';
-    check.style.borderColor = 'var(--text-muted)';
-    check.style.background = 'transparent';
-  }
+  const isSelected = el.classList.toggle('selected');
+  el.setAttribute('aria-checked', isSelected ? 'true' : 'false');
   updateEstimate();
 };
 
 function updateEstimate() {
-  let total = 0;
+  const typeEl = document.querySelector('#est-type .radio-option.selected') as HTMLElement;
+  const speedEl = document.querySelector('#est-speed .radio-option.selected') as HTMLElement;
+  const featureEls = document.querySelectorAll('#est-features .radio-option.selected');
 
-  // Base type
-  const typeEl = document.querySelector<HTMLElement>('#est-type .radio-option.selected');
-  if (typeEl) total += parseInt(typeEl.dataset.value || '0');
+  let base = typeEl ? parseInt(typeEl.dataset.value || '1500') : 1500;
+  let mult = speedEl ? parseFloat(speedEl.dataset.mult || '1') : 1;
 
-  // Features
-  document.querySelectorAll<HTMLElement>('#est-features .radio-option.selected').forEach(f => {
-    total += parseInt(f.dataset.value || '0');
+  let featuresTotal = 0;
+  featureEls.forEach(f => {
+    featuresTotal += parseInt((f as HTMLElement).dataset.value || '0');
   });
 
-  // Design
-  const designEl = document.querySelector<HTMLElement>('#est-design .radio-option.selected');
-  if (designEl) total += parseInt(designEl.dataset.value || '0');
+  const minTotal = Math.round((base + featuresTotal) * mult);
+  const maxTotal = Math.round(minTotal * 1.35);
 
-  // Timeline multiplier
-  const timeEl = document.querySelector<HTMLElement>('#est-timeline .radio-option.selected');
-  if (timeEl) total = Math.round(total * parseFloat(timeEl.dataset.multiplier || '1'));
-
-  const result = document.getElementById('estimate-result');
-  if (result) result.textContent = '$' + total.toLocaleString();
+  const priceEl = document.getElementById('est-total-price');
+  if (priceEl) {
+    priceEl.textContent = `$${minTotal.toLocaleString()} – $${maxTotal.toLocaleString()}`;
+  }
 }
-
