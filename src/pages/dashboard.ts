@@ -7,21 +7,26 @@ import { showAlert } from '../components/ui/Alert';
 import { sanitizeHTML } from '../utils/sanitize';
 import { renderDashboardSidebar } from '../components/dashboard/DashboardSidebar';
 import { renderDashboardChatView } from '../components/dashboard/DashboardChatView';
+import { getLanguage } from '../utils/i18n';
 
 let socket = null;
 let currentActiveConversationId = null;
 
 export function renderDashboard() {
   const userStr = localStorage.getItem('user');
+  const isAr = getLanguage() === 'ar';
+
   if (!userStr) {
     return `
       <section class="section" style="padding-top:12rem; text-align:center;">
-        <div class="container" style="max-width: 500px;">
-          <div class="glass-card reveal" style="padding:var(--space-10);">
-            <div style="font-size:4rem; margin-bottom:var(--space-4);">ðŸ</div>
-            <h2 style="font-size:var(--font-size-2xl); font-weight:800; margin-bottom:var(--space-2);">Access Denied</h2>
-            <p style="color:var(--text-secondary); margin-bottom:var(--space-6);">You must be logged in to access the dashboard portal.</p>
-            <a href="./auth" class="btn btn-primary" data-link>Sign In</a>
+        <div class="container" style="max-width: 520px;">
+          <div class="glass-card reveal" style="padding:var(--space-10); border-radius:var(--radius-2xl);">
+            <div style="width:64px;height:64px;border-radius:50%;background:rgba(239,68,68,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-4);color:var(--accent-tertiary);border:1px solid rgba(239,68,68,0.3);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h2 style="font-size:var(--font-size-xl); font-weight:800; margin-bottom:var(--space-2);">${isAr ? 'الوصول مرفوض' : 'Access Denied'}</h2>
+            <p style="color:var(--text-secondary); font-size:var(--font-size-sm); margin-bottom:var(--space-6);">${isAr ? 'يجب عليك تسجيل الدخول أولاً للوصول إلى لوحة التحكم.' : 'You must be signed in to access the client portal.'}</p>
+            <a href="./auth" class="btn btn-primary" data-link style="width:100%;justify-content:center;">${isAr ? 'تسجيل الدخول' : 'Sign In'}</a>
           </div>
         </div>
       </section>
@@ -32,16 +37,19 @@ export function renderDashboard() {
   const isAdmin = user.role === 'ADMIN';
 
   return `
-    <section class="page-hero" style="padding: 10rem 0 3rem 0;">
+    <section class="page-hero" style="padding: 9rem 0 3rem 0;">
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
         <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-4);">
           <div>
-            <span class="section-label">✓¦ Workspace</span>
-            <h1 class="section-title" style="font-size:var(--font-size-3xl); margin-bottom:0;">Welcome back, <span class="gradient-text">${user.name}</span></h1>
-            <p style="color:var(--text-secondary); font-size:var(--font-size-sm); margin-top:var(--space-1);">${isAdmin ? 'Nexus Administrator Console' : 'Nexus Client Portal'}</p>
+            <div class="badge badge-accent" style="margin-bottom:var(--space-2);">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              ${isAr ? 'مساحة العمل المشفرة' : 'ENCRYPTED WORKSPACE'}
+            </div>
+            <h1 class="section-title" style="font-size:var(--font-size-2xl); margin-bottom:0;">${isAr ? 'مرحباً بعودتك،' : 'Welcome back,'} <span class="gradient-text">${user.name}</span></h1>
+            <p style="color:var(--text-secondary); font-size:var(--font-size-sm); margin-top:var(--space-1);">${isAdmin ? (isAr ? 'لوحة تحكم المسؤول' : 'Nexus Administrator Console') : (isAr ? 'بوابة العميل المعتمدة' : 'Nexus Client Portal')}</p>
           </div>
-          <button class="btn btn-secondary" onclick="handleLogout()" style="border-color:var(--accent-tertiary); color:var(--accent-tertiary);">Sign Out</button>
+          <button class="btn btn-secondary" onclick="handleLogout()" style="border-color:var(--accent-tertiary); color:var(--accent-tertiary);">${isAr ? 'تسجيل الخروج' : 'Sign Out'}</button>
         </div>
       </div>
     </section>

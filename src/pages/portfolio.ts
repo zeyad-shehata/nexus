@@ -1,5 +1,5 @@
-import { apiFetch } from '../utils/api';
 import { getTechLogo } from '../components/tech-logos';
+import { t, getLanguage } from '../utils/i18n';
 
 const projectsData = [
   {
@@ -53,6 +53,7 @@ const projectsData = [
 ];
 
 function renderPortfolioItem(p: any, i: number) {
+  const isAr = getLanguage() === 'ar';
   const cat = p.category || p.cat || 'Web App';
   const descText = p.description || p.desc;
   const tech = p.technologies || p.tech || ['React', 'Next.js'];
@@ -82,7 +83,7 @@ function renderPortfolioItem(p: any, i: number) {
             <div class="portfolio-tech" style="margin-bottom:var(--space-4);">
               ${tech.map((t: string) => `<span class="badge">${t}</span>`).join('')}
             </div>
-            <div class="service-link" style="font-size:var(--font-size-xs);font-weight:700;">View Case Study →</div>
+            <div class="service-link" style="font-size:var(--font-size-xs);font-weight:700;">${isAr ? 'عرض دراسة الحالة ←' : 'View Case Study →'}</div>
           </div>
         </div>
       </div>
@@ -91,133 +92,98 @@ function renderPortfolioItem(p: any, i: number) {
 }
 
 export function renderPortfolio() {
-  const categories = ['All', 'Web App', 'Mobile', 'E-Commerce', 'Branding', 'AI'];
+  const isAr = getLanguage() === 'ar';
+  const categories = isAr ? ['الكل', 'تطوير الويب', 'تطبيقات الجوال', 'التجارة الإلكترونية', 'الهوية', 'الذكاء الاصطناعي'] : ['All', 'Web App', 'Mobile', 'E-Commerce', 'Branding', 'AI'];
 
   return `
     <section class="page-hero">
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
         <div class="container">
-          <span class="section-label reveal">Featured Case Studies</span>
-          <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">Enterprise <span class="gradient-text">Portfolio</span></h1>
-          <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;max-width:640px;">Deep dive into how Nexus engineered high-scale web platforms, mobile apps, and AI solutions for global clients.</p>
+          <div class="badge badge-accent animate-fade-in" style="margin-bottom:var(--space-4);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            ${isAr ? 'دراسات الحالة والتطبيقات' : 'ENTERPRISE CASE STUDIES'}
+          </div>
+          <h1 class="page-title animate-fade-in">${t('portfolio.title', 'Featured Case Studies')}</h1>
+          <p class="page-subtitle animate-fade-in">${t('portfolio.subtitle', 'Explore our selected projects showcasing engineering excellence.')}</p>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" style="padding-top:0;">
       <div class="container">
-        <div class="tabs reveal" id="portfolio-tabs">
-          ${categories.map((c, i) => `
-            <button class="tab-btn ${i === 0 ? 'active' : ''}" onclick="filterPortfolio('${c}')">${c}</button>
-          `).join('')}
+        <!-- Filter Tabs -->
+        <div class="tabs portfolio-tabs" id="portfolio-filter-tabs">
+          <button class="tab-btn active" data-filter="All">${isAr ? 'جميع المشاريع' : 'All Projects'}</button>
+          <button class="tab-btn" data-filter="Web App">${isAr ? 'تطوير الويب' : 'Web App'}</button>
+          <button class="tab-btn" data-filter="Mobile">${isAr ? 'تطبيقات الجوال' : 'Mobile'}</button>
+          <button class="tab-btn" data-filter="E-Commerce">${isAr ? 'التجارة الإلكترونية' : 'E-Commerce'}</button>
+          <button class="tab-btn" data-filter="Branding">${isAr ? 'الهوية البصرية' : 'Branding'}</button>
+          <button class="tab-btn" data-filter="AI">${isAr ? 'الذكاء الاصطناعي' : 'AI & Data'}</button>
         </div>
 
-        <div class="portfolio-grid" id="portfolio-masonry" style="display:grid;grid-template-columns:repeat(3, 1fr);gap:var(--space-6);">
+        <!-- Portfolio Masonry Grid -->
+        <div class="masonry-grid" id="portfolio-masonry-grid" style="margin-top:var(--space-8);">
           ${projectsData.map((p, i) => renderPortfolioItem(p, i)).join('')}
         </div>
       </div>
     </section>
-
-    <!-- Lightbox -->
-    <div class="lightbox-overlay" id="portfolio-lightbox" onclick="if(event.target===this)closeProjectLightbox()">
-      <div class="lightbox-content" id="lightbox-body"></div>
-    </div>
   `;
 }
 
-export async function initPortfolio() {
-  const container = document.getElementById('portfolio-masonry');
-  if (!container) return;
+export function initPortfolio() {
+  const tabs = document.querySelectorAll('#portfolio-filter-tabs .tab-btn');
+  const items = document.querySelectorAll('#portfolio-masonry-grid .masonry-item');
 
-  try {
-    const res = await apiFetch('/portfolio');
-    const data = await res.json();
-    const dbProjects = Array.isArray(data) ? data : (data.portfolio || []);
-    if (res.ok && dbProjects.length > 0) {
-      container.innerHTML = dbProjects.map((p: any, i: number) => renderPortfolioItem(p, i)).join('');
-    }
-  } catch (e) {
-    console.warn('⚠️ Could not fetch portfolio from API, falling back to static mock data.', e);
-  }
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const filter = tab.getAttribute('data-filter');
+      items.forEach(item => {
+        const cat = item.getAttribute('data-category');
+        if (filter === 'All' || filter === cat) {
+          (item as HTMLElement).style.display = 'block';
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
 }
 
-// Lightbox
 (window as any).openProjectLightbox = function(index: number) {
   const p = projectsData[index];
   if (!p) return;
-  const lb = document.getElementById('portfolio-lightbox');
-  const body = document.getElementById('lightbox-body');
-  if (!lb || !body) return;
+  const isAr = getLanguage() === 'ar';
 
-  body.innerHTML = `
-    <button class="lightbox-close" onclick="closeProjectLightbox()" aria-label="Close modal">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-    <div class="lightbox-visual" style="background:linear-gradient(135deg, ${p.color}33, ${p.color}11);display:flex;align-items:center;justify-content:center;padding:var(--space-8);">
-      ${p.icon}
-    </div>
-    <div class="lightbox-header" style="margin-top:var(--space-6);">
-      <div class="portfolio-category" style="margin-bottom:var(--space-2);">${p.cat}</div>
-      <h2 style="font-size:var(--font-size-2xl);font-weight:800;margin-bottom:var(--space-3);color:var(--text-primary);">${p.title}</h2>
-      <p style="color:var(--text-secondary);line-height:var(--line-height-relaxed);">${p.desc}</p>
-    </div>
-    <div class="lightbox-tech" style="margin:var(--space-4) 0;display:flex;gap:8px;flex-wrap:wrap;">
-      ${p.tech.map(t => `<span class="badge badge-subtle">${t}</span>`).join('')}
-    </div>
-    <div class="lightbox-stats" style="display:grid;grid-template-columns:repeat(3, 1fr);gap:var(--space-4);margin-bottom:var(--space-6);">
-      <div class="lightbox-stat glass-card" style="padding:var(--space-4);text-align:center;">
-        <div class="lightbox-stat-value gradient-text" style="font-weight:800;font-size:var(--font-size-lg);">${p.metrics}</div>
-        <div class="lightbox-stat-label" style="font-size:var(--font-size-xs);color:var(--text-tertiary);">Quantified Result</div>
+  const modal = document.createElement('div');
+  modal.className = 'modal-backdrop visible';
+  modal.style.zIndex = '100000';
+  modal.innerHTML = `
+    <div class="glass-card modal-content" style="max-width:650px;width:90%;padding:var(--space-8);position:relative;">
+      <button onclick="this.closest('.modal-backdrop').remove()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text-tertiary);cursor:pointer;font-size:1.5rem;">&times;</button>
+      <div style="font-size:var(--font-size-xs);color:var(--accent-primary);font-weight:700;margin-bottom:var(--space-2);">${p.cat} • ${p.client}</div>
+      <h2 style="font-size:var(--font-size-xl);font-weight:800;margin-bottom:var(--space-4);">${p.title}</h2>
+      <p style="color:var(--text-secondary);font-size:var(--font-size-sm);line-height:var(--line-height-relaxed);margin-bottom:var(--space-6);">${p.desc}</p>
+      
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);margin-bottom:var(--space-6);background:rgba(255,255,255,0.03);padding:var(--space-4);border-radius:var(--radius-md);">
+        <div>
+          <div style="font-size:0.75rem;color:var(--text-tertiary);">${isAr ? 'التحدي الهندسي' : 'Challenge'}</div>
+          <div style="font-size:var(--font-size-xs);color:var(--text-secondary);margin-top:4px;">${p.challenge}</div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;color:var(--text-tertiary);">${isAr ? 'الحل المطور' : 'Solution'}</div>
+          <div style="font-size:var(--font-size-xs);color:var(--text-secondary);margin-top:4px;">${p.solution}</div>
+        </div>
       </div>
-      <div class="lightbox-stat glass-card" style="padding:var(--space-4);text-align:center;">
-        <div class="lightbox-stat-value" style="color:var(--accent-secondary);font-weight:800;font-size:var(--font-size-lg);">${p.duration}</div>
-        <div class="lightbox-stat-label" style="font-size:var(--font-size-xs);color:var(--text-tertiary);">Timeline</div>
+
+      <div style="display:flex;gap:var(--space-3);justify-content:flex-end;">
+        <button onclick="this.closest('.modal-backdrop').remove()" class="btn btn-secondary">${isAr ? 'إغلاق' : 'Close'}</button>
+        <a href="./start-project" class="btn btn-primary" data-link onclick="this.closest('.modal-backdrop').remove()">${isAr ? 'طلب مشروع مماثل' : 'Request Similar Project'}</a>
       </div>
-      <div class="lightbox-stat glass-card" style="padding:var(--space-4);text-align:center;">
-        <div class="lightbox-stat-value" style="color:var(--text-primary);font-weight:700;font-size:var(--font-size-sm);">${p.client}</div>
-        <div class="lightbox-stat-label" style="font-size:var(--font-size-xs);color:var(--text-tertiary);">Client Partner</div>
-      </div>
-    </div>
-    ${p.challenge ? `
-      <div style="padding:var(--space-5);background:var(--bg-glass);border:1px solid var(--bg-glass-border);border-radius:var(--radius-xl);margin-bottom:var(--space-4);">
-        <h4 style="font-weight:700;margin-bottom:var(--space-2);font-size:var(--font-size-xs);color:var(--accent-primary);text-transform:uppercase;letter-spacing:0.05em;">The Challenge</h4>
-        <p style="color:var(--text-secondary);font-size:var(--font-size-xs);line-height:var(--line-height-relaxed);">${p.challenge}</p>
-      </div>
-    ` : ''}
-    ${p.solution ? `
-      <div style="padding:var(--space-5);background:var(--bg-glass);border:1px solid var(--bg-glass-border);border-radius:var(--radius-xl);margin-bottom:var(--space-6);">
-        <h4 style="font-weight:700;margin-bottom:var(--space-2);font-size:var(--font-size-xs);color:var(--accent-secondary);text-transform:uppercase;letter-spacing:0.05em;">Our Architecture & Solution</h4>
-        <p style="color:var(--text-secondary);font-size:var(--font-size-xs);line-height:var(--line-height-relaxed);">${p.solution}</p>
-      </div>
-    ` : ''}
-    <div style="text-align:center;">
-      <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link style="width:100%;justify-content:center;">Start a Similar Project →</a>
     </div>
   `;
-
-  lb.classList.add('active');
-  document.body.style.overflow = 'hidden';
-};
-
-(window as any).closeProjectLightbox = function() {
-  const lb = document.getElementById('portfolio-lightbox');
-  if (lb) lb.classList.remove('active');
-  document.body.style.overflow = '';
-};
-
-// Close on Escape
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') (window as any).closeProjectLightbox();
-});
-
-// Portfolio filter
-(window as any).filterPortfolio = function(category: string) {
-  const items = document.querySelectorAll<HTMLElement>('.masonry-item');
-  const btns = document.querySelectorAll('.tab-btn');
-  btns.forEach(b => b.classList.toggle('active', b.textContent === category));
-  items.forEach(item => {
-    const show = category === 'All' || item.dataset.category === category;
-    item.style.display = show ? '' : 'none';
-  });
+  document.body.appendChild(modal);
 };

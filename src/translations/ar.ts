@@ -1,4 +1,5 @@
 export const ar: Record<string, string> = {
+  // Navigation & Action Buttons
   'nav.home': 'الرئيسية',
   'nav.services': 'الخدمات',
   'nav.portfolio': 'الأعمال',
@@ -7,6 +8,23 @@ export const ar: Record<string, string> = {
   'nav.contact': 'اتصل بنا',
   'nav.get_started': 'ابدأ الآن',
   'nav.switch_lang': 'English',
+  'nav.signin': 'تسجيل الدخول',
+  'nav.dashboard': 'لوحة التحكم',
+  'common.back_to_top': 'العودة إلى الأعلى',
+  'common.skip_nav': 'التخطي إلى المحتوى',
+  'common.view_details': 'عرض التفاصيل',
+  'common.learn_more': 'معرفة المزيد',
+  'common.read_more': 'قراءة المزيد',
+  'common.submit': 'إرسال',
+  'common.send_message': 'إرسال الرسالة',
+  'common.search_placeholder': 'بحث...',
+  'common.all': 'الكل',
+  'common.loading': 'جاري التحميل...',
+  'common.success': 'تم بنجاح',
+  'common.error': 'خطأ',
+  'common.close': 'إغلاق',
+
+  // Hero Section
   'hero.tagline': 'التميز الرقمي',
   'hero.title_prefix': 'حوّل رؤيتك',
   'hero.title_gradient': 'إلى واقع ملموس.',
@@ -24,12 +42,113 @@ export const ar: Record<string, string> = {
   'hero.mau': 'المستخدمين النشطين شهرياً',
   'hero.latency': 'زمن الاستجابة',
   'hero.security_score': 'فحص الأمان والامتثال',
+
+  // Home Page Sections
+  'home.why_title': 'لماذا تختار الشركات الرائدة نيكسوس؟',
+  'home.why_subtitle': 'إتقان هندسي، أمان عالي المستوى، وسرعة فائقة في التنفيذ.',
+  'home.why_years': 'سنوات الخبرة',
+  'home.why_projects': 'المشاريع المنجزة',
+  'home.why_clients': 'العملاء السعداء',
+  'home.why_satisfaction': 'نسبة رضا العملاء',
+  'home.services_preview_title': 'بناء قدرات البرمجيات للمؤسسات',
+  'home.services_preview_subtitle': 'تطوير برمجيات مخصصة مصممة للتوسع والسرعة والأمان.',
+  'home.portfolio_preview_title': 'أبرز المشاريع وتجارب النجاح',
+  'home.portfolio_preview_subtitle': 'استكشف كيف نساعد الشركات سريعة النمو على توسيع حضورها الرقمي.',
+  'home.testimonials_title': 'آراء وتوصيات العملاء',
+  'home.testimonials_subtitle': 'استمع إلى قادة الهندسة والمؤسسين الذين يبنون مشاريعهم مع نيكسوس.',
+  'home.cta_title': 'هل أنت جاهز لبناء منتج استثنائي؟',
+  'home.cta_subtitle': 'شارك مع فريقنا الهندسي الرائد لإطلاق جيلك القادم من المنتجات الرقمية.',
+  'home.cta_btn': 'حجز استشارة هندسية',
+
+  // Services Page
   'services.title': 'خدمات المؤسسات',
   'services.subtitle': 'حلول رقمية متكاملة مصممة للفرق عالية الأداء والشركات سريعة النمو.',
-  'portfolio.title': 'أبرز المشاريع وتجارب النجاح',
+  'services.web_dev': 'تطوير منصات الويب',
+  'services.web_dev_desc': 'تطبيقات ويب فائقة الأداء باستخدام React وNext.js مصممة للسرعة ومحركات البحث والتوسع العالمي.',
+  'services.mobile_apps': 'تطبيقات الهواتف الذكية',
+  'services.mobile_apps_desc': 'تطبيقات iOS وAndroid باستخدام Flutter وReact Native لتجارب جوال سلسة.',
+  'services.ecommerce': 'متاجر التجارة الإلكترونية',
+  'services.ecommerce_desc': 'بنية تجارة إلكترونية بدون رأس (Headless) مصممة لمعدلات تحويل عالية ودفع سريع.',
+  'services.uiux': 'تصميم واجهات وتجربة المستخدم',
+  'services.uiux_desc': 'أنظمة تصميم متمركزة حول المستخدم، ونماذج تفاعلية، وواجهات مخصصة لزيادة المبيعات.',
+  'services.graphic': 'التصميم الجرافيكي والحركة',
+  'services.graphic_desc': 'رسوم ثلاثية الأبعاد، وأصول متجهة، وحزم متحركة مخصصة للهوية.',
+  'services.branding': 'استراتيجية وبناء الهوية التجارية',
+  'services.branding_desc': 'تحديد موقع العلامة التجارية، أنظمة الشعارات، وأدلة الخطوط والهوية البصرية.',
+  'services.ai_solutions': 'حلول الذكاء الاصطناعي والتعلم الآلي',
+  'services.ai_solutions_desc': 'دمج الذكاء الاصطناعي التوليدي، ضبط نماذج اللغة، ومحركات التحليلات التنبؤية.',
+  'services.cybersecurity': 'أمان المؤسسات والتدقيق',
+  'services.cybersecurity_desc': 'إعداد الامتثال لشهادة SOC2، اختبار الاختراق، وأمان السحابة بإنعدام الثقة (Zero-Trust).',
+  'services.pricing_title': 'باقات أسعار المؤسسات',
+  'services.pricing_subtitle': 'نماذج تعاون مرنة مصممة خصيصاً لمرحلة عملك وسرعة نموك.',
+  'services.plan_starter': 'البداية',
+  'services.plan_business': 'الأعمال',
+  'services.plan_enterprise': 'المؤسسات',
+  'services.plan_custom': 'حلول مخصصة',
+  'services.popular_badge': 'الأكثر شعبية',
+  'services.per_month': '/ شهرياً',
+  'services.one_time': '/ دفعة واحدة',
+
+  // Portfolio Page
+  'portfolio.title': 'معرض الأعمال والدراسات',
   'portfolio.subtitle': 'استكشف مشاريعنا المختارة التي تبرز التميز الهندسي والتصميمي.',
+  'portfolio.filter_all': 'جميع المشاريع',
+  'portfolio.filter_web': 'تطوير الويب',
+  'portfolio.filter_mobile': 'تطبيقات الجوال',
+  'portfolio.filter_ai': 'الذكاء الاصطناعي',
+  'portfolio.filter_branding': 'الهوية والتصميم',
+
+  // Start Project Page
+  'start.title': 'ابدأ مشروعك الآن',
+  'start.subtitle': 'أخبرنا بمتطلبات مشروعك واستلم عرضاً تفصيلياً خلال 24 ساعة.',
+  'start.step1': 'نوع المشروع',
+  'start.step2': 'النطاق والميزات',
+  'start.step3': 'الميزانية المتوقعة',
+  'start.step4': 'الجدول الزمني',
+  'start.step5': 'بيانات التواصل',
+  'start.submit': 'إرسال تفاصيل المشروع',
+
+  // Blog Page
+  'blog.title': 'رؤى الهندسة والمنتجات',
+  'blog.subtitle': 'مقالات قيادية واستراتيجيات تطوير البرمجيات من فريقنا.',
+  'blog.filter_all': 'جميع المقالات',
+  'blog.filter_engineering': 'الهندسة البرمجية',
+  'blog.filter_design': 'تصميم المنتجات',
+  'blog.filter_ai': 'الذكاء الاصطناعي',
+  'blog.filter_growth': 'النمو والتوسع',
+
+  // Contact Page
   'contact.title': 'تواصل مع الفريق الهندسي',
   'contact.subtitle': 'هل لديك مشروع؟ تواصل معنا وسيجيب فريقنا الهندسي خلال 24 ساعة.',
+  'contact.form_name': 'الاسم الكامل',
+  'contact.form_email': 'البريد الإلكتروني للعمل',
+  'contact.form_subject': 'موضوع الرسالة',
+  'contact.form_message': 'تفاصيل ومتطلبات المشروع',
+  'contact.send': 'إرسال الرسالة للفريق',
+
+  // FAQ Page
+  'faq.title': 'الأسئلة الشائعة',
+  'faq.subtitle': 'إجابات واضحة حول عمليتنا، الأمان، اتفاقية مستوى الخدمة، والتقنيات المستخدمة.',
+
+  // Tracker Page
+  'tracker.title': 'متابع المشاريع المباشر',
+  'tracker.subtitle': 'تابع حالة مشروعك ومراحل الإطلاق ومهمات الفريق في الوقت الفعلي.',
+  'tracker.input_placeholder': 'أدخل معرف المشروع (مثال: NX-8921)...',
+  'tracker.btn_track': 'تتبع المشروع',
+
+  // Consultation Page
+  'consultation.title': 'حجز استشارة هندسية',
+  'consultation.subtitle': 'احجز جلسة اكتشاف استراتيجية لمدة 30 دقيقة مع كبير مهندسينا.',
+
+  // Reviews Page
+  'reviews.title': 'تقييمات وأراء العملاء',
+  'reviews.subtitle': 'اقرأ تقييمات معتمدة من المدراء التنفيذيين ومدراء التقنية الذين يبنون مع نيكسوس.',
+
+  // Estimator Page
+  'estimator.title': 'حاسبة تكلفة المشروع',
+  'estimator.subtitle': 'احسب تقديراً فورياً للتكلفة بناءً على الميزات والبنية التقنية المطلوبة.',
+
+  // Auth Page
   'auth.portal_title': 'بوابة المؤسسات المشفرة',
   'auth.portal_subtitle': 'مساحة عمل آمنة • مصادقة معتمدة',
   'auth.signin': 'تسجيل الدخول',
@@ -40,6 +159,8 @@ export const ar: Record<string, string> = {
   'auth.forgot': 'نسيت كلمة المرور؟',
   'auth.fullname': 'الاسم الكامل',
   'auth.phone': 'رقم الهاتف',
+
+  // Footer & Miscellaneous
   'footer.desc': 'بناء برمجيات عالمية المستوى، ومنصات ويب عالية التوسع، وحلول ذكاء اصطناعي مخصصة لقادة الصناعة.',
   'footer.rights': '© 2026 وكالة نيكسوس. جميع الحقوق محفوظة. صُمم للفرق عالية الأداء.',
   'footer.title_services': 'الخدمات',
@@ -49,6 +170,22 @@ export const ar: Record<string, string> = {
   'footer.subscribe_title': 'اشترك في النشرة البريدية',
   'footer.subscribe_btn': 'اشتراك',
   'footer.subscribe_placeholder': 'أدخل البريد الإلكتروني...',
-  'common.back_to_top': 'العودة إلى الأعلى',
-  'common.skip_nav': 'التخطي إلى المحتوى'
+  'footer.mobile_apps': 'تطبيقات الجوال',
+  'footer.ecommerce': 'المتاجر الإلكترونية',
+  'footer.uiux': 'تصميم الواجهات',
+  'footer.ai_solutions': 'حلول الذكاء الاصطناعي',
+  'footer.case_studies': 'دراسات الحالة',
+  'footer.blog_news': 'المدونة والأخبار',
+  'footer.faq': 'الأسئلة الشائعة',
+  'footer.reviews': 'تقييمات العملاء',
+  'footer.estimator': 'حاسبة التكلفة',
+  'footer.book_consultation': 'حجز استشارة',
+  'footer.contact_engineering': 'تواصل مع الهندسة',
+  'footer.privacy': 'سياسة الخصوصية',
+  'footer.terms': 'شروط الخدمة',
+
+  // 404 Page
+  '404.title': 'الصفحة غير موجودة',
+  '404.desc': 'الصفحة التي تبحث عنها غير موجودة أو تم نقلها.',
+  '404.back': 'العودة للرئيسية'
 };

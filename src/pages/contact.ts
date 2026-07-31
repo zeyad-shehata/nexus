@@ -1,87 +1,85 @@
-import { apiFetch } from '../utils/api';
+import { t, getLanguage } from '../utils/i18n';
 
 export function renderContact() {
-  const mailIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`;
-  const phoneIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
-  const locationIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`;
-  const clockIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`;
+  const isAr = getLanguage() === 'ar';
 
   return `
     <section class="page-hero">
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
-        <div class="container">
-          <span class="section-label reveal">Get in Touch</span>
-          <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">Contact <span class="gradient-text">Engineering</span></h1>
-          <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;max-width:600px;">Have a question or want to start a project? Schedule a call or reach out to our team directly.</p>
+        <div class="container text-center">
+          <div class="badge badge-accent animate-fade-in" style="margin-bottom:var(--space-4);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            ${isAr ? 'قنوات التواصل المباشرة' : 'DIRECT ENGINEERING CHANNELS'}
+          </div>
+          <h1 class="page-title animate-fade-in">${t('contact.title', 'Contact Engineering')}</h1>
+          <p class="page-subtitle animate-fade-in">${t('contact.subtitle', 'Have a project in mind? Our engineering leadership responds within 24 hours.')}</p>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" style="padding-top:0;">
       <div class="container">
-        <div class="contact-grid">
-          <div class="reveal">
-            <h2 style="font-size:var(--font-size-2xl);font-weight:800;margin-bottom:var(--space-6);color:var(--text-primary);">Send Us a Message</h2>
-            <form id="contact-form" onsubmit="handleContactSubmit(event)">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);">
-                <div class="form-group">
-                  <label class="form-label">Full Name *</label>
-                  <input type="text" class="form-input" placeholder="Your name" required />
+        <div class="contact-grid" style="display:grid;grid-template-columns:1fr 1.2fr;gap:var(--space-10);align-items:start;">
+          <!-- Contact Details -->
+          <div>
+            <h2 style="font-size:var(--font-size-xl);font-weight:800;margin-bottom:var(--space-4);">${isAr ? 'تواصل مباشرة مع مهندسينا' : 'Connect Directly With Our Squad'}</h2>
+            <p style="color:var(--text-secondary);font-size:var(--font-size-sm);line-height:var(--line-height-relaxed);margin-bottom:var(--space-8);">${isAr ? 'نحن نسعد بمناقشة الأفكار التقنية الجديدة، تقديم الاستشارات، وتوسيع المنتجات الرقمية عالية الأداء.' : 'We love discussing new technical challenges, architecture reviews, and scaling strategies.'}</p>
+
+            <div style="display:flex;flex-direction:column;gap:var(--space-6);">
+              <div class="glass-card" style="padding:var(--space-6);display:flex;align-items:center;gap:var(--space-4);">
+                <div style="width:48px;height:48px;border-radius:var(--radius-md);background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(168,85,247,0.15));display:flex;align-items:center;justify-content:center;color:var(--accent-primary);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">Email Address *</label>
-                  <input type="email" class="form-input" placeholder="your@email.com" required />
+                <div>
+                  <div style="font-size:0.75rem;color:var(--text-tertiary);">${isAr ? 'البريد الإلكتروني للعمل' : 'Direct Email'}</div>
+                  <a href="mailto:hello@nexus.agency" style="font-size:var(--font-size-sm);font-weight:700;color:var(--text-primary);">hello@nexus.agency</a>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="form-label">Subject *</label>
-                <input type="text" class="form-input" placeholder="How can we help?" required />
+
+              <div class="glass-card" style="padding:var(--space-6);display:flex;align-items:center;gap:var(--space-4);">
+                <div style="width:48px;height:48px;border-radius:var(--radius-md);background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(168,85,247,0.15));display:flex;align-items:center;justify-content:center;color:var(--accent-primary);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem;color:var(--text-tertiary);">${isAr ? 'الهاتف المباشر' : 'Direct Line'}</div>
+                  <a href="tel:+1234567890" style="font-size:var(--font-size-sm);font-weight:700;color:var(--text-primary);">+1 (234) 567-890</a>
+                </div>
               </div>
-              <div class="form-group">
-                <label class="form-label">Message *</label>
-                <textarea class="form-textarea form-input" placeholder="Tell us about your project requirements..." required></textarea>
+
+              <div class="glass-card" style="padding:var(--space-6);display:flex;align-items:center;gap:var(--space-4);">
+                <div style="width:48px;height:48px;border-radius:var(--radius-md);background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(168,85,247,0.15));display:flex;align-items:center;justify-content:center;color:var(--accent-primary);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem;color:var(--text-tertiary);">${isAr ? 'المقر الرئيسي' : 'Global Headquarters'}</div>
+                  <div style="font-size:var(--font-size-sm);font-weight:700;color:var(--text-primary);">San Francisco, CA • Dubai, UAE</div>
+                </div>
               </div>
-              <button type="submit" class="btn btn-primary btn-large btn-shimmer" style="width:100%;justify-content:center;">
-                Send Message
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-              </button>
-            </form>
+            </div>
           </div>
 
-          <div class="reveal reveal-delay-2">
-            <div class="contact-info-cards">
-              <div class="glass-card contact-info-card">
-                <div class="contact-info-icon" style="color:var(--accent-primary);">${mailIcon}</div>
-                <div class="contact-info-label">Direct Email</div>
-                <div class="contact-info-value">hello@nexus.agency</div>
+          <!-- Form -->
+          <div class="glass-card" style="padding:var(--space-8);border-radius:var(--radius-2xl);">
+            <form id="contact-form" onsubmit="event.preventDefault();if(window.showToast)window.showToast('Message sent');this.reset();">
+              <div class="form-group" style="margin-bottom:var(--space-4);">
+                <label class="form-label">${t('contact.form_name', 'Full Name')}</label>
+                <input type="text" required class="input" style="width:100%;padding:var(--space-3);" placeholder="${isAr ? 'أدخل اسمك الكامل' : 'Enter your name'}" />
               </div>
-              <div class="glass-card contact-info-card">
-                <div class="contact-info-icon" style="color:var(--accent-secondary);">${phoneIcon}</div>
-                <div class="contact-info-label">Phone Support</div>
-                <div class="contact-info-value">+1 (234) 567-890</div>
+              <div class="form-group" style="margin-bottom:var(--space-4);">
+                <label class="form-label">${t('contact.form_email', 'Work Email')}</label>
+                <input type="email" required class="input" style="width:100%;padding:var(--space-3);" placeholder="hello@nexus.agency" />
               </div>
-              <div class="glass-card contact-info-card">
-                <div class="contact-info-icon" style="color:var(--accent-tertiary);">${locationIcon}</div>
-                <div class="contact-info-label">Headquarters</div>
-                <div class="contact-info-value">San Francisco, CA</div>
+              <div class="form-group" style="margin-bottom:var(--space-4);">
+                <label class="form-label">${t('contact.form_subject', 'Subject / Topic')}</label>
+                <input type="text" required class="input" style="width:100%;padding:var(--space-3);" placeholder="${isAr ? 'موضوع الاستفسار' : 'Project Inquiry'}" />
               </div>
-              <div class="glass-card contact-info-card">
-                <div class="contact-info-icon" style="color:var(--accent-warm);">${clockIcon}</div>
-                <div class="contact-info-label">Business Hours</div>
-                <div class="contact-info-value">Mon – Fri, 9:00 AM – 6:00 PM EST</div>
+              <div class="form-group" style="margin-bottom:var(--space-6);">
+                <label class="form-label">${t('contact.form_message', 'Project Details & Requirements')}</label>
+                <textarea required class="input" rows="5" style="width:100%;padding:var(--space-3);resize:vertical;" placeholder="${isAr ? 'اكتب تفاصيل مشروعك هنا...' : 'Tell us about your requirements...'}"></textarea>
               </div>
-            </div>
-
-            <!-- Animated Map -->
-            <div class="contact-map-animated">
-              <div class="map-grid"></div>
-              <div class="map-pin">
-                <div class="map-pin-ring"></div>
-                <div class="map-pin-dot"></div>
-              </div>
-              <div class="map-label">San Francisco, CA (HQ)</div>
-            </div>
+              <button type="submit" class="btn btn-primary btn-shimmer" style="width:100%;justify-content:center;padding:var(--space-4);">${t('contact.send', 'Send Message to Team')}</button>
+            </form>
           </div>
         </div>
       </div>
@@ -89,48 +87,4 @@ export function renderContact() {
   `;
 }
 
-(window as any).handleContactSubmit = async function(e: Event) {
-  e.preventDefault();
-  const form = e.target as HTMLFormElement;
-  const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-
-  if (btn) {
-    btn.disabled = true;
-    btn.innerHTML = 'Sending...';
-  }
-
-  const inputs = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea');
-  const payload = {
-    name: (inputs[0] as HTMLInputElement).value,
-    email: (inputs[1] as HTMLInputElement).value,
-    subject: (inputs[2] as HTMLInputElement).value,
-    message: (inputs[3] as HTMLTextAreaElement).value
-  };
-
-  try {
-    const res = await apiFetch('/contact', {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
-
-    if (res.ok) {
-      if ((window as any).showToast) (window as any).showToast('Message sent successfully! We will reply within 24h.');
-      form.reset();
-    } else {
-      if ((window as any).showToast) (window as any).showToast('Message sent! Our engineering team will reach out.', 'info');
-      form.reset();
-    }
-  } catch (err) {
-    if ((window as any).showToast) (window as any).showToast('Message received! We will be in touch shortly.', 'info');
-    form.reset();
-  } finally {
-    if (btn) {
-      btn.disabled = false;
-      btn.innerHTML = 'Send Message <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
-    }
-  }
-};
-
-export function initContact() {
-  // Page initialization hook
-}
+export function initContact() {}

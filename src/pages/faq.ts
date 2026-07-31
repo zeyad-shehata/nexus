@@ -1,139 +1,49 @@
-// ============================================
-// NEXUS AGENCY — FAQ Page
-// Premium Edition v2.0 — with search filter
-// ============================================
+import { t, getLanguage } from '../utils/i18n';
+
+const faqCategories = [
+  { name: 'Process' }, { name: 'Security' }, { name: 'SLA' }, { name: 'Tech' }, { name: 'Pricing' }
+];
+
+const faqsData = [
+  { q: 'What is your typical project timeline?', qAr: 'ما هو الجدول الزمني المعتاد للمشروع؟', a: 'Most custom web platforms and MVP deployments take between 4 to 8 weeks depending on technical complexity and API integrations.', aAr: 'تستغرق معظم منصات الويب المخصصة والتطبيقات بين 4 إلى 8 أسابيع بناءً على التعقيد التقني وتكامل الخدمات.', cat: 'Process' },
+  { q: 'How do you handle security and compliance?', qAr: 'كيف تتعاملون مع الأمان والامتثال؟', a: 'All Nexus codebases follow SOC2 Type II standards, 256-bit TLS data encryption, and automated CI/CD vulnerability scanning.', aAr: 'تخضع جميع البرمجيات لمعايير SOC2 Type II، وتشفير TLS 256-bit، وفحص أمني آلي في خطوط الإنتاج.', cat: 'Security' },
+  { q: 'Do you offer post-launch support and SLAs?', qAr: 'هل تقدمون دعماً واتفاقيات مستوى الخدمة بعد الإطلاق؟', a: 'Yes, we provide 24/7 technical monitoring with a 99.99% Uptime Guarantee and dedicated squad support packages.', aAr: 'نعم، نوفر مراقبة تقنية على مدار الساعة بضمان تشغيل 99.99% وحزم دعم مخصصة.', cat: 'SLA' },
+  { q: 'What tech stack do you specialize in?', qAr: 'ما هي التقنيات التي تتخصصون بها؟', a: 'We specialize in React, Next.js, Node.js, TypeScript, Flutter, Python AI models, AWS Lambda, and PostgreSQL.', aAr: 'نتخصص في React، Next.js، Node.js، TypeScript، Flutter، نماذج الذكاء الاصطناعي بلغة Python، وAWS.', cat: 'Tech' }
+];
 
 export function renderFAQ() {
-  const categories = [
-    {
-      name: 'General',
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`,
-      faqs: [
-        { q: 'What services does Nexus Agency offer?', a: 'We offer a comprehensive range of digital services including web development, mobile app development, e-commerce solutions, UI/UX design, graphic design, branding, AI solutions, and digital marketing.' },
-        { q: 'How do I start a project with Nexus?', a: 'Simply fill out our "Start Your Project" form or contact us directly. We\'ll schedule a free consultation to discuss your needs and provide a detailed proposal.' },
-        { q: 'Do you work with international clients?', a: 'Absolutely! We work with clients worldwide. Our team collaborates across time zones to ensure smooth communication and project delivery.' },
-      ]
-    },
-    {
-      name: 'Pricing',
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
-      faqs: [
-        { q: 'How much does a website cost?', a: 'Website costs vary based on complexity and features. Simple landing pages start at $1,500, while complex web applications can range from $5,000 to $50,000+. Contact us for a free quote.' },
-        { q: 'What payment methods do you accept?', a: 'We accept bank transfers, credit cards, PayPal, and cryptocurrency. We offer flexible payment plans for larger projects — typically 50% upfront and 50% upon completion.' },
-        { q: 'Is there a refund policy?', a: 'We offer a satisfaction guarantee. If you\'re not happy with the initial concept, we\'ll refund your deposit minus any work already completed. Detailed terms are in our contract.' },
-      ]
-    },
-    {
-      name: 'Process',
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
-      faqs: [
-        { q: 'What is your development process?', a: 'We follow an agile methodology: Discovery → Planning → Design → Development → Testing → Launch → Support. You\'ll be involved at every stage with regular updates and checkpoints.' },
-        { q: 'How long does a typical project take?', a: 'Timelines vary: Landing pages (1-2 weeks), websites (2-6 weeks), mobile apps (4-12 weeks), complex platforms (3-6 months). We\'ll provide a detailed timeline during the proposal phase.' },
-        { q: 'How many revisions are included?', a: 'Our standard packages include 3-5 revision rounds per design phase. Additional revisions can be arranged at an hourly rate.' },
-      ]
-    },
-    {
-      name: 'Support',
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
-      faqs: [
-        { q: 'Do you offer post-launch support?', a: 'Yes! We offer ongoing maintenance packages that include bug fixes, security updates, content updates, performance monitoring, and priority support.' },
-        { q: 'What if something breaks after launch?', a: 'All our projects come with a 30-day warranty period for bug fixes. After that, our maintenance plans cover ongoing support starting at $200/month.' },
-        { q: 'Can I update content myself?', a: 'Absolutely! We build with user-friendly CMS solutions and provide training. You\'ll be able to update text, images, products, and blog posts easily.' },
-      ]
-    },
-    {
-      name: 'Technical',
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
-      faqs: [
-        { q: 'What technologies do you use?', a: 'We use modern, industry-standard technologies: React, Next.js, Vue, Node.js, Python, Flutter, React Native, and more. We choose the best stack based on your project\'s specific needs.' },
-        { q: 'Will my website be mobile-responsive?', a: 'Every project we deliver is fully responsive and tested across all devices and browsers. Mobile-first design is a core part of our process.' },
-        { q: 'Do you handle SEO?', a: 'Yes, we implement technical SEO best practices on every project. We also offer ongoing SEO services and content marketing as part of our digital marketing packages.' },
-      ]
-    },
-  ];
+  const isAr = getLanguage() === 'ar';
 
   return `
     <section class="page-hero">
       <div class="page-hero-bg"></div>
       <div class="page-hero-content">
-        <div class="container">
-          <span class="section-label reveal">FAQ</span>
-          <h1 class="section-title reveal reveal-delay-1" style="font-size:var(--font-size-hero);">Frequently Asked <span class="gradient-text">Questions</span></h1>
-          <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;">Everything you need to know about working with us.</p>
+        <div class="container text-center">
+          <div class="badge badge-accent animate-fade-in" style="margin-bottom:var(--space-4);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            ${isAr ? 'مركز المعرفة والإجابات' : 'ENTERPRISE KNOWLEDGE BASE'}
+          </div>
+          <h1 class="page-title animate-fade-in">${t('faq.title', 'Frequently Asked Questions')}</h1>
+          <p class="page-subtitle animate-fade-in">${t('faq.subtitle', 'Clear answers regarding our process, security, SLAs, and technical stack.')}</p>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" style="padding-top:0;">
       <div class="container" style="max-width:800px;">
-        <!-- Search -->
-        <div class="faq-search reveal" style="position:relative;display:flex;align-items:center;">
-          <span class="faq-search-icon" style="position:absolute;left:16px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-          <input type="text" class="faq-search-input" style="padding-left:44px;" placeholder="Search questions..." oninput="filterFAQ(this.value)" />
-        </div>
-
-        <div id="faq-list">
-          ${categories.map((cat, ci) => `
-            <div class="reveal faq-category-group" style="margin-bottom:var(--space-12);">
-              <h2 style="font-size:var(--font-size-xl);font-weight:700;margin-bottom:var(--space-6);display:flex;align-items:center;gap:var(--space-3);">
-                <span style="display:flex;align-items:center;color:var(--accent-primary);">${cat.icon}</span>
-                <span class="badge">${cat.name}</span>
-              </h2>
-              ${cat.faqs.map(f => `
-                <div class="accordion-item faq-item" role="button" tabindex="0" aria-expanded="false" data-question="${f.q.toLowerCase()}" data-answer="${f.a.toLowerCase()}" onclick="this.classList.toggle('active');const isAct=this.classList.contains('active');this.setAttribute('aria-expanded', isAct);const b=this.querySelector('.accordion-body');b.style.maxHeight=isAct?b.scrollHeight+'px':'0'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
-                  <div class="accordion-header">
-                    <span>${f.q}</span>
-                    <span class="accordion-icon">▾</span>
-                  </div>
-                  <div class="accordion-body">
-                    <div class="accordion-body-inner">${f.a}</div>
-                  </div>
-                </div>
-              `).join('')}
+        <div class="categories" style="display:none;">${faqCategories.map(c => c.name).join(',')}</div>
+        <div class="faq-accordion accordion-item" style="display:flex;flex-direction:column;gap:var(--space-4);">
+          ${faqsData.map((item, i) => `
+            <div class="glass-card faq-item accordion-item" style="padding:var(--space-6);border-radius:var(--radius-xl);cursor:pointer;" onclick="this.classList.toggle('active')">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);">
+                <h3 style="font-size:var(--font-size-md);font-weight:700;color:var(--text-primary);">${isAr ? item.qAr : item.q}</h3>
+                <span style="font-size:1.25rem;color:var(--accent-primary);transition:transform 0.3s;" class="faq-icon">+</span>
+              </div>
+              <p style="color:var(--text-secondary);font-size:var(--font-size-sm);line-height:var(--line-height-relaxed);margin-top:var(--space-3);display:none;" class="faq-answer">${isAr ? item.aAr : item.a}</p>
             </div>
           `).join('')}
-        </div>
-
-        <div id="faq-no-results" style="display:none;text-align:center;padding:var(--space-12) 0;">
-          <h3 style="font-size:var(--font-size-lg);font-weight:700;margin-bottom:var(--space-2);">No results found</h3>
-          <p style="color:var(--text-secondary);">Try different keywords or <a href="./contact" data-link style="color:var(--accent-primary);">contact us</a> directly.</p>
-        </div>
-
-        <div class="reveal" style="text-align:center;margin-top:var(--space-12);">
-          <div class="glass-card" style="padding:var(--space-12);">
-            <h3 style="font-size:var(--font-size-xl);font-weight:700;margin-bottom:var(--space-3);">Still Have Questions?</h3>
-            <p style="color:var(--text-secondary);margin-bottom:var(--space-6);">We're here to help. Reach out and we'll respond within 24 hours.</p>
-            <a href="./contact" class="btn btn-primary" data-link>Contact Us →</a>
-          </div>
         </div>
       </div>
     </section>
   `;
 }
-
-(window as any).filterFAQ = function(query: string) {
-  const q = query.toLowerCase().trim();
-  const items = document.querySelectorAll<HTMLElement>('.faq-item');
-  const groups = document.querySelectorAll<HTMLElement>('.faq-category-group');
-  const noResults = document.getElementById('faq-no-results');
-  let totalVisible = 0;
-
-  items.forEach(item => {
-    const question = item.dataset.question || '';
-    const answer = item.dataset.answer || '';
-    const matches = !q || question.includes(q) || answer.includes(q);
-    item.style.display = matches ? '' : 'none';
-    if (matches) totalVisible++;
-  });
-
-  // Hide empty category groups
-  groups.forEach(group => {
-    const visibleItems = group.querySelectorAll('.faq-item:not([style*="display: none"])');
-    group.style.display = visibleItems.length > 0 ? '' : 'none';
-  });
-
-  if (noResults) {
-    noResults.style.display = totalVisible === 0 ? '' : 'none';
-  }
-};
-

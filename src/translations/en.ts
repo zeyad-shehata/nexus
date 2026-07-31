@@ -1,4 +1,5 @@
 export const en: Record<string, string> = {
+  // Navigation & Action Buttons
   'nav.home': 'Home',
   'nav.services': 'Services',
   'nav.portfolio': 'Portfolio',
@@ -7,6 +8,23 @@ export const en: Record<string, string> = {
   'nav.contact': 'Contact',
   'nav.get_started': 'Get Started',
   'nav.switch_lang': 'العربية',
+  'nav.signin': 'Sign In',
+  'nav.dashboard': 'Dashboard',
+  'common.back_to_top': 'Back to top',
+  'common.skip_nav': 'Skip to content',
+  'common.view_details': 'View Details',
+  'common.learn_more': 'Learn More',
+  'common.read_more': 'Read More',
+  'common.submit': 'Submit',
+  'common.send_message': 'Send Message',
+  'common.search_placeholder': 'Search...',
+  'common.all': 'All',
+  'common.loading': 'Loading...',
+  'common.success': 'Success',
+  'common.error': 'Error',
+  'common.close': 'Close',
+
+  // Hero Section
   'hero.tagline': 'Digital Excellence',
   'hero.title_prefix': 'Turn Your Vision',
   'hero.title_gradient': 'Into Reality.',
@@ -24,14 +42,115 @@ export const en: Record<string, string> = {
   'hero.mau': 'Monthly Active Users',
   'hero.latency': 'Edge Latency',
   'hero.security_score': 'Security Audit',
+
+  // Home Page Sections
+  'home.why_title': 'Why Leading Brands Choose Nexus',
+  'home.why_subtitle': 'Engineering craftsmanship, enterprise security, and rapid velocity.',
+  'home.why_years': 'Years of Experience',
+  'home.why_projects': 'Projects Delivered',
+  'home.why_clients': 'Happy Clients',
+  'home.why_satisfaction': 'Client Satisfaction',
+  'home.services_preview_title': 'Architecting Enterprise Capabilities',
+  'home.services_preview_subtitle': 'Bespoke software development engineered for scale, speed, and security.',
+  'home.portfolio_preview_title': 'Featured Case Studies',
+  'home.portfolio_preview_subtitle': 'Explore how we help high-growth companies scale their digital footprint.',
+  'home.testimonials_title': 'Client Testimonials',
+  'home.testimonials_subtitle': 'Hear from engineering leaders and founders who build with Nexus.',
+  'home.cta_title': 'Ready to Build Something Extraordinary?',
+  'home.cta_subtitle': 'Partner with our elite engineering squad to ship your next-generation digital product.',
+  'home.cta_btn': 'Schedule Engineering Consultation',
+
+  // Services Page
   'services.title': 'Enterprise Services',
   'services.subtitle': 'End-to-end digital solutions engineered for high-velocity teams.',
+  'services.web_dev': 'Web Development',
+  'services.web_dev_desc': 'High-performance React & Next.js web applications built for speed, SEO, and global scale.',
+  'services.mobile_apps': 'Mobile Applications',
+  'services.mobile_apps_desc': 'Native iOS & Android apps built with Flutter and React Native for fluid mobile experiences.',
+  'services.ecommerce': 'E-Commerce Platforms',
+  'services.ecommerce_desc': 'Headless e-commerce architecture engineered for high-volume conversion and fast checkouts.',
+  'services.uiux': 'UI/UX & Product Design',
+  'services.uiux_desc': 'Human-centric design systems, interactive prototypes, and conversion-focused interfaces.',
+  'services.graphic': 'Graphic & Motion Design',
+  'services.graphic_desc': 'Custom 3D graphics, vector assets, and brand animation suites.',
+  'services.branding': 'Brand Identity & Strategy',
+  'services.branding_desc': 'Comprehensive brand positioning, logo systems, typography guidelines, and brand books.',
+  'services.ai_solutions': 'AI & Machine Learning',
+  'services.ai_solutions_desc': 'Generative AI integration, custom LLM fine-tuning, and predictive analytics engines.',
+  'services.cybersecurity': 'Enterprise Security & Audit',
+  'services.cybersecurity_desc': 'SOC2 compliance preparation, penetration testing, and zero-trust cloud security.',
+  'services.pricing_title': 'Enterprise Pricing Packages',
+  'services.pricing_subtitle': 'Flexible engagement models tailored to your business stage and growth velocity.',
+  'services.plan_starter': 'Starter',
+  'services.plan_business': 'Business',
+  'services.plan_enterprise': 'Enterprise',
+  'services.plan_custom': 'Custom Solution',
+  'services.popular_badge': 'MOST POPULAR',
+  'services.per_month': '/ month',
+  'services.one_time': '/ one-time',
+
+  // Portfolio Page
   'portfolio.title': 'Featured Case Studies',
   'portfolio.subtitle': 'Explore our selected projects showcasing engineering excellence.',
+  'portfolio.filter_all': 'All Projects',
+  'portfolio.filter_web': 'Web Development',
+  'portfolio.filter_mobile': 'Mobile Apps',
+  'portfolio.filter_ai': 'AI & Data',
+  'portfolio.filter_branding': 'Branding & Design',
+
+  // Start Project Page
+  'start.title': 'Start Your Project',
+  'start.subtitle': 'Tell us about your project requirements and receive a detailed proposal within 24 hours.',
+  'start.step1': 'Project Type',
+  'start.step2': 'Scope & Features',
+  'start.step3': 'Budget Range',
+  'start.step4': 'Timeline Expectations',
+  'start.step5': 'Contact Details',
+  'start.submit': 'Submit Project Brief',
+
+  // Blog Page
+  'blog.title': 'Engineering & Product Insights',
+  'blog.subtitle': 'Thought leadership, architecture patterns, and software strategy from our team.',
+  'blog.filter_all': 'All Articles',
+  'blog.filter_engineering': 'Engineering',
+  'blog.filter_design': 'Product Design',
+  'blog.filter_ai': 'Artificial Intelligence',
+  'blog.filter_growth': 'Growth & Scale',
+
+  // Contact Page
   'contact.title': 'Contact Engineering',
-  'contact.subtitle': 'Get in touch with our team. We respond within 24 hours.',
-  'auth.portal_title': 'Secure Enterprise Portal',
-  'auth.portal_subtitle': 'Encrypted Workspace • Trusted Authentication',
+  'contact.subtitle': 'Have a project in mind? Our engineering leadership responds within 24 hours.',
+  'contact.form_name': 'Full Name',
+  'contact.form_email': 'Work Email',
+  'contact.form_subject': 'Subject / Topic',
+  'contact.form_message': 'Project Details & Requirements',
+  'contact.send': 'Send Message to Team',
+
+  // FAQ Page
+  'faq.title': 'Frequently Asked Questions',
+  'faq.subtitle': 'Clear answers regarding our process, security, SLAs, and technical stack.',
+
+  // Tracker Page
+  'tracker.title': 'Real-Time Project Tracker',
+  'tracker.subtitle': 'Track your project status, release milestones, and active squad tasks.',
+  'tracker.input_placeholder': 'Enter your Project ID (e.g. NX-8921)...',
+  'tracker.btn_track': 'Track Project',
+
+  // Consultation Page
+  'consultation.title': 'Book Engineering Consultation',
+  'consultation.subtitle': 'Schedule a 30-minute strategic discovery call with our Lead Architect.',
+
+  // Reviews Page
+  'reviews.title': 'Client Reviews & Case Feedback',
+  'reviews.subtitle': 'Read verified reviews from CEOs, CTOs, and Product Directors who build with Nexus.',
+
+  // Estimator Page
+  'estimator.title': 'Project Cost Estimator',
+  'estimator.subtitle': 'Calculate instant estimates tailored to your required technical architecture and features.',
+
+  // Auth Page
+  'auth.portal_title': 'Secure Enterprise Access',
+  'auth.portal_subtitle': 'Encrypted Workspace • Official Single Sign-On',
   'auth.signin': 'Sign In',
   'auth.register': 'Register Account',
   'auth.email': 'Email Address',
@@ -40,6 +159,8 @@ export const en: Record<string, string> = {
   'auth.forgot': 'Forgot Password?',
   'auth.fullname': 'Full Name',
   'auth.phone': 'Phone Number',
+
+  // Footer & Miscellaneous
   'footer.desc': 'Architecting world-class software, high-scale web platforms, and custom AI solutions for industry leaders worldwide.',
   'footer.rights': '© 2026 Nexus Agency. All rights reserved. Built for high-velocity enterprise teams.',
   'footer.title_services': 'Services',
@@ -49,6 +170,22 @@ export const en: Record<string, string> = {
   'footer.subscribe_title': 'Subscribe to Enterprise Insights',
   'footer.subscribe_btn': 'Subscribe',
   'footer.subscribe_placeholder': 'Enter work email...',
-  'common.back_to_top': 'Back to top',
-  'common.skip_nav': 'Skip to content'
+  'footer.mobile_apps': 'Mobile Applications',
+  'footer.ecommerce': 'E-Commerce Stores',
+  'footer.uiux': 'UI/UX Design',
+  'footer.ai_solutions': 'AI Solutions',
+  'footer.case_studies': 'Case Studies',
+  'footer.blog_news': 'Blog & News',
+  'footer.faq': 'FAQ Accordion',
+  'footer.reviews': 'Client Reviews',
+  'footer.estimator': 'Cost Estimator',
+  'footer.book_consultation': 'Book Consultation',
+  'footer.contact_engineering': 'Contact Engineering',
+  'footer.privacy': 'Privacy Policy',
+  'footer.terms': 'Terms of Service',
+
+  // 404 Page
+  '404.title': 'Page Not Found',
+  '404.desc': 'The page you are looking for does not exist or has been moved.',
+  '404.back': 'Back to Home'
 };
