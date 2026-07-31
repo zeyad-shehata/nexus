@@ -69,6 +69,7 @@ export class Router {
     // Handle browser history navigation and hash-based fallback
     window.addEventListener('popstate', () => this.render());
     window.addEventListener('hashchange', () => this.render());
+    window.addEventListener('languageChange', () => this.render());
 
     // Initial render
     this.render();

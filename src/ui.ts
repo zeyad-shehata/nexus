@@ -56,9 +56,7 @@ export function initCursor() {
       document.body.classList.remove('cursor-text');
     }
   });
-}
-
-import { getLanguage, setLanguage } from './utils/i18n';
+}import { getLanguage, setLanguage, t } from './utils/i18n';
 
 // Scroll progress with glow
 export function initScrollProgress() {
@@ -83,6 +81,21 @@ export function initBackToTop() {
 
   btn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+export function updateDOMTranslations() {
+  const lang = getLanguage();
+  const langBtn = document.getElementById('lang-toggle');
+  if (langBtn) {
+    langBtn.textContent = lang === 'en' ? '🌐 AR' : '🌐 EN';
+  }
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (key) {
+      el.textContent = t(key);
+    }
   });
 }
 
@@ -120,10 +133,10 @@ export function initNavbar() {
 
     if (token) {
       authLink.href = '/dashboard';
-      authLink.textContent = 'Dashboard';
+      authLink.textContent = t('nav.dashboard', 'Dashboard');
     } else {
       authLink.href = '/auth';
-      authLink.textContent = 'Sign In';
+      authLink.textContent = t('nav.signin', 'Sign In');
     }
 
     // Insert before the nav-actions container
@@ -142,12 +155,16 @@ export function initNavbar() {
     langBtn.addEventListener('click', () => {
       const newLang = getLanguage() === 'en' ? 'ar' : 'en';
       setLanguage(newLang);
-      langBtn.textContent = newLang === 'en' ? '🌐 AR' : '🌐 EN';
     });
   }
 
   updateAuthNav();
+  updateDOMTranslations();
   window.addEventListener('authChange', updateAuthNav);
+  window.addEventListener('languageChange', () => {
+    updateAuthNav();
+    updateDOMTranslations();
+  });
 }
 
 // Magnetic tilt effect for glass cards

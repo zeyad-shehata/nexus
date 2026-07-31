@@ -1513,6 +1513,41 @@ input, textarea, select {
   z-index: 2;
   max-width: 800px;
 }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: var(--space-10);
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+  }
+  .hero-content {
+    text-align: center !important;
+    max-width: 100% !important;
+  }
+  .hero-buttons, .hero-kpis {
+    justify-content: center !important;
+  }
+  .hero-visual {
+    margin-top: var(--space-6);
+  }
+}
+
+[dir="rtl"] .hero-content {
+  text-align: right;
+}
+@media (max-width: 992px) {
+  [dir="rtl"] .hero-content {
+    text-align: center;
+  }
+}
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -4330,10 +4365,47 @@ input, textarea, select {
   }
 }
 
-@media (max-width: 480px) {
-  .reviews-stats-grid {
+/* === AUTHENTICATION & CLIENT PORTAL === */
+.auth-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: start;
+  gap: var(--space-10);
+  width: 100%;
+}
+
+.sso-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sso-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 992px) {
+  .auth-grid {
     grid-template-columns: 1fr !important;
+    gap: var(--space-8);
   }
+}
+
+[dir="rtl"] .auth-left {
+  text-align: right;
 }
 
 /* === RTL Support & Floating Widgets Alignment === */

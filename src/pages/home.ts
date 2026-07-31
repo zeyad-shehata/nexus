@@ -5,6 +5,7 @@
 
 import { getTechLogo } from '../components/tech-logos';
 import { featureIcons, serviceIcons } from '../components/ui-icons';
+import { t } from '../utils/i18n';
 
 export function renderHome() {
   return `
@@ -40,40 +41,113 @@ function heroSection() {
         <div class="hero-shape hero-shape-3"></div>
       </div>
       <div class="container">
-        <div class="hero-content">
-          <div class="hero-badge reveal">
-            <span class="hero-badge-dot"></span>
-            Available for new projects
-          </div>
-          <h1 class="hero-title reveal reveal-delay-1">
-            Turn Your Vision<br>Into <span class="gradient-text">Reality.</span>
-          </h1>
-          <p class="hero-subtitle reveal reveal-delay-2" style="max-width:640px;margin:0 auto var(--space-8);">
-            We design and develop premium <span class="typing-wrapper"><span class="typing-text" id="typing-text">websites</span></span> that help high-growth companies scale and dominate their market.
-          </p>
-          <div class="hero-buttons reveal reveal-delay-3" style="margin-bottom:var(--space-8);">
-            <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link>
-              Start Your Project
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="./portfolio" class="btn btn-secondary btn-large" data-link>
-              Explore Solutions
-            </a>
+        <div class="hero-grid" style="display:grid;grid-template-columns:1.05fr 0.95fr;align-items:center;gap:var(--space-10);">
+          
+          <!-- Left Content -->
+          <div class="hero-content" style="text-align:left;">
+            <div class="hero-badge reveal">
+              <span class="hero-badge-dot"></span>
+              <span data-i18n="hero.badge">${t('hero.badge', 'Available for new projects')}</span>
+            </div>
+            <h1 class="hero-title reveal reveal-delay-1" style="font-size:clamp(2.5rem, 4.5vw, 4.2rem);line-height:1.1;letter-spacing:-0.03em;margin-bottom:var(--space-4);">
+              <span data-i18n="hero.title_prefix">${t('hero.title_prefix', 'Turn Your Vision')}</span><br>
+              <span data-i18n="hero.title_gradient">${t('hero.title_gradient', 'Into Reality.')}</span>
+            </h1>
+            <p class="hero-subtitle reveal reveal-delay-2" style="font-size:var(--font-size-md);line-height:1.6;color:var(--text-secondary);margin-bottom:var(--space-8);" data-i18n="hero.subtitle">
+              ${t('hero.subtitle', 'We design and develop premium software solutions, high-scale web platforms, and AI systems that help high-growth companies scale and dominate.')}
+            </p>
+            <div class="hero-buttons reveal reveal-delay-3" style="display:flex;gap:var(--space-4);flex-wrap:wrap;margin-bottom:var(--space-8);">
+              <a href="./start-project" class="btn btn-primary btn-large btn-shimmer" data-link data-i18n="hero.cta_start">
+                ${t('hero.cta_start', 'Start Your Project')}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="./portfolio" class="btn btn-secondary btn-large" data-link data-i18n="hero.cta_explore">
+                ${t('hero.cta_explore', 'Explore Solutions')}
+              </a>
+            </div>
+
+            <!-- Enterprise Floating Trust Cards -->
+            <div class="hero-kpis reveal reveal-delay-4" style="display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;">
+              <div class="glass-card hero-kpi-badge" style="padding:8px 14px;display:flex;align-items:center;gap:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(18,18,28,0.5);backdrop-filter:blur(12px);">
+                <span style="width:8px;height:8px;border-radius:50%;background:var(--accent-secondary);box-shadow:0 0 10px rgba(16,185,129,0.8);"></span>
+                <span style="font-size:0.8125rem;font-weight:600;color:var(--text-primary);" data-i18n="hero.kpi_uptime">${t('hero.kpi_uptime', '99.99% Uptime SLA')}</span>
+              </div>
+              <div class="glass-card hero-kpi-badge" style="padding:8px 14px;display:flex;align-items:center;gap:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(18,18,28,0.5);backdrop-filter:blur(12px);">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span style="font-size:0.8125rem;font-weight:600;color:var(--text-primary);" data-i18n="hero.kpi_soc2">${t('hero.kpi_soc2', 'SOC2 Type II Certified')}</span>
+              </div>
+              <div class="glass-card hero-kpi-badge" style="padding:8px 14px;display:flex;align-items:center;gap:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:rgba(18,18,28,0.5);backdrop-filter:blur(12px);">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-tertiary)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <span style="font-size:0.8125rem;font-weight:600;color:var(--text-primary);" data-i18n="hero.kpi_apps">${t('hero.kpi_apps', '150+ Apps Delivered')}</span>
+              </div>
+            </div>
           </div>
 
-          <!-- Enterprise Floating Trust Cards -->
-          <div class="hero-kpis reveal reveal-delay-4" style="display:flex;align-items:center;justify-content:center;gap:var(--space-5);flex-wrap:wrap;">
-            <div class="glass-card hero-kpi-badge" style="padding:8px 16px;display:flex;align-items:center;gap:8px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(18,18,28,0.4);backdrop-filter:blur(12px);">
-              <span style="width:8px;height:8px;border-radius:50%;background:var(--accent-secondary);box-shadow:0 0 10px rgba(16,185,129,0.8);"></span>
-              <span style="font-size:0.8125rem;font-weight:600;color:var(--text-primary);">99.99% Uptime SLA</span>
+          <!-- Right Visual: Enterprise Software Workspace Mockup -->
+          <div class="hero-visual reveal reveal-delay-2" style="position:relative;">
+            <div class="glass-card" style="padding:0;overflow:hidden;border-radius:16px;border:1px solid rgba(255,255,255,0.12);box-shadow:0 24px 64px rgba(0,0,0,0.5), 0 0 40px rgba(99,102,241,0.15);background:rgba(12,12,20,0.85);backdrop-filter:blur(24px);">
+              
+              <!-- Window Control Header -->
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.08);">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="width:11px;height:11px;border-radius:50%;background:#ff5f56;display:inline-block;"></span>
+                  <span style="width:11px;height:11px;border-radius:50%;background:#ffbd2e;display:inline-block;"></span>
+                  <span style="width:11px;height:11px;border-radius:50%;background:#27c93f;display:inline-block;"></span>
+                  <span style="font-size:11px;font-weight:700;color:var(--text-tertiary);margin-left:8px;letter-spacing:0.05em;" data-i18n="hero.mockup_title">${t('hero.mockup_title', 'NEXUS PLATFORM // CORE ENGINE V2.4')}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;padding:3px 10px;border-radius:20px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);">
+                  <span style="width:6px;height:6px;border-radius:50%;background:var(--accent-secondary);animation:pulseRing 2s infinite;"></span>
+                  <span style="font-size:10px;font-weight:700;color:var(--accent-secondary);" data-i18n="hero.mockup_status">${t('hero.mockup_status', 'PRODUCTION SQUAD ACTIVE')}</span>
+                </div>
+              </div>
+
+              <!-- Dashboard Analytics Stats Grid -->
+              <div style="padding:18px;display:grid;grid-template-columns:repeat(3, 1fr);gap:12px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.01);">
+                <div style="padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);">
+                  <div style="font-size:10px;color:var(--text-tertiary);font-weight:600;" data-i18n="hero.mau">${t('hero.mau', 'Monthly Active Users')}</div>
+                  <div style="font-size:18px;font-weight:800;color:var(--text-primary);margin-top:2px;">2.4M</div>
+                  <div style="font-size:10px;color:var(--accent-secondary);font-weight:700;margin-top:2px;">+28.4% ↑</div>
+                </div>
+                <div style="padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);">
+                  <div style="font-size:10px;color:var(--text-tertiary);font-weight:600;" data-i18n="hero.latency">${t('hero.latency', 'Edge Latency')}</div>
+                  <div style="font-size:18px;font-weight:800;color:var(--accent-primary-light);margin-top:2px;">14ms</div>
+                  <div style="font-size:10px;color:var(--accent-secondary);font-weight:700;margin-top:2px;">99.99% SLA</div>
+                </div>
+                <div style="padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);">
+                  <div style="font-size:10px;color:var(--text-tertiary);font-weight:600;" data-i18n="hero.security_score">${t('hero.security_score', 'Security Audit')}</div>
+                  <div style="font-size:18px;font-weight:800;color:var(--text-primary);margin-top:2px;">99.8/100</div>
+                  <div style="font-size:10px;color:var(--accent-secondary);font-weight:700;margin-top:2px;">SOC2 Passed</div>
+                </div>
+              </div>
+
+              <!-- Live Architecture Code snippet preview -->
+              <div style="padding:18px;background:rgba(5,5,10,0.95);font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;font-size:12px;line-height:1.6;color:#a9b7c6;">
+                <div style="color:#64748b;margin-bottom:6px;">// Nexus Enterprise Engine Architecture</div>
+                <div><span style="color:#c792ea;">import</span> { <span style="color:#82aaff;">EnterpriseEngine</span> } <span style="color:#c792ea;">from</span> <span style="color:#ecc48d;">'@nexus/core'</span>;</div>
+                <div style="margin-top:4px;"><span style="color:#c792ea;">export const</span> <span style="color:#ffcb6b;">app</span> = <span style="color:#82aaff;">EnterpriseEngine</span>.<span style="color:#82aaff;">deploy</span>({</div>
+                <div style="padding-left:16px;"><span style="color:#f78c6c;">architecture</span>: <span style="color:#ecc48d;">'microservices'</span>,</div>
+                <div style="padding-left:16px;"><span style="color:#f78c6c;">security</span>: <span style="color:#ecc48d;">'SOC2-Type-II'</span>,</div>
+                <div style="padding-left:16px;"><span style="color:#f78c6c;">sla</span>: <span style="color:#ecc48d;">'99.99%'</span>,</div>
+                <div style="padding-left:16px;"><span style="color:#f78c6c;">aiEngine</span>: <span style="color:#82aaff;">true</span></div>
+                <div>});</div>
+              </div>
             </div>
-            <div class="glass-card hero-kpi-badge" style="padding:8px 16px;display:flex;align-items:center;gap:8px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(18,18,28,0.4);backdrop-filter:blur(12px);">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-              <span style="font-size:0.8125rem;font-weight:600;color:var(--text-primary);">SOC2 Type II Certified</span>
+
+            <!-- Floating Overlay Accent Badges -->
+            <div class="glass-card" style="position:absolute;top:-16px;right:-16px;padding:10px 16px;border-radius:12px;background:rgba(16,16,28,0.85);border:1px solid rgba(99,102,241,0.3);box-shadow:0 12px 32px rgba(0,0,0,0.4);display:flex;align-items:center;gap:10px;backdrop-filter:blur(16px);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary-light)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--text-primary);">Enterprise Security</div>
+                <div style="font-size:9px;color:var(--accent-secondary);font-weight:600;">SOC2 Type II Certified</div>
+              </div>
             </div>
-            <div class="glass-card hero-kpi-badge" style="padding:8px 16px;display:flex;align-items:center;gap:8px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(18,18,28,0.4);backdrop-filter:blur(12px);">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-tertiary)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              <span style="font-size:0.8125rem;font-weight:600;color:var(--text-primary);">150+ Apps Delivered</span>
+
+            <div class="glass-card" style="position:absolute;bottom:-16px;left:-16px;padding:10px 16px;border-radius:12px;background:rgba(16,16,28,0.85);border:1px solid rgba(16,185,129,0.3);box-shadow:0 12px 32px rgba(0,0,0,0.4);display:flex;align-items:center;gap:10px;backdrop-filter:blur(16px);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-secondary)" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg>
+              <div>
+                <div style="font-size:11px;font-weight:700;color:var(--text-primary);">High Performance</div>
+                <div style="font-size:9px;color:var(--text-secondary);font-weight:600;">Global Edge Infrastructure</div>
+              </div>
             </div>
           </div>
         </div>
@@ -81,7 +155,7 @@ function heroSection() {
 
       <!-- Downward Scroll Indicator -->
       <div class="hero-scroll-indicator scroll-indicator-down" onclick="window.scrollTo({top: window.innerHeight - 80, behavior: 'smooth'})" style="cursor:pointer;">
-        <span>Scroll down</span>
+        <span data-i18n="hero.scroll">${t('hero.scroll', 'Scroll down')}</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
       </div>
     </section>
